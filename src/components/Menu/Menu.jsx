@@ -7,7 +7,10 @@ export default props =>
     <div class="col-md-2 col-12 btn-nav">
         <ul class="nav nav-pills">
         <li class="nav-item dropdown text-center menu" style={{textDecoration: 'none', alignItems: 'center'}}>
-                <a class="nav-link dropdown-toggle mt-2 linksNavTitulo" data-toggle="dropdown" href="file:///home/aluno/%C3%81rea%20de%20Trabalho/Treinamento%20RD/Projeto%20Integrador/GIT%20-%20Pata%20na%20Janta/PatanaJanta/header/header.html#" role="button" aria-haspopup="true" aria-expanded="false" style={{backgroundColor: '#b86360'}}>Cachorro</a>
+                <a class="nav-link dropdown-toggle mt-2 linksNavTitulo" data-toggle="dropdown" href="#" 
+                role="button" aria-haspopup="true" aria-expanded="false" 
+                style={{backgroundColor: '#b86360'}}>Cachorro</a>
+
                 <div class="dropdown-menu menu" >
                     <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
                     <a class="dropdown-item linkNav" href="resultado-produto.html">Conforto</a>
@@ -19,8 +22,11 @@ export default props =>
     </div>
     <div class="col-md-2 col-12 btn-nav">
         <ul class="nav nav-pills">
-        <li class="nav-item dropdown text-center menu" style={{textDecoration: 'none', alignItems: 'center'}}>
-                <a class="nav-link dropdown-toggle mt-2 linksNavTitulo " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style={{backgroundColor: '#b86360'}}>Gato</a>
+            <li class="nav-item dropdown text-center menu" style={{textDecoration: 'none', alignItems: 'center'}}>
+                <a class="nav-link dropdown-toggle mt-2 linksNavTitulo " data-toggle="dropdown" 
+                role="button" aria-haspopup="true" aria-expanded="false" 
+                style={{backgroundColor: '#b86360'}}>Gato</a>
+
                 <div class="dropdown-menu menu">
                     <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
                     <a class="dropdown-item linkNav" href="resultado-produto.html">Conforto</a>
