@@ -1,0 +1,141 @@
+.header{
+    background-color: #b7773f;
+    min-height: 115px;
+}
+
+
+.linkNav:hover{
+    color: white;
+    background-color: #b86360;
+}
+
+.searchBox{
+    /* min-width:300px;
+    max-width: 619px; */
+    max-width: 619px;
+    display: inline;
+}
+
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-height:699px) and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
+/* ========================================================== */
+/* ==================== BOTAO BUSCAR ======================== */
+/* ========================================================== */
+.btn-search{
+    background-color: #b86360;
+    border: solid 2px #9D5452;
+}
+
+.btn-search:hover{
+    background-color: #C27976;
+}
+
+.sucessoDeCompras{
+    color:  #b86360;
+}
+
+/* ========================================================== */
+/* ==================== CARRINHO ======================== */
+/* ========================================================== */
+
+.titulo-carrinho{
+    color: white; 
+    margin-top: 5px
+}
+
+
+.carrinho{
+    padding-top: 2px; 
+    margin-top: 16px;
+    text-align: center; 
+    display:inline-block; 
+    display: block;
+    margin-top: '16px';
+    text-align: 'center'
+}
+
+
+/*======================================================== */
+/* ============ MEDIA QUERY BARRA DE PESQUISA =============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .searchBox{
+        width: 200px;
+    }
+
+    .barrinha{
+        width: 100%;
+    }
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .searchBox{
+        width: 300px;
+        
+    }
+
+    .barrinha{
+        width: 100%;
+    }
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+
+    .searchBox{
+        width: 190px;
+        margin-left: 20px;
+    }
+    .barrinha{
+        width: 100%;
+    }
+
+}
+
+/* DE MEDIUM ATE TELAS LARGAS - LG*/
+@media screen and (min-width:769px) and (max-width:991px){
+
+    .searchBox{
+        width: 347px;
+    }
+    
+}
+
+/* DE LG ATE TELAS EXTRA LARGAS - XLG*/
+@media screen and (min-width:992px) and (max-width:1200px){
+
+    .searchBox{
+        width: 477px;
+    }
+}
+
+/* DE XLG ATE INFINITO*/
+@media screen and (min-width:1201px){
+
+    .searchBox{
+        width: 593px;
+    }
+}
+
+
+
+
