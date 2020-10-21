@@ -11,6 +11,8 @@ import Carrinho from '../pages/Carrinho/Carrinho';
 
 
 
+import Detalhes from '../pages/DetalhesProduto/detalhes'
+
 export default props => 
     <div className="container-fluid">
         <HeaderCarrinho/>
