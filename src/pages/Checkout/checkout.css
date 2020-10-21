@@ -64,6 +64,8 @@ spam{
 }
 
 
+/* Styles da migração react */
+
 .h1l9{
    margin-top: 80px;
 }
@@ -75,3 +77,22 @@ spam{
 .labell260{
     display: block;
 }
+
+.labell281{
+    display: block;
+}
+.divl293{
+    margin-top: 30px;
+}
+.imgl300{
+    margin-top: -5px;
+}
+
+.divl311{
+    height: 100%;
+}
+
+.buttonl340 {
+    color:white
+}
+

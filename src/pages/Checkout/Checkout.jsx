@@ -1,4 +1,11 @@
 import React from 'react';
+import './checkout.css';
+
+import MCARD from '../../images/imgcheckout/MCARD.png';
+import VISAMARROM from '../../images/imgcheckout/VISA_MARROM.png';
+import PAYPAL from '../../images/imgcheckout/PAYPAL_MARROM.png';
+import AMEXMARROM from '../../images/imgcheckout/AMEX_MARROM.png';
+import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
 
 
 export default props =>
@@ -217,10 +224,10 @@ export default props =>
                                     </div>
 
                                     <div className="col-12 col-sm-6" >
-                                        <img src="images/MCARD.png" width="34px" />
-                                        <img src="images/VISA_MARROM.png" width="32px" />
-                                        <img src="images/PAYPAL_MARROM.png" width="38px" />
-                                        <img src="images/AMEX_MARROM.png" width="38px" />
+                                        <img src={MCARD} width="34px" />
+                                        <img src={VISAMARROM} width="32px" />
+                                        <img src={PAYPAL} width="38px" />
+                                        <img src={AMEXMARROM} width="38px" />
                                     </div>
                                 </div>
 
@@ -278,7 +285,7 @@ export default props =>
 
                                     <div className="col-12 col-sm-4 espacoTop10">
                                         <strong>
-                                            <label className="form-check-label corMarrom espacoTop10" style="display: block;">
+                                            <label className="form-check-label corMarrom espacoTop10 labell281" >
                                                 CVV
                                             </label>
                                         </strong>
@@ -290,14 +297,14 @@ export default props =>
 
                                 <div className="row espacoBottom20">
                                     <div className="col-12 espacoTop10">
-                                        <div className="margemLeft20" style="margin-top: 30px;">
+                                        <div className="margemLeft20 divl293" >
 
                                             <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagBoleto" value="1" />
                                             <label className="form-check-label corMarrom" for="rdbPagBoleto">
                                                 Boleto Bancário
                                             </label>
 
-                                            <img src="images/codigoDeBarras.png" width="34px" className="margemLeft20" style="margin-top: -5px;" />
+                                            <img src={BOLETO} width="34px" className="margemLeft20 imgl300" />
                                         </div>
                                     </div>
                                 </div>
@@ -308,7 +315,7 @@ export default props =>
 
                     {/* INICIO CARD FINALIZA COMPRA */}
                     <div className="col-12 col-sm-5 espacoTop10 espacoBottom20">
-                        <div className="card" style="height: 100%;">
+                        <div className="card divl311" >
                             <div className="card-body">
 
                                 <div className="col-12">
@@ -337,7 +344,7 @@ export default props =>
                                 </div>
 
                                 <div className="col-12 mt-5 text-center">
-                                    <button className="btn btn-search" type="submit" style="color:white">
+                                    <button className="btn btn-search buttonl340" type="submit" >
                                         Finalizar Compra
                                     </button>
                                 </div>
