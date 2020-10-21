@@ -9,11 +9,13 @@ import Footer from '../components/Footer/Footer';
 import Menu from '../components/Menu/Menu';
 import Routes from '../main/Routes'
 
+import Detalhes from '../pages/DetalhesProduto/detalhes'
+
 export default props => 
     <div className="container-fluid">
         <Header/>
         <Menu/>
-        <Routes/>
+        <Detalhes/>
         <Footer/>
     </div>
 
