@@ -6,14 +6,23 @@ import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer';
-import Menu from '../components/Menu/Menu';
-import Routes from './Routes';
+import Routes from './Routes'
+
+import Checkout from '../pages/Checkout/Checkout'
 
 export default props => 
     <div className="container-fluid">
-        <HeaderCarrinho/>
-        <Carrinho/>
+        <Header/>
+
+        <div>conteudo</div>
+
+        <Checkout />
+
+        <div>conteudo</div>
+
+        <Routes/>
         <Footer/>
+        
     </div>
 
 

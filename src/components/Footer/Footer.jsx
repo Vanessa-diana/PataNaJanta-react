@@ -35,5 +35,6 @@ export default props =>
     <div className="col-12 text-center mt-4">
         <p>Política de privacidade | © 2020 PATA NA JANTA. Todos os direitos reservados.</p>
     </div>
+    
 </div>
 
