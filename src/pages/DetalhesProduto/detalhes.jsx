@@ -28,21 +28,21 @@ export default props=>(
     
                                 <div className="col-12 col-sm-7 testeD">
                                     
-                                    /* TITULO DO PRODUTO */
+                                    {/*  TITULO DO PRODUTO */} 
                                     <div className="row">
                                         <div className="col-12">
                                             <h2 id="titulo_produto">Ração Pedigree Vital Pro</h2>
                                         </div>
                                     </div>
     
-                                    /* PRECO PRODUTO + PRECO PARCELADO PRODUTO */
+                                    {/* PRECO PRODUTO + PRECO PARCELADO PRODUTO */}
                                     <div className="row">
                                         <div className="col-12 col-sm-6">
                                             <h3 id="preco_produto">Por: R$ 109,90</h3>
                                             <h6 id="preco_produto_parcelado">Ou até 3x de R$ 36,63 sem juros</h6>
                                         </div>
     
-                                        /* Quantidade */
+                                        {/* Quantidade */} 
                                         <div className="col-12 col-sm-6">
                                             <h6 id="lbl_qtd">Quantidade</h6>
                                             <input id="input_qtd_itens" min="1" value="1" type="number" className="form-control" required/>
@@ -58,7 +58,7 @@ export default props=>(
                                         </div>
                                     </div>
 
-                                     /* <div className="row">
+                                      <div className="row">
                                         <div className="col-12">
                                             <div className="form-check" id="container_chk">
                                                 <input className="form-check-input" type="checkbox" value="" id="chkZoom"/>
@@ -67,7 +67,7 @@ export default props=>(
                                                 </label>
                                               </div>
                                         </div>
-                                    </div>  */
+                                    </div>  
     
                                 </div>
                             </div>
@@ -77,13 +77,13 @@ export default props=>(
                 </form>
             </div>
       </div>
-     /* FIM FORMULARIO PRODUTO */ 
+     {/* FIM FORMULARIO PRODUTO */}
 
 
-        /* INICIO DESCRICAO */
+        {/*  INICIO DESCRICAO */} 
         <div className="container">
 
-         /* TITULO DESCRICAO */ 
+        {/*  TITULO DESCRICAO  */}
             <div className="row">
                 <div className="col-12 text-left">
                     <h3 id="lbl_titulo_descricao">Descrição</h3>
