@@ -1,54 +1,53 @@
+.btn:hover {
+    color: #fff;
+    opacity: 0.8;
+    border: 1px solid #9D5452;
+}
 
+.conhecer{
 
-    .conhecer{
-    
-    margin-top: 2.5rem ;
+    margin-top: 50px ;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     background-color: #b86360;
-    color: #fff;
-    
-    }
-    
-    .titulo{
-    
-        width: 100%;
-        font-size: xx-large;
-        text-align: center;
-        padding-top: 3rem;
-        
-    
-    }
-    
-    .cardspet{
-    
+     color: #fff
+}
+
+
+.titulo{
+    width: 100%;
+}
+
+.cardspet{
+
     width: 70%;
-    min-height: 21.875rem;
-    margin:1.875rem;
+    min-height: 350px;
+    margin:30px;
     margin-left: auto;
     margin-right: auto;
-    border:0.125rem solid gray;
-    border-radius: 0.3125rem;
+    border:2px solid gray;
+    border-radius: 5px;
     background-color: white;
-    text-align: start;
-    
-    }
-    
-    .desc{
-    
-    height: 8.125rem;
+   
+}
+
+.desc{
+
+    height: 130px;
     overflow: auto;
-    
-    }
-    
-  
-    .a{
-    text-decoration: none;
-    
-    }
-    
-    .a:link{
-    text-decoration: none;
-    
-    }
+
+}
+
+.btn:hover {
+    color: #fff;
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+

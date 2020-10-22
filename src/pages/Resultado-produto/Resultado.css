@@ -2,7 +2,7 @@
 .btn:hover {
     color: #fff;
     opacity: 0.8;
-    border: solid #9D5452;
+    border: 2px solid #9D5452;
 }
 
 .btnfiltrar{
@@ -47,6 +47,7 @@ margin-bottom: 10px;
 
 .cardes{
     max-width: 110%;
+    /* margin:20px; */
     margin-left: auto;
     margin-right: auto;
     width: 18rem;
@@ -71,6 +72,8 @@ margin-bottom: 10px;
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
 }
+
+
 
 
 
