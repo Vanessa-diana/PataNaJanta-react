@@ -7,6 +7,7 @@ import Login from '../pages/Login/Login'
 import Carrinho from '../pages/Carrinho/Carrinho'
 import Cadastro from '../pages/Cadastro/Cadastro'
 import Checkout from '../pages/Checkout/Checkout'
+import HistoricoPedido from '../pages/HistoricoDePedido/HistoricoDePedido'
 
 
 export default props => (
@@ -18,7 +19,7 @@ export default props => (
     <Route path = '/carrinho' component={Carrinho}/>
     <Route path = '/cadastro' component={Cadastro}/>
     <Route path = '/checkout' component={Checkout}/>
-  
-     <Redirect from='*' to='/home'/>
+    <Route path = '/historicopedido' component={HistoricoPedido}/>
+    <Redirect from='*' to='/home'/>
     </Router>
 )

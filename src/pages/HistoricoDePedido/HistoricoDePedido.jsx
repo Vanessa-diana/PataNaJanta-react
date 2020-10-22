@@ -11,9 +11,7 @@ export default props =>
     <div class="container conteudo">
         <div class="row mt-3">
             <div class="col-12">
-                <h1>
-                    <Title title="Histórico do Pedido" style="titulo-principal" />
-                </h1>
+                <Title title="Histórico do Pedido" style="titulo-principal" />
                 <small>Acompanhe seu pedido</small>
             </div>
         </div>
