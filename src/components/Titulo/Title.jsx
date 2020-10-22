@@ -1,8 +1,8 @@
 import React from 'react'
 
 export default props=>(
-<div className={props.style}>
+<h3 className={props.style}>
     {props.title}
-</div>
+</h3>
 )
 

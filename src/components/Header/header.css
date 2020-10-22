@@ -25,7 +25,7 @@
 
 .header{
     background-color: #b7773f;
-    min-height: 115px;
+    min-height: 7.19rem;
     
 }
 
@@ -35,7 +35,7 @@
 }
 
 .searchBox{
-    max-width: 619px;
+    max-width: 38.69rem;
     display: inline;
 }
 
@@ -75,7 +75,7 @@
 /* ==================== CARRINHO ======================== */
 /* ========================================================== */
 
-.titulo-carrinho{
+.carrinho-header{
     color: white; 
     margin-top: 5px
 }
@@ -83,7 +83,7 @@
 
 .carrinho{
     padding-top: 2px; 
-    margin-top: 16px;
+    margin-top: 1rem;
     text-align: center; 
     display:inline-block; 
     display: block;
@@ -100,7 +100,7 @@
 @media screen and (max-width:392px) {
 
     .searchBox{
-        width: 200px;
+        width: 12.5rem;
     }
 
 }
@@ -109,7 +109,7 @@
 @media screen and (min-width: 393px) and (max-width:575px) {
 
     .searchBox{
-        width: 300px;
+        width: 18.75rem;
     }  
  
 }
@@ -118,8 +118,8 @@
 @media screen and (min-width:576px) and (max-width:768px){
 
     .searchBox{
-        width: 190px;
-        margin-left: 20px;
+        width: 11.88rem;
+        margin-left: 1.25rem;
     }
 
 }
@@ -128,7 +128,7 @@
 @media screen and (min-width:769px) and (max-width:991px){
 
     .searchBox{
-        width: 347px;
+        width: 21.69rem;
     }
     
 }
@@ -137,7 +137,7 @@
 @media screen and (min-width:992px) and (max-width:1200px){
 
     .searchBox{
-        width: 477px;
+        width: 29.81rem;
     }
 }
 
@@ -145,7 +145,7 @@
 @media screen and (min-width:1201px){
 
     .searchBox{
-        width: 593px;
+        width: 37.06rem;
     }
 }
 
@@ -162,12 +162,12 @@
 }
 
 .navBar{
-    min-height: 60px;
+    min-height: 3.75rem;
     background-color: #351912;
 }
 .btn-nav{
-    padding-left: 40px; 
-    padding-right: 40px;
+    padding-left: 2.5rem; 
+    padding-right: 2.5rem;
 
 }
 /*======================================================== */
