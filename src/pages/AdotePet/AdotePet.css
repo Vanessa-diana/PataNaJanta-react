@@ -23,7 +23,11 @@ body{
     
     .titulo{
     
-    width: 100%;
+        width: 100%;
+        font-size: xx-large;
+        text-align: center;
+        padding-top: 3rem;
+        
     
     }
     
