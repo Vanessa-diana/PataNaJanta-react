@@ -1,5 +1,6 @@
 import React from 'react';
 import './checkout.css';
+import Title from '../../components/Titulo/Title'
 
 import MCARD from '../../images/imgcheckout/MCARD.png';
 import VISAMARROM from '../../images/imgcheckout/VISA_MARROM.png';
@@ -13,8 +14,8 @@ export default props =>
 
     <form action="sucesso-compra.html" method="get">
 
-        <h1 className="text-center corMarrom h1l9" >
-            Checkout
+        <h1 >
+            <Title title="Checkout" style="text-center corMarrom h1l9" />
         </h1>
 
         <div className="container divl13" >
