@@ -3,6 +3,8 @@ import './login.css';
 
 import axios from 'axios';
 import LocalStorage from '../../main/LocalStorage';
+import Header from '../../components/Header/Header'
+import HeaderController from '../../components/Header/HeaderController';
 
 let URL = 'http://patanajanta.test/api'
 
@@ -14,6 +16,9 @@ class Login extends React.Component {
 
 
         componentDidMount(){
+
+            const homeURI = '#/home'
+
             let txtSenha=document.getElementById('senhaUsuario')
             let txtUsuario=document.getElementById('txtUsuario')
             let btnEntrar=document.getElementById('btnEntrar')
@@ -46,6 +51,13 @@ class Login extends React.Component {
                     try{
                         LocalStorage.usuario = resp.data[0];
                         localStorage.setItem('usuario', JSON.stringify(LocalStorage.usuario));
+                        
+                        window.location.replace(`window.location.href${homeURI}`);
+
+                        HeaderController.titulo = LocalStorage.usuario.nome
+                        console.log(HeaderController.titulo);
+                        HeaderController.self.forceUpdate();
+
                         alert('GRAVADO COM SUCESSO')
                     }catch(e){
                         alert('ERRO AO GRAVAR LOCAL STORAGE')
