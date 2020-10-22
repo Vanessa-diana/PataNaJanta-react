@@ -14,6 +14,7 @@ import FaleConoscp from '../pages/FaleConosco/FaleConosco'
 export default props => 
     <div className="container-fluid">
         <Header/>
+        <Checkout />
         <Routes/>
         <Footer/>
     </div>
