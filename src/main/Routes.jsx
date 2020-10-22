@@ -18,7 +18,6 @@ export default props => (
     <Route path = '/carrinho' component={Carrinho}/>
     <Route path = '/cadastro' component={Cadastro}/>
     <Route path = '/checkout' component={Checkout}/>
-  
-     <Redirect from='*' to='/home'/>
+    <Redirect from='*' to='/home'/>
     </Router>
 )

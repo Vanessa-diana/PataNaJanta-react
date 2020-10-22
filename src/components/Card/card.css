@@ -3,22 +3,21 @@
     margin-top: 1.25rem;
 }
 
-.card {
-    font-size: 1rem;
+.card-do-card{
+    font-size: 16px;
     align-items: center;
     width:auto;
     height: auto;
     margin-top: 10px;
     visibility: visible;
-   
-    }
+}
 
 .card-img-top{
     width: 6.25rem;
     align-items: center;
 }
 
-.card-body{
+.body-card{
     text-align: center;
 }
 .card-title{
