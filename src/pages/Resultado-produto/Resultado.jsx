@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import '../Resultado-produto/Resultado.css';
-import Card from './../../components/Card/card'
+import Card from '../../components/Card/cardi'
 
 
 const URL = 'localhost:3004/todo'
