@@ -24,10 +24,11 @@
 .textop{
     margin-top: -10px;
     text-align: justify;
-    padding: 25px; 
+    padding: 25px;
+    color: white; 
 }
 
-.formulario{
+.formulariofale{
     padding: 0% 5%;
 } 
 
