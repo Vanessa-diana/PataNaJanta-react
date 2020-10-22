@@ -4,10 +4,8 @@ import FaleConosco from '../pages/FaleConosco/FaleConosco';
 
 
 
+
 export default props => (
     <Router history={hashHistory}>
-        
-    <Route path='/faleconosco' component={FaleConosco} />
-
     </Router>
 )

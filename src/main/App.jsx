@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import $ from 'jquery';
 import Popper from 'popper.js';
