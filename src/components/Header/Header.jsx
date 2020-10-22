@@ -9,7 +9,7 @@ export default props =>
 <div id='header-pataNaJanta'>
     <div className='row header' >
     <div className="col-12 col-sm-2 text-center mt-2">
-    <a href="home.html"><img src={Logo} width="170px"/></a>
+    <a href="#/home"><img src={Logo} width="170px"/></a>
     </div>
     <div className="col-12 col-sm-7 text-center">
     <form className="form">
@@ -22,11 +22,11 @@ export default props =>
     <div class="col-12 col-sm-3">
     <div class="row">
         <div className="col-6 text-center carrinho mt-3">
-            <a href="carrinho.html" style={{color: '#b7773f'}}><img src={Cart} className="img-fluid" width="33px"/>
+            <a href="#/carrinho" style={{color: '#b7773f'}}><img src={Cart} className="img-fluid" width="33px"/>
             <h6 className='titulo-carrinho'>Meu carrinho</h6></a>
         </div>
         <div class="col-6 text-center mt-4">
-            <a href="login.html">
+            <a href="#/login">
                 <img src={User} width="30px"/>
             </a>
             <div class="container-fluid" style={{display: 'block'}}>
@@ -36,8 +36,8 @@ export default props =>
                             <small style={{display: 'inline-block'}}>Entre ou Cadastre-se</small>
                         </a>
                         <div class="dropdown-menu mr-2">
-                            <a class="dropdown-item linkNav" href="historico-pedido.html">Pedidos</a>
-                            <a class="dropdown-item linkNav" href="#">Sair</a>
+                            <a class="dropdown-item linkNav" href="#/historicopedido">Pedidos</a>
+                            <a class="dropdown-item linkNav" href="#/login">Sair</a>
                         </div>
                     </li>
                 </ul>

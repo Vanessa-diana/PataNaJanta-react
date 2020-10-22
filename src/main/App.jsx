@@ -8,21 +8,12 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer';
 import Routes from './Routes'
 
-import Checkout from '../pages/Checkout/Checkout'
 
 export default props => 
     <div className="container-fluid">
         <Header/>
-
-        <div>conteudo</div>
-
-        <Checkout />
-
-        <div>conteudo</div>
-
         <Routes/>
         <Footer/>
-        
     </div>
 
 

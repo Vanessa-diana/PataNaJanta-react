@@ -55,7 +55,7 @@ h4{
     color: #351912;
 }
 
-spam{
+.spam{
     color: red;
 }
 
@@ -94,5 +94,14 @@ spam{
 
 .buttonl340 {
     color:white
+}
+
+.buttonl341{
+    margin-left:21.875rem;
+    color:white
+}
+
+.cardBox {
+    width: 18rem;
 }
 
