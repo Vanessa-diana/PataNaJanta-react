@@ -13,16 +13,8 @@ import Checkout from '../pages/Checkout/Checkout'
 export default props => 
     <div className="container-fluid">
         <Header/>
-
-        <div>conteudo</div>
-
-        <Checkout />
-
-        <div>conteudo</div>
-
         <Routes/>
         <Footer/>
-        
     </div>
 
 
