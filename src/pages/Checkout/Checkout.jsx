@@ -7,7 +7,7 @@ import VISAMARROM from '../../images/imgcheckout/VISA_MARROM.png';
 import PAYPAL from '../../images/imgcheckout/PAYPAL_MARROM.png';
 import AMEXMARROM from '../../images/imgcheckout/AMEX_MARROM.png';
 import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
-
+import Button from '../../components/Button/Button'
 
 export default props => (
     
@@ -91,18 +91,18 @@ export default props => (
                                             <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm" target="_blank">
                                                 <h6 id="lblEsqueciCep">Esqueci o CEP</h6>
                                             </a>
-                                            <button className="btn-padrao buttonl341" type="submit" >
-                                                Salvar
-                                </button>
+                                        </div>
+                                        <div className="col-12 mt-4 d-flex justify-content-center">
+                                            <Button style = "btn-padrao" type="submit" title="Salvar"/>
                                         </div>
                                     </div>
 
 
                                     <div className="row espacoTop10">
                                         <div className="col-12">
-                                            <spam>
+                                            <span>
                                                 <h6 id="lblErroCEP" className="espacoTop10"></h6>
-                                            </spam>
+                                            </span>
                                         </div>
                                     </div>
 
@@ -350,13 +350,11 @@ export default props => (
                                             <h5 className="corMarrom">Total</h5>
                                             <h5 className="corMarrom">R$ 00,00</h5>
                                         </div>
-
+                                        <span class="space"></span>
                                         <div className="col-12 mt-5 text-center">
-                                            <button className="btn btn-search buttonl340" type="submit" >
-                                                Finalizar Compra
-                                </button>
+                                            <Button title = "Finalizar Compra" style="btn-padrao"/>
                                         </div>
-
+                                           
                                     </div>
                                 </div>
                             </div>

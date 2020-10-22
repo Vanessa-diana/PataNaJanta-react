@@ -95,17 +95,11 @@ h4{
     height: 100%;
 }
 
-.buttonl340 {
-    color:white
-}
-
-.buttonl341{
-    height: 40px;
-    margin-left:21.875rem;
-    
-}
-
 .cardBox {
     width: 18rem;
 }
 
+.space{
+    display: block;
+    height: 4rem;
+}
