@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer';
 import Routes from './Routes'
+import resultado from '../pages/Resultado-produto/Resultado'
 
 export default props => 
     <div className="container-fluid">
@@ -14,5 +15,4 @@ export default props =>
         <Routes/>
         <Footer/>
     </div>
-
 
