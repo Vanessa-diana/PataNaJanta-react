@@ -6,6 +6,7 @@ import AdotePet from '../pages/AdotePet/AdotePet'
 import Login from '../pages/Login/Login'
 import Carrinho from '../pages/Carrinho/Carrinho'
 import Cadastro from '../pages/Cadastro/Cadastro'
+import Checkout from '../pages/Checkout/Checkout'
 
 
 export default props => (
@@ -16,6 +17,8 @@ export default props => (
     <Route path = '/login' component={Login}/>
     <Route path = '/carrinho' component={Carrinho}/>
     <Route path = '/cadastro' component={Cadastro}/>
-    <Redirect from='*' to='/home'/>
+    <Route path = '/checkout' component={Checkout}/>
+  
+     <Redirect from='*' to='/home'/>
     </Router>
 )

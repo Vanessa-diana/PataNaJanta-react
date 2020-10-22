@@ -1,15 +1,5 @@
 
 
-body{
-    background-color: #ebebeb;
-    }
-    
-    .btn:hover {
-    color: #fff;
-    opacity: 0.8;
-    border: 0.0625rem solid #9D5452;
-    }
-    
     .conhecer{
     
     margin-top: 2.5rem ;
@@ -52,11 +42,7 @@ body{
     
     }
     
-    .btn:hover {
-    color: #fff;
-    opacity: 0.8;
-    }
-    
+  
     .a{
     text-decoration: none;
     

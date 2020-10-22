@@ -2,8 +2,8 @@
 
 import React from 'react'
 import '../Card/card.css'
+import RacaoCachorro from '../../images/racaoCachorro.png'
 
-import RacaoCachorro from '../../images/racaogolden.png'
 
 
 
