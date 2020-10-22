@@ -6,7 +6,7 @@
 }
 
 .titulo{
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -26,44 +26,44 @@
         float: left;
         margin-left: 15px;
         margin-top: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 1.25rem;
     }
 }
 
 @media screen and (min-width:576px) and (max-width:586px){
 
     #card-1{
-        width: 45px;
+        width: 2.81rem;
     }
 
     #card-2{
-        width: 45px;
+        width: 2.81rem;
     }
 
     #card-3{
-        width: 45px;
+        width: 2.81rem;
     }
 
     #card-4{
-        width: 55px;
+        width: 3.44rem;
     }
 }
 
 @media screen and (max-width:293px){
 
     #card-1{
-        width: 40px;
+        width: 2.5rem;
     }
 
     #card-2{
-        width: 40px;
+        width: 2.5rem;
     }
 
     #card-3{
-        width: 40px;
+        width: 2.5rem;
     }
 
     #card-4{
-        width: 50px;
+        width: 3.12rem;
     }
 }
