@@ -30,7 +30,7 @@ class Login extends React.Component {
                 axios({
                     method: 'get',
                     url:URL,
-                    timeout:10000
+                    timeout:20000
                 })
                 .then(function(resp){
                     if(resp.data.status==='Usuário ou senha inválidos' ){
@@ -39,9 +39,17 @@ class Login extends React.Component {
                         self.setState({lblBotao:'Entrar'})
                         return 
                     }
+
                     //fazer local storage
-                    LocalStorage.usuario = resp.data[0];
-                    console.log(LocalStorage.usuario);
+                    
+                    
+                    try{
+                        LocalStorage.usuario = resp.data[0];
+                        localStorage.setItem('usuario', JSON.stringify(LocalStorage.usuario));
+                        alert('GRAVADO COM SUCESSO')
+                    }catch(e){
+                        alert('ERRO AO GRAVAR LOCAL STORAGE')
+                    }
                     
 
 
