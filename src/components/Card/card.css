@@ -1,5 +1,4 @@
-
-
+/* INICIO CARD */
 .custom-cards {
     margin-top: 20px;
 }
@@ -30,7 +29,7 @@
 /* INICIO BOTAO */
 .btn-comprar{
     background-color: #9D5452;
-    width: 85%;
+    width: 200px;
     color: #fff;
     cursor: pointer;
     
@@ -70,12 +69,3 @@
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-

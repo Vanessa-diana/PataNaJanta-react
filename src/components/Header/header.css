@@ -1,8 +1,33 @@
+#header-pataNaJanta{
+    /* position: fixed;
+    top: 0; */
+    position: -webkit-sticky;
+    position: sticky;
+    transition: top 1.0s;
+    z-index: 999;
+}
+
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-height:699px) and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
 .header{
     background-color: #b7773f;
     min-height: 115px;
+    
 }
-
 
 .linkNav:hover{
     color: white;
@@ -10,8 +35,6 @@
 }
 
 .searchBox{
-    /* min-width:300px;
-    max-width: 619px; */
     max-width: 619px;
     display: inline;
 }
@@ -80,9 +103,6 @@
         width: 200px;
     }
 
-    .barrinha{
-        width: 100%;
-    }
 }
 
 /* TELA MUITO PEQUENA - XSM */
@@ -90,12 +110,8 @@
 
     .searchBox{
         width: 300px;
-        
-    }
-
-    .barrinha{
-        width: 100%;
-    }
+    }  
+ 
 }
 
 /* DE SMALL ATE TELAS MEDIAS - MD*/
@@ -104,9 +120,6 @@
     .searchBox{
         width: 190px;
         margin-left: 20px;
-    }
-    .barrinha{
-        width: 100%;
     }
 
 }
@@ -136,6 +149,54 @@
     }
 }
 
+/* ========================================================== */
+/* ==================== MENU =============================== */
+/* ========================================================== */
+
+.link-menu{
+    text-align: center;
+    color:white
+}
+.link-menu:hover{
+    color: white;
+}
+
+.navBar{
+    min-height: 60px;
+    background-color: #351912;
+}
+.btn-nav{
+    padding-left: 40px; 
+    padding-right: 40px;
+
+}
+/*======================================================== */
+/* ==================== MEDIA QUERY MENU ==================*/
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .menu{
+        width: 100%;
+    }
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .menu{
+        width: 100%;
+    }
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
 
 
+    .menu{
+        width: 100%;
+    }
+
+}
 
