@@ -4,24 +4,59 @@ import Logo from '../../images/logo.png'
 import Lupa from '../../images/lupa.png'
 import Cart from '../../images/cart.png'
 import User from '../../images/user.png'
-import HeaderController from './HeaderController'
-
 
 
 export default class Header extends Component {
 
     state = {
-        lbl_titulo: HeaderController.titulo
+        lbl_titulo: 'Entre ou Cadastre-se',
+        link_url: '#'
     }
 
     componentDidMount()
     {
-        let dropSair = document.getElementById('dropSair')
-        HeaderController.self = this;
+        var self = this;
 
-        dropSair.addEventListener('click', function(){
-            localStorage.clear();
-        })
+        //CASO USUARIO ESTEJA LOGADO
+        if(localStorage.getItem('usuario') != null){
+
+            let toJSON = JSON.parse(localStorage.getItem('usuario'));
+            let nome = toJSON.nome;
+
+            this.setState({lbl_titulo: nome})
+            this.setState({link_url: '#'})
+
+
+            let dropSair = document.getElementById('dropSair')
+
+            dropSair.addEventListener('click', function(){
+                localStorage.clear();
+                self.setState({lbl_titulo: 'Entre ou Cadastre-se'})
+                window.location.reload(false);
+            })
+
+            return;
+        }
+
+        this.setState({link_url: '#/login'})
+
+        //CASO USUARIO NAO ESTEJA LOGADO
+    }
+
+
+    mostraPainel = () => {
+
+        if(localStorage.getItem('usuario') != null){
+
+            return(
+                <>
+                <div class="dropdown-menu mr-2 menu-dropdown">
+                    <a class="dropdown-item linkNav" href="#/historicopedido">Pedidos</a>
+                    <a class="dropdown-item linkNav" href="#/login" id='dropSair'>Sair</a>
+                </div>
+                </>
+            )
+        }
     }
 
     render() {
@@ -46,19 +81,16 @@ export default class Header extends Component {
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
                             </div>
                             <div class="col-6 text-center mt-4">
-                                <a href="#/login">
+                                <a href={this.state.link_url}>
                                     <img src={User} width="30px" />
                                 </a>
                                 <div class="container-fluid" style={{ display: 'block' }}>
                                     <ul class="nav d-flex justify-content-center">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link linksNavTitulo" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <li class="nav-item dropdown lihover">
+                                            <a class="nav-link linksNavTitulo" href={this.state.link_url} role="button" aria-haspopup="true" aria-expanded="false">
                                                 <small style={{ display: 'inline-block' }}>{this.state.lbl_titulo}</small>
                                             </a>
-                                            <div class="dropdown-menu mr-2">
-                                                <a class="dropdown-item linkNav" href="#/historicopedido">Pedidos</a>
-                                                <a class="dropdown-item linkNav" href="#/login" id='dropSair'>Sair</a>
-                                            </div>
+                                            {this.mostraPainel()}
                                         </li>
                                     </ul>
                                 </div>
@@ -100,7 +132,7 @@ export default class Header extends Component {
                         </ul>
                     </div>
                     <div class="col-md-2 offset-md-4 col-12 text-center pt-3">
-                        <a class="text-center link-menu" href="#/adotepet">Adote um pet</a>
+                        <a class="text-center link-menu" href="adote-pet.html">Adote um pet</a>
                     </div>
                     <div class="col-md-2 col-12 text-center pt-3">
                         <a class="text-center link-menu" href="#/faleconosco">Contatos</a>
@@ -110,5 +142,3 @@ export default class Header extends Component {
         )
     }
 }
-
-
