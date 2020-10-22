@@ -108,19 +108,19 @@ export default class FaleConosco extends Component {
                                 <div className='row'>
                                     <div className='col-sm-6 col-12'>
 
-                                        <div className='form-group formulario'>
+                                        <div className='form-group formulariofale'>
                                             <label for='exampleFormControlInput1'>Nome</label>
                                             <input type='text' className='form-control' id='txtnome'
                                                 placeholder='Primeiro Nome' required />
                                         </div>
 
-                                        <div className='form-group formulario'>
+                                        <div className='form-group formulariofale'>
                                             <label for='exampleFormControlInput1'>Sobrenome</label>
                                             <input type='text' className='form-control' id='txtsobrenome'
                                                 placeholder='Sobrenome ' required />
                                         </div>
 
-                                        <div className='form-group formulario' >
+                                        <div className='form-group formulariofale' >
                                             <label for='exampleFormControlInput1'>Endereço de email</label>
                                             <input type='email' className='form-control' id='txtemail'
                                                 placeholder='nome@exemplo.com' name='email' required />
@@ -129,7 +129,7 @@ export default class FaleConosco extends Component {
 
                                     <div className='col-sm-6 col-12'>
 
-                                        <div className='form-group col-12 formulario ' >
+                                        <div className='form-group col-12 formulariofale ' >
                                             <label for='exampleFormControlTextarea1'>Mensagem</label>
                                             <textarea className='form-control texterea' id='txtmensagem' rows='8'
                                                 placeholder='Digite aqui sua mensagem' required ></textarea>
