@@ -58,6 +58,7 @@ class Login extends React.Component {
                         console.log(HeaderController.titulo);
                         
                         window.location.reload(false);
+                        HeaderController.self.forceUpdate();
 
                         alert('GRAVADO COM SUCESSO')
                     }catch(e){

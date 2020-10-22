@@ -1,0 +1,50 @@
+.test {
+ background-color: red;
+ color: black;
+}
+
+.containerprincipal {
+    width: 70%;
+}
+
+.textotitulo{
+    background-color: #351912; 
+    color:white; 
+    text-align: center;
+     border-radius: 20px 20px 0px 0px  ;  
+}
+
+.containergrande{
+    background-color: #b7773f; 
+    color:white; 
+    text-align: justify; 
+     border-radius: 0px 0px 20px 20px
+}
+
+.textop{
+    margin-top: -10px;
+    text-align: justify;
+    padding: 25px; 
+}
+
+.formulario{
+    padding: 0% 5%;
+} 
+
+.texterea{
+   resize: none;
+}
+
+.divbotaofale{
+    text-align: center;
+}
+
+.botaofale{
+    color: white; width: 40%;
+     text-align: center;
+}
+
+.btn-search:hover{
+    background-color: #C27976;
+    color: white;
+}
