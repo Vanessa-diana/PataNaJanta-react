@@ -17,7 +17,7 @@ export default props =>
     <div className="container-fluid">
         <Header/>
         <SeuEspaco/>
-        {/* <Checkout /> */}
+        <Checkout />
         {/* <Routes /> */}
         <Footer/>
     </div>
