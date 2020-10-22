@@ -23,7 +23,7 @@ export default props =>
     <div class="row">
         <div className="col-6 text-center carrinho mt-3">
             <a href="#/carrinho" style={{color: '#b7773f'}}><img src={Cart} className="img-fluid" width="33px"/>
-            <h6 className='titulo-carrinho'>Meu carrinho</h6></a>
+            <h6 className='carrinho-header'>Meu carrinho</h6></a>
         </div>
         <div class="col-6 text-center mt-4">
             <a href="#/login">
@@ -80,7 +80,7 @@ export default props =>
     </ul>
     </div>
     <div class="col-md-2 offset-md-4 col-12 text-center pt-3">
-    <a class="text-center link-menu" href="adote-pet.html">Adote um pet</a>
+    <a class="text-center link-menu" href="#/adotepet">Adote um pet</a>
     </div>
     <div class="col-md-2 col-12 text-center pt-3">
     <a class="text-center link-menu" href="#/faleconosco">Contatos</a>

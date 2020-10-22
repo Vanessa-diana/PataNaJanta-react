@@ -2,87 +2,81 @@
     color:#b7773f;
     margin-top: 1.25rem;
     
- }
+}
  
- .logos{
+.logos{
  
-    margin-top: 4.375rem;
-   
-    padding-top: 3.125rem;
-    padding-bottom: 0.625rem;
-    
-    
- 
- }
+   margin-top: 4.38rem;
+   padding-top: 3.12rem;
+   padding-bottom: 0.62rem; 
+}
  
  .formulario{
     margin-top: 1.25rem;
-    border-radius: 0.625rem;
+    border-radius: 0.62rem;
     border:1px solid black;
-    padding-top: 3.125rem;
-    padding-bottom: 0.625rem;
-   
- }
+    padding-top: 3.12rem;
+    padding-bottom: 0.62rem;
+  
+}
  
  
- .btn-jacadastrado{
+.btn-jacadastrado{
     color: #fff;
     background-color: #b7773f;
     border: solid 2px #b7773f;
  }
- .btn-jacadastrado:hover{
+.btn-jacadastrado:hover{
     
     color: white;
  }
  
- 
- .criarConta{
+
+.criarConta{
     font-size: xx-large;
- }
+}
  
- .inferior{
+.inferior{
  
     display: flex;
     justify-content: center;
     margin-top: 1.25rem;
-    padding-top: 3.125rem;
+    padding-top: 3.12rem;
     margin-bottom: 3.75rem;
-    
-    
- 
- }
- .btn-limpar:hover{
+}
+
+.btn-limpar:hover{
     background-color: #b86360;
     color: white;
- }
+}
  
  
- .btn-limpar{
+.btn-limpar{
     color: #b86360;
     
     background-color: #fff;
     border: solid 2px#b86360;
-    border-radius: 0.3125rem;
-    margin-bottom: 0.625rem;
+    border-radius: 0.312rem;
+    margin-bottom: 0.62rem;
     min-width: 15rem;
     max-width: 30rem;
-    
- }
+  
+}
  
- .btn-cadastrar:hover{
+.btn-cadastrar:hover{
     background-color: #966462;
     color: white;
- }
+}
  
  
- .btn-cadastrar{
+.btn-cadastrar{
     color:white;
     background-color: #b86360;
     border: solid 2px #b7773f;
     min-width: 15rem;
     max-width: 30rem;
- }
+}
  
  .display-cadastro{
     display:none;
- }
+}
