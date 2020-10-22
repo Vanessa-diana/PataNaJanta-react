@@ -64,11 +64,6 @@ class Login extends React.Component {
                     }
                     
 
-
-
-
-
-
                     btnEntrar.disabled=false;
                     self.setState({lblBotao:'Entrar'})
 
@@ -101,38 +96,35 @@ class Login extends React.Component {
                                     <div class="row">
                                         <div class="col-12 col-sm-6 col-lg-6">
 
-
-                                            <div class="form-group">
+                                           <div class="form-group">
                                                 <h2 class="seuloguin text-center">Faça seu login</h2>
 
                                                 <input type="text" id="txtUsuario" class="form-control cpf-form" placeholder="Digite seu CPF ou Email" />
 
                                                 <div class="alert alert-danger alert-cpf" style={{ display: "none" }}>
                                                     Digite um CPF válido
-                                    </div>
+                                                </div>
 
 
                                                 <input type="password" class="form-control senha-form"
                                                     placeholder="Digite sua senha" id="senhaUsuario" />
                                                 <div class="alert alert-danger alert-Senha" style={{ display: "none" }}>
                                                     Digite uma senha válida
-                                    </div>
-
-
-
-                                                <div class="text-center">
-                                                <button id="btnEntrar" type="submit" class="btn-lg btn-entrar">{this.state.lblBotao}</button>
                                                 </div>
 
 
 
-                                            </div>
+                                                <div class="text-center">
+                                                    <button id="btnEntrar" type="submit" class="btn-lg btn-entrar">{this.state.lblBotao}</button>
+                                                </div>
+
+                                           </div>
                                         </div>
 
                                         <div class="col-12 col-sm-6 col-lg-6 text-center">
                                             <div class="form-group">
                                                 <h2 class="cadastre">Ainda não é nosso cliente?</h2>
-                                                <a href="cadastro.html"><button type="button" class="btn-lg btn-search1">Cadastre-se</button></a>
+                                                <a href="#/cadastro"><button type="button" class="btn-lg btn-search1">Cadastre-se</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -142,8 +134,6 @@ class Login extends React.Component {
                     </form>
                 </div>
             </div>
-
-
         )
     }
 }
