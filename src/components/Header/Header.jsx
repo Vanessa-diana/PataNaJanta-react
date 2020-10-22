@@ -9,7 +9,7 @@ export default props =>
 <div id='header-pataNaJanta'>
     <div className='row header' >
     <div className="col-12 col-sm-2 text-center mt-2">
-    <a href="#/home"><img src={Logo} width="170px"/></a>
+    <a href="#/home"><img src={Logo} width="171px"/></a>
     </div>
     <div className="col-12 col-sm-7 text-center">
     <form className="form">
