@@ -352,7 +352,7 @@ export default props => (
                                         </div>
                                         <span class="space"></span>
                                         <div className="col-12 mt-5 text-center">
-                                            <Button title = "Finalizar Compra" style="btn-padrao"/>
+                                            <a href="#/sucessopedido"><Button title = "Finalizar Compra" style="btn-padrao"/></a>
                                         </div>
                                            
                                     </div>
