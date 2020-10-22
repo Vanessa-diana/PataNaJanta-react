@@ -2,11 +2,12 @@ import React from 'react'
 import '../Carrinho/carrinho.css'
 import ItemCarrinho from '../../images/item-carrinho.jpg'
 import Button from '../../components/Button/Button'
+import Title from '../../components/Titulo/Title'
 
 export default props=>
 <div className="row">
     <div className="col-12 col-xl-8 col-md-6">
-        <h3 className="titulo-carrinho mt-4 ml-2">Meu Carrinho</h3>
+        <Title title = "Meu carrinho" style = "titulo-carrinho mt-4 ml-2"/>
         <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">2</b> itens</p>
         
         {/* <!-- LISTA DE ITENS ADICIONADOS--> */}
@@ -24,8 +25,8 @@ export default props=>
                             <span >R$ 18,90</span>
                         </div>
                         <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                            <input className="quantidade form-control" type="number" name="quantidade" id="quantidade" value= "2" min="1"/>
-                            <span className="excluir-produto ml-1">excluir</span>
+                        <input class="quantidade form-control" type="number" name="quantidade" id="quantidade" value="1" min="1"/>
+                            <small className="excluir-produto mr-5">excluir</small>
                         </div>
                         <div className="col-4 col-sm-4 col-xl-2 mt-3">
                             <span >R$ 37,80</span>
@@ -37,7 +38,7 @@ export default props=>
     </div>
     <div class="col-12 col-xl-4 col-md-6">
         <div className="col-12 resumo-pedido mt-2">
-            <h4 className="titulo-carrinho">Resumo do Pedido</h4>
+            <Title style = "titulo-carrinho" title='Resumo do Pedido'/>
             <span>Subtotal</span>
             <span id="valor">R$ 180,90</span>
             <hr/>
