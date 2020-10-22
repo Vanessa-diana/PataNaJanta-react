@@ -227,7 +227,7 @@ export default props =>
                                         <img src={MCARD} width="34px" />
                                         <img src={VISAMARROM} width="32px" />
                                         <img src={PAYPAL} width="38px" />
-                                        <img src={AMEXMARROM} width="38px" />
+                                        <img src={AMEXMARROM} width="38px" className="imgl230" />
                                     </div>
                                 </div>
 

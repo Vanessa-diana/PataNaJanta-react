@@ -88,7 +88,7 @@ export default class FaleConosco extends Component {
                     {/* container maior textos, input's  */}
                     <div className='containergrande'>
 
-                        <h4>
+                        <h6>
                             <p className='textop'> <br /> É super simples conversar com
                     a gente. <br />Nosso setor não medirá esforço na busca contínua e
                     satisfação dos nossos clientes. <br /> <br />
@@ -100,7 +100,7 @@ export default class FaleConosco extends Component {
 
                     De segunda a sexta das 9h às 19h (exceto feriados). <br /><br />
                             </p>
-                        </h4>
+                        </h6>
 
                         <form action=''>
                             <br />
