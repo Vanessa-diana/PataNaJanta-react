@@ -1,9 +1,4 @@
 
-
-body{
-    background-color: #ebebeb;
-}
-
 .btn:hover {
     color: #fff;
     opacity: 0.8;
@@ -56,8 +51,6 @@ margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     width: 18rem;
-
-
 }
 
 .cardsprod{
@@ -81,11 +74,6 @@ margin-bottom: 10px;
 }
 
 
-/* @media screen and (min-width: 393px) and (max-width:575px) {
-
-
-
-} */
 
 
 
