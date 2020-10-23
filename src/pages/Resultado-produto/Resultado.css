@@ -2,12 +2,15 @@
 .btn:hover {
     color: #fff;
     opacity: 0.8;
-    border: 2px solid #9D5452;
+    border: 0.125rem solid #9D5452;
 }
 
 .btnfiltrar{
-    background-color: #b86360
+    background-color: #b86360;
+    width: 100%;
+    
 }
+
 
 .btncomprar{
     width: 70%; 
@@ -17,8 +20,8 @@
 
 .btn-primary{
 
-border: 2px solid #9D5452;
-margin-bottom: 10px;
+border: 0.125rem solid #9D5452;
+margin-bottom: 0.625rem;
 
 }
 
@@ -28,26 +31,27 @@ margin-bottom: 10px;
 
 .tipo{
 
-    margin: 5px;
+    margin: 0.3125rem;
 }
 
 .filtrocard{
-    margin-left:10px;
-    margin-top:20px 
+    margin-left:0.625rem;
+    
 }
 
 .titulo{
     width: 100%;
-    margin: 0px;
+    margin: 0rem;
 }
 
 .filtro{
-    margin: 0px;
+    margin: 0rem;
+    
+
 }
 
 .cardes{
     max-width: 110%;
-    /* margin:20px; */
     margin-left: auto;
     margin-right: auto;
     width: 18rem;
@@ -56,7 +60,7 @@ margin-bottom: 10px;
 .cardsprod{
 
     max-width: 110%;
-    margin:20px;
+    margin:1.25rem;
     margin-left: auto;
     margin-right: auto;
     width: 18rem;
@@ -64,17 +68,27 @@ margin-bottom: 10px;
 
 
 .limiteLinhas{
-    height: 50px;
+    height: 3.125rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 
+@media screen and (min-width:49.75rem) and (max-width:75rem){
 
+    .tipo{
+        font-size: smaller;
+        text-align: start;
+        
+    }
+
+   
+
+}
 
 
 

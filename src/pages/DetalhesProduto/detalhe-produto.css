@@ -39,6 +39,7 @@ body{
 #lbl_qtd{
     margin-top: 42px;
     color: #b7773f;
+    font-size: 1rem;
 }
 
 #lbl_titulo_descricao{
