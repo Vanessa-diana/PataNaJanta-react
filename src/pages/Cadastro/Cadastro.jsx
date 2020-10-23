@@ -14,7 +14,7 @@ export default props=>(
                     <label>Criar Conta</label>
                 </div>
 
-                <a href="login.html"> <button className="btn btn-jacadastrado" type="button">Já tenho Cadastro</button></a>
+                <a href="#/login"> <button className="btn btn-jacadastrado" type="button">Já tenho Cadastro</button></a>
             </div>
         </div>
     </div>

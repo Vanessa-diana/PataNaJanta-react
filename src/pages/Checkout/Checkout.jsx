@@ -108,7 +108,15 @@ export default props => (
 
                                 </div>
                             </div>
+                        </div>
 
+
+                        <div className="row espacoTop10">
+                            <div className="col-12">
+                                <spam>
+                                    <h6 id="lblErroCEP" className="espacoTop10"></h6>
+                                </spam>
+                            </div>
                         </div>
 
 
