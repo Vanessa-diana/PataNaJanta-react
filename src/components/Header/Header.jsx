@@ -4,6 +4,7 @@ import Logo from '../../images/logo.png'
 import Lupa from '../../images/lupa.png'
 import Cart from '../../images/cart.png'
 import User from '../../images/user.png'
+import axios from 'axios';
 
 
 export default class Header extends Component {
@@ -38,9 +39,13 @@ export default class Header extends Component {
             return;
         }
 
+        //CASO USUARIO NAO ESTEJA LOGADO
         this.setState({link_url: '#/login'})
 
-        //CASO USUARIO NAO ESTEJA LOGADO
+
+        this.mostraPainel();
+        this.mostraCategorias();
+        this.buscaProdutoPesquisa();
     }
 
 
@@ -59,6 +64,112 @@ export default class Header extends Component {
         }
     }
 
+
+    mostraCategorias = () => {
+
+        let conteudoDropCachorro = document.getElementById("div-dropdown-cachorro");
+        let dropdownCachorro = document.getElementById("dropdownCachorro");
+
+        dropdownCachorro.disabled = true;
+
+        let URL = "http://patanajanta.test/api";
+        let endPoint = "/produto/listarcategorias"
+
+        URL+=endPoint;
+
+        axios({
+            method: 'get',
+            url: URL,
+            timeout: 15000
+        }).then(function(resposta){
+
+            for(let i=0;i<resposta.data.length;i++){
+                conteudoDropCachorro.innerHTML += `<a class="dropdown-item linkNav" href="resultado-produto.html">${resposta.data[i].descricao}</a>`
+            }
+            dropdownCachorro.disabled = false;
+
+        }).catch(function(erro){
+
+            if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
+                alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                dropdownCachorro.disabled = false;
+                return;
+            }
+
+            alert(erro);
+            dropdownCachorro.disabled = false;
+        })
+    }
+
+
+    buscaProdutoPesquisa = () => {
+
+        let txtPesquisa = document.getElementById('txtPesquisa');
+        let btnPesquisar = document.getElementById('btnPesquisar');
+
+        btnPesquisar.addEventListener('click', function(event){
+
+            event.preventDefault();
+
+            let URL = 'http://patanajanta.test/api'
+            let endPoint = `/produto/buscarProdutoTermo/${txtPesquisa.value}`
+
+            URL+=endPoint;
+            
+            axios({
+                method: 'get',
+                url: URL,
+                timeout: 15000
+            }).then(function(resposta){
+
+    
+                //CASO API RETORNE 404
+
+                //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+                if(localStorage.getItem('resultadoPesquisa') == null){
+                    localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                    return
+                }
+
+                //Caso exista alguma consulta anterior guardada em LocalStorage
+                localStorage.removeItem('resultadoPesquisa');
+                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+
+
+                //CASO API RETORNE 201
+                /* try{
+
+                    //CASO API RETORNE NENHUM DADO
+                    if(resposta.data.erro.length != 0){
+                        return;
+                    }
+
+                }catch(e){
+
+                    //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+                    if(localStorage.getItem('resultadoPesquisa') == null){
+                        localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                        return
+                    }
+
+                    //Caso exista alguma consulta anterior guardada em LocalStorage
+                    localStorage.removeItem('resultadoPesquisa');
+                    localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                } */
+
+    
+            }).catch(function(erro){
+                if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
+                    alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                    return;
+                }
+
+                alert(`CATCH AXIOS = ${erro}`);
+            })
+
+        })
+    }
+
     render() {
         return (
             <div id='header-pataNaJanta'>
@@ -68,8 +179,8 @@ export default class Header extends Component {
                     </div>
                     <div className="col-12 col-sm-7 text-center">
                         <form className="form">
-                            <input className="form-control mr-2 mb-1 mt-4 searchBox" type="search" placeholder="Procure produtos para seu cachorro ou gato" aria-label="Search" />
-                            <button className="btn btn-search" type="submit">
+                            <input id='txtPesquisa' className="form-control mr-2 mb-1 mt-4 searchBox" type="search" placeholder="Procure produtos para seu cachorro ou gato" aria-label="Search" />
+                            <button className="btn btn-search" type="submit" id='btnPesquisar'>
                                 <img src={Lupa} width="22px" />
                             </button>
                         </form>
@@ -104,13 +215,16 @@ export default class Header extends Component {
                             <li class="nav-item dropdown text-center menu" style={{ textDecoration: 'none', alignItems: 'center' }}>
                                 <a class="nav-link dropdown-toggle mt-2 linksNavTitulo" data-toggle="dropdown" href="#"
                                     role="button" aria-haspopup="true" aria-expanded="false"
-                                    style={{ backgroundColor: '#b86360' }}>Cachorro</a>
+                                    style={{ backgroundColor: '#b86360' }} id='dropdownCachorro'>Cachorro</a>
 
-                                <div class="dropdown-menu menu" >
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
+                                <div class="dropdown-menu menu" id="div-dropdown-cachorro">
+                                    
+                                    {/* {this.mostraCategorias()} */}
+                                    {/* <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
                                     <a class="dropdown-item linkNav" href="resultado-produto.html">Conforto</a>
                                     <a class="dropdown-item linkNav" href="resultado-produto.html">Brinquedos</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Passeio</a>
+                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Passeio</a> */}
+                                
                                 </div>
                             </li>
                         </ul>
