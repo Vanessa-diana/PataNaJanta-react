@@ -88,8 +88,8 @@ export default class Header extends Component {
         }).then(function(resposta){
 
             for(let i=0;i<resposta.data.length;i++){
-                conteudoDropCachorro.innerHTML += `<a class="dropdown-item linkNav" href="resultado-produto.html">${resposta.data[i].descricao}</a>`
-                conteudoDropGato.innerHTML += `<a class="dropdown-item linkNav" href="resultado-produto.html">${resposta.data[i].descricao}</a>`;
+                conteudoDropCachorro.innerHTML += `<a class="dropdown-item linkNav" href="#/resultadoproduto">${resposta.data[i].descricao}</a>`
+                conteudoDropGato.innerHTML += `<a class="dropdown-item linkNav" href="#/resultadoproduto">${resposta.data[i].descricao}</a>`;
             }
             dropdownCachorro.disabled = false;
             dropdownGato.disabled = false;
