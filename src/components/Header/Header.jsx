@@ -36,12 +36,11 @@ export default class Header extends Component {
                 window.location.reload(false);
             })
 
-            return;
+            //return;
+        }else{
+            //CASO USUARIO NAO ESTEJA LOGADO
+            this.setState({link_url: '#/login'})
         }
-
-        //CASO USUARIO NAO ESTEJA LOGADO
-        this.setState({link_url: '#/login'})
-
 
         this.mostraPainel();
         this.mostraCategorias();
@@ -66,6 +65,7 @@ export default class Header extends Component {
 
 
     mostraCategorias = () => {
+
 
         let conteudoDropCachorro = document.getElementById("div-dropdown-cachorro");
         let dropdownCachorro = document.getElementById("dropdownCachorro");
