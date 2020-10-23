@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer';
 import Routes from './Routes'
-import resultado from '../pages/Resultado-produto/Resultado'
+
 
 
 import SeuEspaco from '../pages/SeuEspaco/SeuEspaco'
