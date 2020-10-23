@@ -15,7 +15,7 @@ class Login extends React.Component {
 
     componentDidMount() {
 
-        const homeURI = '/#/home'
+        const homeURI = '#/home'
 
         let txtSenha = document.getElementById('senhaUsuario')
         let txtUsuario = document.getElementById('txtUsuario')

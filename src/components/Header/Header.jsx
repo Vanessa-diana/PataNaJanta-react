@@ -70,7 +70,11 @@ export default class Header extends Component {
         let conteudoDropCachorro = document.getElementById("div-dropdown-cachorro");
         let dropdownCachorro = document.getElementById("dropdownCachorro");
 
+        let conteudoDropGato = document.getElementById("div-dropdown-gato");
+        let dropdownGato = document.getElementById("dropdownGato");
+
         dropdownCachorro.disabled = true;
+        dropdownGato.disabled = true;
 
         let URL = "http://patanajanta.test/api";
         let endPoint = "/produto/listarcategorias"
@@ -85,19 +89,23 @@ export default class Header extends Component {
 
             for(let i=0;i<resposta.data.length;i++){
                 conteudoDropCachorro.innerHTML += `<a class="dropdown-item linkNav" href="resultado-produto.html">${resposta.data[i].descricao}</a>`
+                conteudoDropGato.innerHTML += `<a class="dropdown-item linkNav" href="resultado-produto.html">${resposta.data[i].descricao}</a>`;
             }
             dropdownCachorro.disabled = false;
+            dropdownGato.disabled = false;
 
         }).catch(function(erro){
 
             if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
                 alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
                 dropdownCachorro.disabled = false;
+                dropdownGato.disabled = false;
                 return;
             }
 
             alert(erro);
             dropdownCachorro.disabled = false;
+            dropdownGato.disabled = false;
         })
     }
 
@@ -219,11 +227,7 @@ export default class Header extends Component {
 
                                 <div class="dropdown-menu menu" id="div-dropdown-cachorro">
                                     
-                                    {/* {this.mostraCategorias()} */}
-                                    {/* <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Conforto</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Brinquedos</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Passeio</a> */}
+                                    {/* CONSUMO API AQUI mostraCategorias*/}
                                 
                                 </div>
                             </li>
@@ -234,13 +238,12 @@ export default class Header extends Component {
                             <li class="nav-item dropdown text-center menu" style={{ textDecoration: 'none', alignItems: 'center' }}>
                                 <a class="nav-link dropdown-toggle mt-2 linksNavTitulo " data-toggle="dropdown"
                                     role="button" aria-haspopup="true" aria-expanded="false"
-                                    style={{ backgroundColor: '#b86360' }}>Gato</a>
+                                    style={{ backgroundColor: '#b86360' }} id='dropdownGato'>Gato</a>
 
-                                <div class="dropdown-menu menu">
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Alimentação</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Conforto</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Brinquedos</a>
-                                    <a class="dropdown-item linkNav" href="resultado-produto.html">Ambiente</a>
+                                <div class="dropdown-menu menu" id='div-dropdown-gato'>
+                                    
+                                    {/* CONSUMO API AQUI mostraCategorias */}
+
                                 </div>
                             </li>
                         </ul>
