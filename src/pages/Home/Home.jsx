@@ -13,7 +13,6 @@ import Title from '../../components/Titulo/Title';
 /* <!-- CARROSSEL -->*/
 export default props =>
     <>
-
         <div id="carouselExampleControls" className="carousel slide row" data-ride="carousel">
             <div className="carousel-inner">
                 <div className="carousel-item active">
