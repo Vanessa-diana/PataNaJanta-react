@@ -24,7 +24,6 @@ export default props => (
     <Route path = '/detalhe' component={DetalheProduto}/>
     <Route path = '/historicopedido' component={HistoricoPedido}/>
     <Route path = '/resultadoProduto' component={ResultadoProduto}/>
-
     <Redirect from='*' to='/home'/>
     </Router>
 )
