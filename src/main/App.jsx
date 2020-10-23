@@ -18,7 +18,7 @@ export default props =>
         <Header/>
         <SeuEspaco/>
         <Checkout />
-        {/* <Routes /> */}
+        <Routes />
         <Footer/>
     </div>
 
