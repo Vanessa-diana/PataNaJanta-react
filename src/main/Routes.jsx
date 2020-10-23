@@ -13,15 +13,15 @@ import Sucesso from '../pages/SucessoPedido/Sucesso'
 
 export default props => (
     <Router history={hashHistory}>
-    <Route path = '/home' component={Home}/>
-    <Route path = '/faleconosco' component={FaleConosco}/>
-    <Route path ='/adotepet' component={AdotePet}/>
-    <Route path = '/login' component={Login}/>
-    <Route path = '/carrinho' component={Carrinho}/>
-    <Route path = '/cadastro' component={Cadastro}/>
-    <Route path = '/checkout' component={Checkout}/>
-    <Route path = '/historicopedido' component={HistoricoPedido}/>
-    <Route path = '/sucessopedido' component={Sucesso}/>
+        <Route path = '/home' component={Home}/>
+        <Route path = '/faleconosco' component={FaleConosco}/>
+        <Route path ='/adotepet' component={AdotePet}/>
+        <Route path = '/login' component={Login}/>
+        <Route path = '/carrinho' component={Carrinho}/>
+        <Route path = '/cadastro' component={Cadastro}/>
+        <Route path = '/checkout' component={Checkout}/>
+        <Route path = '/historicopedido' component={HistoricoPedido}/>
+        <Route path = '/sucessopedido' component={Sucesso}/>
     <Redirect from='*' to='/home'/>
     </Router>
 )

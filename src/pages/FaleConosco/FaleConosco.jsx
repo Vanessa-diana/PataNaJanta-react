@@ -76,75 +76,67 @@ export default class FaleConosco extends Component {
     render() {
         return (
             <>
+            <div className='containerprincipal'>
+                <span className = 'space'></span>
+                <Title title="Fale Conosco" style="textotitulo" />
+                
+                {/* container maior textos, input's  */}
+                <div className='containergrande '>
+                    <div className="col-12 texto">
+                        <p className='espaco'> É super simples conversar com a gente. </p>
 
+                        <p>Nosso setor não medirá esforço na busca contínua e
+                        satisfação dos nossos clientes.</p>
 
-                <div className='container containerprincipal'>
-                    <br /> <br /> <br />
-                    <h1>
-                        <Title title="Fale Conosco" style="textotitulo" />
-                    </h1>
-                    {/* container maior textos, input's  */}
-                    <div className='containergrande'>
-                        <h6>
-                            <p className='textop'> <br /> É super simples conversar com
-                    a gente. <br />Nosso setor não medirá esforço na busca contínua e
-                    satisfação dos nossos clientes. <br /> <br />
+                        <p>Nosso canal de atendimento é através do telefone (11) 4002 8922, ou se preferir, basta preencher o
+                        formulário abaixo e retornaremos mais breve possivel.</p>
 
-                    Nosso canal de atendimento é através do telefone (11) 4002 8922, ou se preferir, basta preencher o
-                    formulário abaixo e retornaremos mais breve possivel. <br /> <br />
+                        <p>Horário de atendimento:</p>
 
-                    Horário de atendimento:
+                        <p>De segunda a sexta das 9h às 19h (exceto feriados). </p>
+                    </div> 
+                    <span className = 'space'></span>    
+                <form action=''>
+                    <div className='col-12'>
+                            <div className='row'>
+                                <div className='col-sm-6 col-12'>
 
-                    De segunda a sexta das 9h às 19h (exceto feriados). <br /><br />
-                            </p>
-                        </h6>
-
-                        <form action=''>
-                            <br />
-                            <div className='col-12'>
-                                <div className='row'>
-                                    <div className='col-sm-6 col-12'>
-
-                                        <div className='form-group formulariofale'>
-                                            <label for='exampleFormControlInput1'>Nome</label>
-                                            <input type='text' className='form-control' id='txtnome'
-                                                placeholder='Primeiro Nome' required />
-                                        </div>
-                                        <div className='form-group formulariofale'>
-                                            <label for='exampleFormControlInput1'>Sobrenome</label>
-                                            <input type='text' className='form-control' id='txtsobrenome'
-                                                placeholder='Sobrenome ' required />
-                                        </div>
-                                        <div className='form-group formulariofale' >
-                                            <label for='exampleFormControlInput1'>Endereço de email</label>
-                                            <input type='email' className='form-control' id='txtemail'
-                                                placeholder='nome@exemplo.com' name='email' required />
-                                        </div>
+                                    <div className='form-group formulariofale'>
+                                        <label for='exampleFormControlInput1'>Nome</label>
+                                        <input type='text' className='form-control' id='txtnome'
+                                            placeholder='Primeiro Nome' required />
                                     </div>
-                                    <div className='col-sm-6 col-12'>
-                                        <div className='form-group col-12 formulariofale ' >
-                                            <label for='exampleFormControlTextarea1'>Mensagem</label>
-                                            <textarea className='form-control texterea' id='txtmensagem' rows='8'
-                                                placeholder='Digite aqui sua mensagem' required ></textarea>
-                                        </div>
+                                    <div className='form-group formulariofale'>
+                                        <label for='exampleFormControlInput1'>Sobrenome</label>
+                                        <input type='text' className='form-control' id='txtsobrenome'
+                                            placeholder='Sobrenome ' required />
+                                    </div>
+                                    <div className='form-group formulariofale' >
+                                        <label for='exampleFormControlInput1'>Endereço de email</label>
+                                        <input type='email' className='form-control' id='txtemail'
+                                            placeholder='nome@exemplo.com' name='email' required />
+                                    </div>
+                                </div>
+                                <div className='col-sm-6 col-12'>
+                                    <div className='form-group col-12 formulariofale ' >
+                                        <label for='exampleFormControlTextarea1'>Mensagem</label>
+                                        <textarea className='form-control texterea' id='txtmensagem' rows='8'
+                                            placeholder='Digite aqui sua mensagem' required ></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-sm-12 col-12 mt-5 divbotaofale' >
-                               
-                                {/* <button className='btn btn-search botaofale' type='submit'
-                                    id='btnfale' > {this.state.lbl_botao}
-                                </button> */}
-                                
-                               <Button style="btn-padrao botaofale" type="submit" id="btnfale" title={this.state.lbl_botao}  />
+                        </div>
+                        <div className='col-sm-12 col-12 mt-5 divbotaofale' >
+                            
+                        <Button style="btn-padrao" type="submit" id="btnfale" title={this.state.lbl_botao}  />
 
-                            </div>
-                            <br /><br />
-                        </form>
-                    </div>
-                    <br /><br /><br />
+                        </div>
+                        <span className='space'></span>
+                    </form>
                 </div>
-            </>
+                <span className='space'></span>
+            </div>
+        </>
         )
     }
 
