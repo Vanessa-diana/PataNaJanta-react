@@ -9,15 +9,9 @@ import Footer from '../components/Footer/Footer';
 import Routes from './Routes'
 
 
-
-import SeuEspaco from '../pages/SeuEspaco/SeuEspaco'
-import Checkout from '../pages/Checkout/Checkout'
-
 export default props => 
     <div className="container-fluid">
         <Header/>
-        <SeuEspaco/>
-        <Checkout />
         <Routes />
         <Footer/>
     </div>
