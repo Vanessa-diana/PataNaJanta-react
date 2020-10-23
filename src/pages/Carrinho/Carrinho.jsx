@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import '../Carrinho/carrinho.css'
 import ItemCarrinho from '../../images/item-carrinho.jpg'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Titulo/Title'
 
-export default props=>
+export default class Carrinho extends Component { 
+    state = {
+        numero: 0
+    }
+
+    aumentar = () =>{
+        this.setState({numero:this.state.numero + 1})
+    }
+
+    diminuir = () => {
+        this.setState({numero:this.state.numero -1})
+        if((this.state.numero) <= 0) {
+            return this.setState({numero:this.state.numero = 0})
+        }
+    }
+
+    render(){
+        return (
 <div className="row">
     <div className="col-12 col-xl-8 col-md-6">
         <Title title = "Meu carrinho" style = "titulo-carrinho mt-4 ml-2"/>
@@ -25,8 +42,19 @@ export default props=>
                             <span >R$ 18,90</span>
                         </div>
                         <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                        <input class="quantidade form-control" type="number" name="quantidade" id="quantidade" value="1" min="1"/>
-                            <small className="excluir-produto mr-5">excluir</small>
+                            <div className='row'>
+                                <div className="col-3">
+                                    <Button style = 'btn-quantidade' title='+' click= {this.aumentar}/>
+                                </div>
+                                <div className="col-4">
+                                    <input className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
+                                </div>
+                                <div className="col-5">
+                                    <Button style='btn-quantidade' title='-' click= {this.diminuir}/>
+                                </div>
+                                <small className="col-12 text-center excluir-produto">excluir</small>
+                            </div>
+                        
                         </div>
                         <div className="col-4 col-sm-4 col-xl-2 mt-3">
                             <span >R$ 37,80</span>
@@ -58,6 +86,10 @@ export default props=>
         </div>
     </div> 
 </div>
+        )
+    }
 
+}
+    
     
 
