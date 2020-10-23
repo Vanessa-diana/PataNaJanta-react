@@ -7,8 +7,13 @@ import Login from '../pages/Login/Login'
 import Carrinho from '../pages/Carrinho/Carrinho'
 import Cadastro from '../pages/Cadastro/Cadastro'
 import Checkout from '../pages/Checkout/Checkout'
+import DetalheProduto from '../pages/DetalhesProduto/detalhes'
 import HistoricoPedido from '../pages/HistoricoDePedido/HistoricoDePedido'
+<<<<<<< HEAD
 import Sucesso from '../pages/SucessoPedido/Sucesso'
+=======
+import ResultadoProduto from '../pages/Resultado-produto/Resultado'
+>>>>>>> lilian
 
 
 export default props => (
@@ -20,8 +25,13 @@ export default props => (
     <Route path = '/carrinho' component={Carrinho}/>
     <Route path = '/cadastro' component={Cadastro}/>
     <Route path = '/checkout' component={Checkout}/>
+    <Route path = '/detalhe' component={DetalheProduto}/>
     <Route path = '/historicopedido' component={HistoricoPedido}/>
+<<<<<<< HEAD
     <Route path = '/sucessopedido' component={Sucesso}/>
+=======
+    <Route path = '/resultadoproduto' component={ResultadoProduto}/>
+>>>>>>> lilian
     <Redirect from='*' to='/home'/>
     </Router>
 )
