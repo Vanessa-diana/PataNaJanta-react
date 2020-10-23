@@ -8,11 +8,7 @@ import RacaoCachorro from '../../images/racaoCachorro.png'
 
 {/* /* <!-- DIV DE CONTEUDO DA PAGINA--> */ }
 export default props => (
-    <div className="container">
-      
-    
-        {/* INICIANDO CARDS */}
-        <div className="row custom-cards">
+   
             <div className="col-lg-3 col-md-6 col-sm-12">
                 <div className="card">
                     <img className="card-img-top img-fluid" src={RacaoCachorro} alt="racao-adulto-special-15kg-golden-3310549-15kg" />
@@ -25,7 +21,6 @@ export default props => (
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+      
 
 )

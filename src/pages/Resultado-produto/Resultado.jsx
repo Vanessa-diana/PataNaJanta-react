@@ -3,7 +3,8 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import '../Resultado-produto/Resultado.css';
-import Card from './../../components/Card/card'
+import Card from './../../components/Card/Card'
+import Botao from '../../components/Button/Button'
 
 
 const URL = 'localhost:3004/todo'
@@ -42,7 +43,7 @@ export default class Resultado extends Component {
     
                     <div class="card filtrocard" >
                         <div class="card-body">
-                        <h4 class="card-title">FILTROS</h4>
+                        <h4 >FILTRAR</h4>
                        
                             <hr/>
     
@@ -116,7 +117,11 @@ export default class Resultado extends Component {
                         </div>
                         <h6 class="tipo">Mais de R$150,00</h6>
                       </div>
-                        <a href="#" class="btn btn-primary btn-block btnfiltrar" >Filtrar</a>
+
+                        <Botao title="Filtrar" style="btn-padrao primary btn-block btnfiltrar" />
+
+                        {/* <a href="#" class="btn btn-primary btn-block btnfiltrar" >Filtrar</a> */}
+                       
                         </div>
                     </div>
     

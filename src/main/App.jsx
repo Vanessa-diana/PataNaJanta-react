@@ -7,12 +7,12 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer';
 import Routes from './Routes'
-import resultado from '../pages/Resultado-produto/Resultado'
+import Resultado from '../pages/Resultado-produto/Resultado'
 
 export default props => 
     <div className="container-fluid">
         <Header/>
-        <Routes/>
+        <Resultado/>
         <Footer/>
     </div>
 

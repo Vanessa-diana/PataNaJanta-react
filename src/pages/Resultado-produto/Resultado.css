@@ -6,8 +6,11 @@
 }
 
 .btnfiltrar{
-    background-color: #b86360
+    background-color: #b86360;
+    width: 100%;
+    
 }
+
 
 .btncomprar{
     width: 70%; 
@@ -33,7 +36,7 @@ margin-bottom: 10px;
 
 .filtrocard{
     margin-left:10px;
-    margin-top:20px 
+    
 }
 
 .titulo{
@@ -43,11 +46,12 @@ margin-bottom: 10px;
 
 .filtro{
     margin: 0px;
+    
+
 }
 
 .cardes{
     max-width: 110%;
-    /* margin:20px; */
     margin-left: auto;
     margin-right: auto;
     width: 18rem;
@@ -74,7 +78,17 @@ margin-bottom: 10px;
 }
 
 
+@media screen and (min-width:796px) and (max-width:1200px){
 
+    .tipo{
+        font-size: smaller;
+        text-align: start;
+        
+    }
+
+   
+
+}
 
 
 
