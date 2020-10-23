@@ -200,3 +200,10 @@
 
 }
 
+.menu-dropdown{
+    display: none;
+}
+
+.lihover:hover .menu-dropdown{
+    display: block !important;
+}
