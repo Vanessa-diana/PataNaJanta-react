@@ -60,10 +60,10 @@ class Login extends React.Component {
                         window.location.replace(domain[0] + homeURI);
                         window.location.reload(false);
 
-                        alert('GRAVADO COM SUCESSO')
+                        console.log('GRAVADO COM SUCESSO')
 
                     } catch (e) {
-                        alert('ERRO AO GRAVAR LOCAL STORAGE')
+                        console.log('ERRO AO GRAVAR LOCAL STORAGE')
                     }
 
 
