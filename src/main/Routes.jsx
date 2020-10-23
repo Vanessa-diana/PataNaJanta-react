@@ -23,7 +23,7 @@ export default props => (
     <Route path = '/checkout' component={Checkout}/>
     <Route path = '/detalhe' component={DetalheProduto}/>
     <Route path = '/historicopedido' component={HistoricoPedido}/>
-    <Route path = '/resultadoProduto' component={ResultadoProduto}/>
+    <Route path = '/resultadoproduto' component={ResultadoProduto}/>
     <Redirect from='*' to='/home'/>
     </Router>
 )
