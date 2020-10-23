@@ -51,7 +51,7 @@ export default props =>
                 </div>
                 {/* <!--fim - banner-->  */}
                 <Title style="pgato mt-2" title="Para seu gato" />
-                <Card />
+                <Card/>
             </div>
         
     </> 

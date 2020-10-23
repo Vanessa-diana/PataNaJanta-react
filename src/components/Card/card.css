@@ -1,24 +1,23 @@
 /* INICIO CARD */
-.custom-cards {
+/* .custom-cards {
     margin-top: 1.25rem;
-}
+} */
 
-.card {
-    font-size: 1rem;
+.card-do-card{
+    font-size: 16px;
     align-items: center;
     width:auto;
     height: auto;
     margin-top: 10px;
     visibility: visible;
-   
-    }
+}
 
 .card-img-top{
     width: 6.25rem;
     align-items: center;
 }
 
-.card-body{
+.body-card{
     text-align: center;
 }
 .card-title{
@@ -29,7 +28,7 @@
 /* INICIO BOTAO */
 .btn-comprar{
     background-color: #9D5452;
-    width: 12.5rem;
+    width: 100%;
     color: #fff;
     cursor: pointer;
     
@@ -68,4 +67,5 @@
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
+    margin-top: 1.25rem;
 }
