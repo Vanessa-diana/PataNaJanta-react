@@ -10,9 +10,9 @@ export default props =>
 
     <div className="container mt-5 mb-3 ">
 
-        <h1>
+        <h1><strong>
             <Title title="Seu Espaço" style="tituloespaco" />
-        </h1>
+        </strong></h1>
 
         <div className="col-12">
             <div className="container ">
