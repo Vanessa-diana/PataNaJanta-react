@@ -19,7 +19,7 @@ export default class Home extends Component {
      }
      refreshCachorro = () => {
        return this.state.list.map((item => {
-      return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} />
+      return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
         }))
     }
     getCachorro = () => {
@@ -30,7 +30,7 @@ export default class Home extends Component {
 
     refreshGato = () => {
         return this.state.listGato.map((item => {
-       return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} />
+       return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
          }))
      }
      getGato = () => {
