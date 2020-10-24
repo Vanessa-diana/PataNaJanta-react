@@ -78,7 +78,7 @@ class Login extends React.Component {
                 }).catch(function (erro) {
 
                     if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                        alert('O banco de dados demorou muito para responder, por favor tente mais tarde!')
+                        alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
                         btnEntrar.disabled = false;
                         txtUsuario.disabled = false;
                         txtSenha.disabled = false;
