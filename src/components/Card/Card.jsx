@@ -14,9 +14,9 @@ export default props => (
                     <img className="card-img-top img-fluid" src={RacaoCachorro} alt="racao-adulto-special-15kg-golden-3310549-15kg" />
                     <div className="card-body body-card">
                         <div className="container limiteLinhas">
-                            <h6 className="card-title">Ração para Cães Adultos Golden premium...</h6>
+                            <h6 className="card-title limiteLinhas">{props.descricao}</h6>
                         </div>
-                        <p className="card-text">R$ 110,00</p>
+                        <p className="card-text">{props.preco}</p>
                         <a href="detalhes-produto.html" className="btn btn-comprar">Comprar</a>
                     </div>
                 </div>

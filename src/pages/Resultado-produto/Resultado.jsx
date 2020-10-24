@@ -5,9 +5,28 @@ import axios from 'axios'
 import '../Resultado-produto/Resultado.css';
 import Card from './../../components/Card/Card'
 import Botao from '../../components/Button/Button'
+import '../../components/Card/card.css'
+
+const URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
+
+const URLCATEGORIA = 'http://patanajanta.test/api/produto/listar/'
+
+const URLPORTERMO = 'http://patanajanta.test/api/produto/buscarProdutoTermo/'
+
+// Route::get('produto/listar/{descricaoTipoProduto}/{descricaoCategoriaProduto}'
+
+//RECUPERAR CATEGORIA E TIPO PRODUTO DA API localstorage, vai ser pego do local storage pelo header quando clicar
+
+//o like deve pegar o input como parametro e consumir no card
+
+//Route::get('produto/buscarProdutoTermo/{termo}
 
 
-const URL = 'localhost:3004/todo'
+const list =  [];
+
+const listaprodtermo = [];
+
+
 
 export default class Resultado extends Component {
    
@@ -16,9 +35,65 @@ export default class Resultado extends Component {
 
         super(props)
     
+        this.state = {  list: [], listaprodtermo:[] }
+
+        this.getCategorias();
+
+        this.getProdutotermo();
+
+     
 
     }
    
+
+
+
+    refresh = () => {
+      
+    
+       //if o like(barra de pesquisa) tiver null entao faca abaixo
+       return this.state.list.map((item => {
+         return <Card descricao={item.nome} preco={item.vlr_aquisicao} /> 
+ 
+
+
+       }))
+  
+
+
+   }
+
+
+   getProdutotermo = () => {
+
+
+       axios.get(`${URLPORTERMO}`)
+       .then(resp => this.setState({listaprodtermo: resp.data}))   //mais o termo value do header
+                                                                  //seta o valor diplay pro pai
+         //   {BarraPesquisa valor={this.state.ValorDisplay}    //componentizar a barra e atribuir pro atributo daqui
+
+          // this.setState({barra: {BarraPesquisa.valor}})
+
+   }
+
+
+
+   getCategorias = () => {
+
+
+       axios.get(`${URL}`)
+       .then(resp => this.setState({list: resp.data}))
+
+   }
+
+
+
+
+
+
+
+
+
 
    
     render() {
@@ -131,11 +206,8 @@ export default class Resultado extends Component {
                 <div class="col-9 cardes">
 
                         <div class="row">
-                            <Card /> 
-                            <Card /> 
-                            <Card /> 
-                            <Card /> 
-                            <Card /> 
+                            {this.refresh()}
+                            
                         </div>
                 
                 </div>
