@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './login.css';
 
 import axios from 'axios';
-import LocalStorage from '../../main/LocalStorage';
 
 let URL = 'http://patanajanta.test/api'
 
