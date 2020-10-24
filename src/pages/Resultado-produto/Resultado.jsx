@@ -53,7 +53,7 @@ export default class Resultado extends Component {
     
        //if o like(barra de pesquisa) tiver null entao faca abaixo
        return this.state.list.map((item => {
-         return <Card descricao={item.nome} preco={item.vlr_aquisicao} /> 
+         return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
  
 
 
