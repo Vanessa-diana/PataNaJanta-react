@@ -24,6 +24,8 @@ export default class Detalhes extends Component {
         document.addEventListener("DOMContentLoaded", function(){
             self.zoom("img_produto", 2);
         });
+
+        window.location.reload(false);
     }
     zoom = (imgID, zoom) =>{
             var img, glass, w, h, bw;
