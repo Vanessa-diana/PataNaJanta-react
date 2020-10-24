@@ -51,8 +51,7 @@ class Login extends React.Component {
 
 
                     try {
-                        LocalStorage.usuario = resp.data[0];
-                        localStorage.setItem('usuario', JSON.stringify(LocalStorage.usuario));
+                        localStorage.setItem('usuario', JSON.stringify(resp.data[0]));
 
                         let currentURL = window.location.href;
                         let domain = currentURL.split("/");
