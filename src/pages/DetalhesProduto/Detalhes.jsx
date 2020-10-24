@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button'
 
 export default class Detalhes extends Component { 
     state = {
-        numero: 0
+        numero: 1
     }
 
     aumentar = () =>{
@@ -126,13 +126,13 @@ export default class Detalhes extends Component {
                                             <h3 id="lbl_qtd">Quantidade</h3>
                                              <div className='row'>
                                                 <div className="col-1">
-                                                    <Button style = 'btn-quantidade' title='+' click= {this.aumentar}/>
+                                                    <button onClick={this.diminuir} className='btn btn-quantidade'>-</button>
                                                 </div>
                                                 <div className="col-2 mr-2 ml-1">
                                                     <input className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
                                                 </div>
                                                 <div className="col-2 d-flex justify-content-start">
-                                                    <Button style='btn-quantidade' title='-' click= {this.diminuir}/>
+                                                    <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
                                                 </div>
                                             
                                             
