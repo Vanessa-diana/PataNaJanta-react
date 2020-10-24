@@ -172,7 +172,7 @@ export default class Header extends Component {
                     return;
                 }
 
-                alert(`CATCH AXIOS = ${erro}`);
+                console.log(`CATCH AXIOS = ${erro}`);
             })
 
         })
