@@ -29,7 +29,7 @@ export default class Home extends Component {
            this.increment();
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
              preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-              onClick={this.addItemCarrinho} />
+              onClick={this.getItemDetalheProduto} />
         })
     }
 
@@ -89,34 +89,34 @@ export default class Home extends Component {
     }
 
 
-    //ADC ITENS NO CARRINHO
-    addItemCarrinho = (btnValue)=>{
+    //ADC ITENS NO CARRINHO * NÃO APAGAR *
+    // addItemCarrinho = (btnValue)=>{
 
-        console.log(btnValue)
-        console.log(this.state.listProdutos)
+    //     console.log(btnValue)
+    //     console.log(this.state.listProdutos)
 
-        try{
+    //     try{
 
-            if(localStorage.getItem('carrinho') == null){
-                let temp = [];
-                temp.push(this.state.listProdutos[btnValue])
-                localStorage.setItem('carrinho',JSON.stringify(temp))
-            }
-            else{
-                let temp = [];
-                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
+    //         if(localStorage.getItem('carrinho') == null){
+    //             let temp = [];
+    //             temp.push(this.state.listProdutos[btnValue])
+    //             localStorage.setItem('carrinho',JSON.stringify(temp))
+    //         }
+    //         else{
+    //             let temp = [];
+    //             let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
                 
-                for(let i=0; i<jsonProdutos.length; i++){
-                    temp.push(jsonProdutos[i]);
-                }
+    //             for(let i=0; i<jsonProdutos.length; i++){
+    //                 temp.push(jsonProdutos[i]);
+    //             }
 
-                temp.push(this.state.listProdutos[btnValue]);
-                localStorage.setItem('carrinho',JSON.stringify(temp))
-            }
-        }catch(e){
-            console.log(e);
-        }
-    }
+    //             temp.push(this.state.listProdutos[btnValue]);
+    //             localStorage.setItem('carrinho',JSON.stringify(temp))
+    //         }
+    //     }catch(e){
+    //         console.log(e);
+    //     }
+    // }
 
         render(){
             return (
