@@ -26,7 +26,7 @@ const list =  [];
 
 const listaprodtermo = [];
 
-
+let resultado = JSON.parse(localStorage.getItem('resultadoPesquisa'));
 
 export default class Resultado extends Component {
    
@@ -38,9 +38,6 @@ export default class Resultado extends Component {
         this.state = {  list: [], listaprodtermo:[] }
 
         this.getCategorias();
-
-        this.getProdutotermo();
-
      
 
     }
@@ -50,31 +47,20 @@ export default class Resultado extends Component {
 
     refresh = () => {
       
+
+
     
        //if o like(barra de pesquisa) tiver null entao faca abaixo
-       return this.state.list.map((item => {
-         return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+       return resultado.map((item,index)=> {
+         return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
  
 
-
-       }))
+       })
   
 
 
    }
 
-
-   getProdutotermo = () => {
-
-
-       axios.get(`${URLPORTERMO}`)
-       .then(resp => this.setState({listaprodtermo: resp.data}))   //mais o termo value do header
-                                                                  //seta o valor diplay pro pai
-         //   {BarraPesquisa valor={this.state.ValorDisplay}    //componentizar a barra e atribuir pro atributo daqui
-
-          // this.setState({barra: {BarraPesquisa.valor}})
-
-   }
 
 
 
@@ -85,13 +71,6 @@ export default class Resultado extends Component {
        .then(resp => this.setState({list: resp.data}))
 
    }
-
-
-
-
-
-
-
 
 
 
