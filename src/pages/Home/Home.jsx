@@ -5,76 +5,98 @@ import '../../components/Card/card.css'
 import Title from '../../components/Titulo/Title';
 import axios from 'axios';
 
-const list = [];
-const listGato = [];
+/* const list = [];
+const listGato = []; */
 
-/* <!-- CARROSSEL -->*/
+let index = -17;
+
 export default class Home extends Component {
  
     constructor(props){
          super(props)
-         this.state = {  list: [], listGato: [] }
-    }
+         this.state = {  list: [], listGato: [], listProdutos: []}
 
-    componentDidMount(){
         this.getCachorro()
         this.getGato()
-        this.addItem()
+    }
+
+    increment = () => {
+        index++;
     }
 
     refreshCachorro = () => {
-       return this.state.list.map((item,index) => {
-      return <Card value ={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
-        },this.addItem())
+       return this.state.list.map(item => {
+           this.increment();
+            return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
+             preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItem} />
+        })
     }
+
     getCachorro = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/cachorro'
+        let self = this;
+
         axios.get(`${URL}`)
-        .then(resp => this.setState({list: resp.data}))
+        .then(function(resp){
+            self.setState({list: resp.data})
+            self.setState({listProdutos: self.state.list.concat(self.state.listGato)})
+        })
     }
 
     refreshGato = () => {
-        return this.state.listGato.map((item,index) => {
-       return (<Card value ={index} image={item.img_produto} nome={item.nome}
-         preco={item.vlr_aquisicao.toFixed(2)} />)
-        
-         } ,this.addItem())
-         
+        return this.state.listGato.map(item => {
+            this.increment();
+            return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
+            preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItem} />
+        })
      }
+
      getGato = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
+        let self = this;
+
          axios.get(`${URL}`)
-         .then(resp => this.setState({listGato: resp.data}))
+         .then(function(resp){
+            self.setState({listGato: resp.data})
+            self.setState({listProdutos: self.state.list.concat(self.state.listGato)})
+         })
      }
 
     
+    //ADC ITENS NO CARRINHO
+    addItem = (btnValue)=>{
 
-        addItem =()=>{
+        console.log(btnValue)
+        console.log(this.state.listProdutos)
 
-            let self = this
-            
-            try{
-             
-                let btncompra  = document.getElementById('btn-compra')
-        
-                btncompra.addEventListener('click', function(){
+        try{
+            //SALVA ITEM ATUAL NO LOCAL STORAGE
+            localStorage.setItem('produto',JSON.stringify(this.state.listProdutos[btnValue]))
 
-                let produtos=[];
+            //REDIRECIONA O USUARIO PARA A PAGINA DE DETALHES
+            let currentURL = window.location.href;
+            let domain = currentURL.split("/");
 
-                produtos.push(self.state.list);
-                produtos.push(self.state.listGato);
+            window.location.replace(domain[0] + '#/detalhe');
 
-              
-                localStorage.setItem('product', JSON.stringify(produtos))
-          
-                
-                })
-                alert("deu certo");    
-            }catch(e){
-                console.log("erro, inferno"); 
-            }
-        
-    
+            //ATUALIZA PAGINA DE DETALHES PARA LUPA FUNCIONAR
+            window.location.reload(false);
+        }catch(e){
+
+        }
+
+        //NAO APAGAR
+        /* if(localStorage.getItem('carrinho') == null){
+            localStorage.setItem('carrinho',JSON.stringify(this.state.listProdutos[btnValue]))
+        }
+        else{
+
+            let temp = [];
+            temp.push(JSON.parse(localStorage.getItem('carrinho')));
+            temp.push(this.state.listProdutos[btnValue]);
+
+            localStorage.setItem('carrinho',JSON.stringify(temp));
+        } */
     }
 
         render(){
@@ -107,7 +129,7 @@ export default class Home extends Component {
         <div className="container">
             <Title style="pcachorro mt-3" title="Para seu cachorro" />
             <div className="row">
-            {this.refreshCachorro()}
+                {this.refreshCachorro()}
             </div>
              
             
