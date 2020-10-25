@@ -98,7 +98,9 @@ export default class Home extends Component {
         try{
 
             if(localStorage.getItem('carrinho') == null){
-                localStorage.setItem('carrinho',JSON.stringify(this.state.listProdutos[btnValue]))
+                let temp = [];
+                temp.push(this.state.listProdutos[btnValue])
+                localStorage.setItem('carrinho',JSON.stringify(temp))
             }
             else{
                 let temp = [];
