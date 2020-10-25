@@ -20,7 +20,7 @@ export default props => (
                             <div className="card-title">{props.nome}</div>
                         </div>
                         <p className="card-text">R$ {props.preco}</p>
-                        <Button style="btn-padrao" title="Comprar"/>
+                        <Button id='btn-compra' value ={props.value} style="btn-padrao" title="Comprar"/>
                     </div>
                 </div>
             </div>   

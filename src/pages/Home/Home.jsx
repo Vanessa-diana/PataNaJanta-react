@@ -10,17 +10,22 @@ const listGato = [];
 
 /* <!-- CARROSSEL -->*/
 export default class Home extends Component {
-
+ 
     constructor(props){
          super(props)
          this.state = {  list: [], listGato: [] }
-         this.getCachorro();
-         this.getGato();
-     }
-     refreshCachorro = () => {
-       return this.state.list.map((item => {
-      return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
-        }))
+    }
+
+    componentDidMount(){
+        this.getCachorro()
+        this.getGato()
+        this.addItem()
+    }
+
+    refreshCachorro = () => {
+       return this.state.list.map((item,index) => {
+      return <Card value ={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
+        },this.addItem())
     }
     getCachorro = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/cachorro'
@@ -29,15 +34,48 @@ export default class Home extends Component {
     }
 
     refreshGato = () => {
-        return this.state.listGato.map((item => {
-       return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
-         }))
+        return this.state.listGato.map((item,index) => {
+       return (<Card value ={index} image={item.img_produto} nome={item.nome}
+         preco={item.vlr_aquisicao.toFixed(2)} />)
+        
+         } ,this.addItem())
+         
      }
      getGato = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
          axios.get(`${URL}`)
          .then(resp => this.setState({listGato: resp.data}))
      }
+
+    
+
+        addItem =()=>{
+
+            let self = this
+            
+            try{
+             
+                let btncompra  = document.getElementById('btn-compra')
+        
+                btncompra.addEventListener('click', function(){
+
+                let produtos=[];
+
+                produtos.push(self.state.list);
+                produtos.push(self.state.listGato);
+
+              
+                localStorage.setItem('product', JSON.stringify(produtos))
+          
+                
+                })
+                alert("deu certo");    
+            }catch(e){
+                console.log("erro, inferno"); 
+            }
+        
+    
+    }
 
         render(){
             return (
@@ -77,7 +115,7 @@ export default class Home extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-12 mt-2">
-                        <img className="img-fluid" src="https://i.ibb.co/58bTjZc/banner4.png" />
+                        <img id="teste" className="img-fluid" src="https://i.ibb.co/58bTjZc/banner4.png" />
                     </div>
                 </div>
                 {/* <!--fim - banner-->  */}
@@ -86,7 +124,7 @@ export default class Home extends Component {
                 
                 <Title style="pgato mt-2" title="Para seu gato" />
                 <div className="row">
-                {this.refreshGato()}
+                    {this.refreshGato()}
                 </div>
         </div>
         
