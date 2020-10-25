@@ -102,35 +102,35 @@ class Login extends React.Component {
         return (
 
             <div>
-                <div class="container formulario">
+                <div className="container formulario">
                     <form id="formulario-cadastro">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="container ">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 col-lg-6">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="container ">
+                                    <div className="row">
+                                        <div className="col-12 col-sm-6 col-lg-6">
 
 
-                                            <div class="form-group">
-                                                <h2 class="seuloguin text-center">Faça seu login</h2>
+                                            <div className="form-group">
+                                                <h2 className="seuloguin text-center">Faça seu login</h2>
 
-                                                <input type="text" id="txtUsuario" class="form-control cpf-form" placeholder="Digite seu CPF ou Email" />
+                                                <input type="text" id="txtUsuario" className="form-control cpf-form" placeholder="Digite seu CPF ou Email" />
 
-                                                <div class="alert alert-danger alert-cpf" style={{ display: "none" }}>
+                                                <div className="alert alert-danger alert-cpf" style={{ display: "none" }}>
                                                     Digite um CPF válido
                                     </div>
 
 
-                                                <input type="password" class="form-control senha-form"
-                                                    placeholder="Digite sua senha" id="senhaUsuario" />
-                                                <div class="alert alert-danger alert-Senha" style={{ display: "none" }}>
+                                                <input type="password" className="form-control senha-form"
+                                                    placeholder="Digite sua senha" id="senhaUsuario" required />
+                                                <div className="alert alert-danger alert-Senha" style={{ display: "none" }}>
                                                     Digite uma senha válida
                                     </div>
 
 
 
-                                                <div class="text-center">
-                                                    <button id="btnEntrar" type="submit" class="btn-lg btn-entrar">{this.state.lblBotao}</button>
+                                                <div className="text-center">
+                                                    <button id="btnEntrar" type="submit" className="btn-lg btn-entrar">{this.state.lblBotao}</button>
                                                 </div>
 
 
@@ -138,10 +138,10 @@ class Login extends React.Component {
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-sm-6 col-lg-6 text-center">
-                                            <div class="form-group">
-                                                <h2 class="cadastre">Ainda não é nosso cliente?</h2>
-                                                <a href="cadastro.html"><button type="button" class="btn-lg btn-search1">Cadastre-se</button></a>
+                                        <div className="col-12 col-sm-6 col-lg-6 text-center">
+                                            <div className="form-group">
+                                                <h2 className="cadastre">Ainda não é nosso cliente?</h2>
+                                                <a href="cadastro.html"><button type="button" className="btn-lg btn-search1">Cadastre-se</button></a>
                                             </div>
                                         </div>
                                     </div>
