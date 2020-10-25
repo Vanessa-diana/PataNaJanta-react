@@ -28,7 +28,7 @@ export default class Home extends Component {
        return this.state.list.map(item => {
            this.increment();
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
-             preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItem} />
+             preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItemCarrinho} />
         })
     }
 
@@ -47,7 +47,7 @@ export default class Home extends Component {
         return this.state.listGato.map(item => {
             this.increment();
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
-            preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItem} />
+            preco={item.vlr_aquisicao.toFixed(2)} onClick={this.getItemDetalheProduto} />
         })
      }
 
@@ -63,8 +63,8 @@ export default class Home extends Component {
      }
 
     
-    //ADC ITENS NO CARRINHO
-    addItem = (btnValue)=>{
+    //PEGA ITEM PARA MOSTRAR NO DETALHE DO PRODUTO - PRONTO
+    getItemDetalheProduto = (btnValue)=>{
 
         console.log(btnValue)
         console.log(this.state.listProdutos)
@@ -82,21 +82,36 @@ export default class Home extends Component {
             //ATUALIZA PAGINA DE DETALHES PARA LUPA FUNCIONAR
             window.location.reload(false);
         }catch(e){
-
+            console.log(e);
         }
+    }
 
-        //NAO APAGAR
-        /* if(localStorage.getItem('carrinho') == null){
-            localStorage.setItem('carrinho',JSON.stringify(this.state.listProdutos[btnValue]))
+
+    //ADC ITENS NO CARRINHO
+    addItemCarrinho = (btnValue)=>{
+
+        console.log(btnValue)
+        console.log(this.state.listProdutos)
+
+        try{
+
+            if(localStorage.getItem('carrinho') == null){
+                localStorage.setItem('carrinho',JSON.stringify(this.state.listProdutos[btnValue]))
+            }
+            else{
+                let temp = [];
+                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
+                
+                for(let i=0; i<jsonProdutos.length; i++){
+                    temp.push(jsonProdutos[i]);
+                }
+
+                temp.push(this.state.listProdutos[btnValue]);
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+            }
+        }catch(e){
+            console.log(e);
         }
-        else{
-
-            let temp = [];
-            temp.push(JSON.parse(localStorage.getItem('carrinho')));
-            temp.push(this.state.listProdutos[btnValue]);
-
-            localStorage.setItem('carrinho',JSON.stringify(temp));
-        } */
     }
 
         render(){
