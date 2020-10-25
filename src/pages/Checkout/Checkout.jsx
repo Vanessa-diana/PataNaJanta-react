@@ -22,6 +22,7 @@ export default class Checkout extends Component {
         this.setEndereco();
         this.getEnderecos();
         this.consumeUFAPI();
+        this.consumeCEP();
     }
 
 
@@ -165,6 +166,59 @@ export default class Checkout extends Component {
             document.getElementById('txtBairro').value = "";
             document.getElementById('txtCidade').value = "";
             document.getElementById('cbbUF')[0].selected = true;
+        })
+    }
+
+
+
+    //CONSUME API CEP - VIA CEP
+    consumeCEP = () =>{
+
+        let txtCep = document.getElementById('txtCEP');
+        let msgErro = document.getElementById('msgErro');
+
+        txtCep.addEventListener('blur', function(){
+
+            const msgTimeOut = "O sistema demorou muito para retornar os dados.\n\nPor favor, tente novamente mais tarde ou preencha os dados manualmente.";
+            const msgCEPfalso = "O CEP informado não existe";
+            let cep = txtCep.value;
+
+
+            //FORMATA CEP PARA DEIXAR ELE SEM TRAÇO
+            if(cep.includes("-")){
+                cep = cep.replace("-","");
+            }
+
+            //Define String de Requisição
+            const strLinkRequest = `https://viacep.com.br/ws/${cep}/json/`;
+            alert(strLinkRequest)
+
+            axios({
+                method: "get",
+                url: strLinkRequest,
+                timeout: 15000
+            })
+    
+            .then(function(resposta){
+    
+                //Caso o usuário tenha digitado um CPF inexistente
+                if(resposta.data.erro == true){
+                    //Caso CEP Inexistente na base de dados
+                    msgErro.textContent = msgCEPfalso;
+                    msgErro.style.display = "block";
+                    return;
+                }
+
+                msgErro.style.display = "none";
+                document.getElementById('txtRua').value = resposta.data.logradouro;
+                document.getElementById('txtComplemento').value = resposta.data.complemento;
+                document.getElementById('txtBairro').value = resposta.data.bairro;
+                document.getElementById('txtCidade').value = resposta.data.localidade;
+                document.getElementById('cbbUF').value = resposta.data.uf;
+
+            }).catch(function(erro){
+                alert(erro)
+            })
         })
     }
 
