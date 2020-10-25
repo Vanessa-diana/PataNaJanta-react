@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './detalhe-produto.css';
-import Button from '../../components/Button/Button'
+import ButtonCard from '../../components/ButtonCard/ButtonCard'
+
 
 export default class Detalhes extends Component { 
     state = {
@@ -30,6 +31,18 @@ export default class Detalhes extends Component {
         });
 
         this.getCurentProdutoLC();
+
+        let btnId = document.getElementById('btn-carrinho')
+            btnId.addEventListener('click',function(){
+                self.addItemCarrinho()
+                let currentURL = window.location.href;
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + '#/carrinho');
+                window.location.reload(false);
+        })
+        
+    
     }
 
 
@@ -44,6 +57,40 @@ export default class Detalhes extends Component {
         console.log(dadosProduto)
         
 
+    }
+
+
+    //ADC ITENS NO CARRINHO
+    addItemCarrinho = (btnValue)=>{
+
+        console.log(btnValue)
+        console.log(this.state.listProdutos)
+        alert('teste')
+
+        try{
+
+            if(localStorage.getItem('carrinho') == null){
+                let temp = [];
+                temp.push(localStorage.getItem('produto'))
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+            }
+            else{
+                let temp = [];
+                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
+                
+                for(let i=0; i<jsonProdutos.length; i++){
+                    temp.push(jsonProdutos[i]);
+                }
+
+                temp.push(localStorage.getItem('produto'));
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+
+               
+            }
+        }catch(e){
+            console.log(e);
+            alert(e)
+        }
     }
 
 
@@ -101,6 +148,7 @@ export default class Detalhes extends Component {
               return {x : x, y : y};
           }
     }
+  
 
     render(){
         return (
@@ -164,7 +212,7 @@ export default class Detalhes extends Component {
                                     <div id="container_btn_comprar" className="container">
                                         <div className="row">
                                             <div className="col-12">
-                                                <Button style='btn-padrao'title='Comprar'/>
+                                                <button id='btn-carrinho'className = 'btn btn-padrao'>Comprar</button>
                                             </div>
                                         </div>
                                   </div>

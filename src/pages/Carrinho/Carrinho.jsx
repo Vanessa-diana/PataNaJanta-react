@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import '../Carrinho/carrinho.css'
-import ItemCarrinho from '../../images/item-carrinho.jpg'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Titulo/Title'
 
 
+let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+
 export default class Carrinho extends Component { 
         
     state = {
-        numero: 0
+        numero: 1,
+        nome: '',
+        img: '',
+        preco: 0,
+        descricao: '',
+          
     }
 
     aumentar = () =>{
         this.setState({numero:this.state.numero + 1})
     }
+
+
 
     diminuir = () => {
         this.setState({numero:this.state.numero -1})
@@ -22,26 +30,40 @@ export default class Carrinho extends Component {
         }
     }
 
+    componentDidMount()
+    {
+       
+        let dadosProduto = JSON.parse(localStorage.getItem('carrinho'));
+
+        this.setState({nome: dadosProduto.nome});
+        this.setState({img: dadosProduto.img_produto});
+        this.setState({preco: dadosProduto.vlr_aquisicao})
+        this.setState({descricao: dadosProduto.descricao})
+    }
+
+
     render(){
         return (
             <div className="row">
                 <div className="col-12 col-xl-8 col-md-6">
                     <Title title = "Meu carrinho" style = "titulo-carrinho mt-4 ml-2"/>
-                    <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">2</b> itens</p>
+                    <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">1</b> itens</p>
                     
                     {/* <!-- LISTA DE ITENS ADICIONADOS--> */}
                     <div className="row">
-                        <div className="col-12">
+                        {carrinho.forEach(item => {
+                            item.forEach(valor=> {
+                       return <div className="col-12">
                             <div className="card card-itens">
                                 <div className="card-body row">
                                     <div className="col-12 col-sm-6 col-xl-2 text-center">
-                                        <img className= "produtos img-fluid" src={ItemCarrinho} alt="produto-carrinho" width="60%" height="60%"/>
+                                        <img className= "produtos img-fluid" src={valor.img_produto} alt="produto-carrinho" width="60%" height="60%"/>
                                     </div>
                                     <div className="col-12 col-sm-6 col-xl-4  mt-3">
-                                        <h6>Ração Golden Gatos Castrados Frango 1kg</h6>
+                                        <h6>{valor.nome}</h6>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span >R$ 18,90</span>
+                                        <span >{valor.vlr_aquisicao}</span>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
                                         <div className='row'>
@@ -59,11 +81,14 @@ export default class Carrinho extends Component {
                                     
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span >R$ 37,80</span>
+                                        <span >{(this.state.numero * valor.vlr_aquisicao).toFixed(2)}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                               
+                            })
+                        })}
                     </div>
                 </div>
                 <div class="col-12 col-xl-4 col-md-6">
