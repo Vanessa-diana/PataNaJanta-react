@@ -138,8 +138,8 @@ export default class Detalhes extends Component {
                                     {/* PRECO PRODUTO + PRECO PARCELADO PRODUTO */}
                                     <div className="row">
                                         <div className="col-6 col-sm-6">
-                                            <h3 id="preco_produto">Por: R$ {this.state.preco.toFixed(2)}</h3>
-                                            <h6 id="preco_produto_parcelado">Ou até 3x de R$ {(this.state.preco/3).toFixed(2)} sem juros</h6>
+                                            <h3 id="preco_produto">Por:{this.state.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+                                            <h6 id="preco_produto_parcelado">Ou até 3x de {(this.state.preco/3).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} sem juros</h6>
                                         </div>
                                           {/* Quantidade  */}
                                         <div className="col-6 col-sm-6">

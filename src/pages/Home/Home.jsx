@@ -28,7 +28,8 @@ export default class Home extends Component {
        return this.state.list.map(item => {
            this.increment();
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
-             preco={item.vlr_aquisicao.toFixed(2)} onClick={this.addItemCarrinho} />
+             preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              onClick={this.addItemCarrinho} />
         })
     }
 
@@ -47,7 +48,8 @@ export default class Home extends Component {
         return this.state.listGato.map(item => {
             this.increment();
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
-            preco={item.vlr_aquisicao.toFixed(2)} onClick={this.getItemDetalheProduto} />
+            preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+             onClick={this.getItemDetalheProduto} />
         })
      }
 

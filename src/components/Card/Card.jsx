@@ -20,7 +20,7 @@ export default props => (
                         <div className="container limiteLinhas">
                             <div className="card-title">{props.nome}</div>
                         </div>
-                        <p className="card-text">R$ {props.preco}</p>
+                        <p className="card-text">{props.preco}</p>
                         <ButtonCard id={props.idBtn} value ={props.value} style="btn-padrao" title="Comprar" acao={props.onClick}/>
                     </div>
                 </div>
