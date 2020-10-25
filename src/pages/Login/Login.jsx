@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './login.css';
 import Title from '../../components/Titulo/Title';
 import axios from 'axios';
-import LocalStorage from '../../main/LocalStorage';
 
 let URL = 'http://patanajanta.test/api'
 
@@ -51,8 +50,7 @@ class Login extends React.Component {
 
 
                     try {
-                        LocalStorage.usuario = resp.data[0];
-                        localStorage.setItem('usuario', JSON.stringify(LocalStorage.usuario));
+                        localStorage.setItem('usuario', JSON.stringify(resp.data[0]));
 
                         let currentURL = window.location.href;
                         let domain = currentURL.split("/");
@@ -80,7 +78,7 @@ class Login extends React.Component {
                 }).catch(function (erro) {
 
                     if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                        alert('O banco de dados demorou muito para responder, por favor tente mais tarde!')
+                        alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
                         btnEntrar.disabled = false;
                         txtUsuario.disabled = false;
                         txtSenha.disabled = false;

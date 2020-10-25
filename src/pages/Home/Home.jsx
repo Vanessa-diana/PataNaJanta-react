@@ -5,39 +5,116 @@ import '../../components/Card/card.css'
 import Title from '../../components/Titulo/Title';
 import axios from 'axios';
 
-const list = [];
-const listGato = [];
+/* const list = [];
+const listGato = []; */
 
-/* <!-- CARROSSEL -->*/
+let index = -17;
+
 export default class Home extends Component {
-
+ 
     constructor(props){
          super(props)
-         this.state = {  list: [], listGato: [] }
-         this.getCachorro();
-         this.getGato();
-     }
-     refreshCachorro = () => {
-       return this.state.list.map((item => {
-      return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
-        }))
+         this.state = {  list: [], listGato: [], listProdutos: []}
+
+        this.getCachorro()
+        this.getGato()
     }
+
+    increment = () => {
+        index++;
+    }
+
+    refreshCachorro = () => {
+       return this.state.list.map(item => {
+           this.increment();
+            return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
+             preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+              onClick={this.addItemCarrinho} />
+        })
+    }
+
     getCachorro = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/cachorro'
+        let self = this;
+
         axios.get(`${URL}`)
-        .then(resp => this.setState({list: resp.data}))
+        .then(function(resp){
+            self.setState({list: resp.data})
+            self.setState({listProdutos: self.state.list.concat(self.state.listGato)})
+        })
     }
 
     refreshGato = () => {
-        return this.state.listGato.map((item => {
-       return <Card image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao.toFixed(2)} />
-         }))
+        return this.state.listGato.map(item => {
+            this.increment();
+            return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
+            preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+             onClick={this.getItemDetalheProduto} />
+        })
      }
+
      getGato = () => {
         let URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
+        let self = this;
+
          axios.get(`${URL}`)
-         .then(resp => this.setState({listGato: resp.data}))
+         .then(function(resp){
+            self.setState({listGato: resp.data})
+            self.setState({listProdutos: self.state.list.concat(self.state.listGato)})
+         })
      }
+
+    
+    //PEGA ITEM PARA MOSTRAR NO DETALHE DO PRODUTO - PRONTO
+    getItemDetalheProduto = (btnValue)=>{
+
+        console.log(btnValue)
+        console.log(this.state.listProdutos)
+
+        try{
+            //SALVA ITEM ATUAL NO LOCAL STORAGE
+            localStorage.setItem('produto',JSON.stringify(this.state.listProdutos[btnValue]))
+
+            //REDIRECIONA O USUARIO PARA A PAGINA DE DETALHES
+            let currentURL = window.location.href;
+            let domain = currentURL.split("/");
+
+            window.location.replace(domain[0] + '#/detalhe');
+
+            //ATUALIZA PAGINA DE DETALHES PARA LUPA FUNCIONAR
+            window.location.reload(false);
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+
+    //ADC ITENS NO CARRINHO
+    addItemCarrinho = (btnValue)=>{
+
+        console.log(btnValue)
+        console.log(this.state.listProdutos)
+
+        try{
+
+            if(localStorage.getItem('carrinho') == null){
+                localStorage.setItem('carrinho',JSON.stringify(this.state.listProdutos[btnValue]))
+            }
+            else{
+                let temp = [];
+                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
+                
+                for(let i=0; i<jsonProdutos.length; i++){
+                    temp.push(jsonProdutos[i]);
+                }
+
+                temp.push(this.state.listProdutos[btnValue]);
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+            }
+        }catch(e){
+            console.log(e);
+        }
+    }
 
         render(){
             return (
@@ -69,7 +146,7 @@ export default class Home extends Component {
         <div className="container">
             <Title style="pcachorro mt-3" title="Para seu cachorro" />
             <div className="row">
-            {this.refreshCachorro()}
+                {this.refreshCachorro()}
             </div>
              
             
@@ -77,7 +154,7 @@ export default class Home extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-12 mt-2">
-                        <img className="img-fluid" src="https://i.ibb.co/58bTjZc/banner4.png" />
+                        <img id="teste" className="img-fluid" src="https://i.ibb.co/58bTjZc/banner4.png" />
                     </div>
                 </div>
                 {/* <!--fim - banner-->  */}
@@ -86,7 +163,7 @@ export default class Home extends Component {
                 
                 <Title style="pgato mt-2" title="Para seu gato" />
                 <div className="row">
-                {this.refreshGato()}
+                    {this.refreshGato()}
                 </div>
         </div>
         
