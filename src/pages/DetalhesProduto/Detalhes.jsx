@@ -4,7 +4,11 @@ import Button from '../../components/Button/Button'
 
 export default class Detalhes extends Component { 
     state = {
-        numero: 1
+        numero: 1,
+        nome: '',
+        img: '',
+        preco: 0,
+        descricao: ''
     }
 
     aumentar = () =>{
@@ -24,7 +28,25 @@ export default class Detalhes extends Component {
         document.addEventListener("DOMContentLoaded", function(){
             self.zoom("img_produto", 2);
         });
+
+        this.getCurentProdutoLC();
     }
+
+
+    getCurentProdutoLC = () => {
+
+        let dadosProduto = JSON.parse(localStorage.getItem('produto'));
+
+        this.setState({nome: dadosProduto.nome});
+        this.setState({img: dadosProduto.img_produto});
+        this.setState({preco: dadosProduto.vlr_aquisicao})
+        this.setState({descricao: dadosProduto.descricao})
+        console.log(dadosProduto)
+        
+
+    }
+
+
     zoom = (imgID, zoom) =>{
             var img, glass, w, h, bw;
             img = document.getElementById(imgID);
@@ -96,7 +118,7 @@ export default class Detalhes extends Component {
                                             <tr>
                                                 <td>
                                                     <div className="img-magnifier-container">
-                                                        <img id="img_produto" width="400" className="img-fluid" src="https://superprix.vteximg.com.br/arquivos/ids/174774-600-600/Racao-Pedigree-Junior-Filhotes-Racas-Medias-e-Grandes-1kg.png?v=636226827249730000"/>
+                                                        <img id="img_produto" width="400" className="img-fluid" src={this.state.img}/>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -110,14 +132,14 @@ export default class Detalhes extends Component {
                                     {/* TITULO DO PRODUTO */}
                                     <div className="row">
                                         <div className="col-12">
-                                            <h2 id="titulo_produto">Ração Pedigree Vital Pro</h2>
+                                            <h2 id="titulo_produto">{this.state.nome}</h2>
                                         </div>
                                       
                                     {/* PRECO PRODUTO + PRECO PARCELADO PRODUTO */}
                                     <div className="row">
                                         <div className="col-6 col-sm-6">
-                                            <h3 id="preco_produto">Por: R$ 109,90</h3>
-                                            <h6 id="preco_produto_parcelado">Ou até 3x de R$ 36,63 sem juros</h6>
+                                            <h3 id="preco_produto">Por:{this.state.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+                                            <h6 id="preco_produto_parcelado">Ou até 3x de {(this.state.preco/3).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} sem juros</h6>
                                         </div>
                                           {/* Quantidade  */}
                                         <div className="col-6 col-sm-6">
@@ -169,7 +191,7 @@ export default class Detalhes extends Component {
 
             <div className="row">
                 <div className="col-12">
-                    <h6 id="lbl_conteudo_descricao">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel sollicitudin nisi, id viverra magna. Nam pretium egestas sem nec porta. Sed facilisis tellus nec sagittis commodo. Praesent luctus elit risus, ut varius lorem mattis sed. Curabitur dui lectus, rutrum at rhoncus a, finibus a elit. Duis a porta ligula. Pellentesque aliquet molestie ante, vel tristique diam sagittis non. Curabitur sodales lorem quis eros sagittis, id maximus purus rhoncus. Vestibulum vel accumsan tellus. Suspendisse at urna sit amet tortor venenatis hendrerit. Curabitur in velit accumsan, varius nunc quis, tincidunt orci. Suspendisse potenti. Etiam quis ullamcorper orci. Vivamus ut malesuada nibh. In auctor ornare elit, et fermentum magna ullamcorper vel. Mauris eleifend aliquam mauris, ut mattis eros commodo at.</h6>
+                    <h6 id="lbl_conteudo_descricao">{this.state.descricao}</h6>
                 </div>
             </div>
         </div>

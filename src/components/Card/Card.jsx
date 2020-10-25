@@ -2,6 +2,7 @@ import React from 'react'
 import '../Card/card.css'
 /* import RacaoCachorro from '../../images/racaoCachorro.png' */
 import Button from '../Button/Button'
+import ButtonCard from '../ButtonCard/ButtonCard'
 
 
 
@@ -19,8 +20,8 @@ export default props => (
                         <div className="container limiteLinhas">
                             <div className="card-title">{props.nome}</div>
                         </div>
-                        <p className="card-text">R$ {props.preco}</p>
-                        <Button style="btn-padrao" title="Comprar"/>
+                        <p className="card-text">{props.preco}</p>
+                        <ButtonCard id={props.idBtn} value ={props.value} style="btn-padrao" title="Comprar" acao={props.onClick}/>
                     </div>
                 </div>
             </div>   
