@@ -33,6 +33,11 @@ export default class Header extends Component {
             dropSair.addEventListener('click', function(){
                 localStorage.clear();
                 self.setState({lbl_titulo: 'Entre ou Cadastre-se'})
+
+                let currentURL = window.location.href;
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + '#/home');
                 window.location.reload(false);
             })
 

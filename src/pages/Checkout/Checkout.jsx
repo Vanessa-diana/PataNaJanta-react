@@ -10,11 +10,14 @@ import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
 import Button from '../../components/Button/Button'
 import axios from 'axios';
 
+let qtdRequisicaoCalculaPrazo = 0;
+
 export default class Checkout extends Component {
 
     state = {
         enderecos: [],
-        UFs: []
+        UFs: [],
+        lblBtnSalvar: 'Salvar'
     }
 
     componentDidMount()
@@ -23,6 +26,7 @@ export default class Checkout extends Component {
         this.getEnderecos();
         this.consumeUFAPI();
         this.consumeCEP();
+        this.cadastraEndereco();
     }
 
 
@@ -44,6 +48,9 @@ export default class Checkout extends Component {
     getEnderecos = () => {
 
         let cbbEndereco = document.getElementById('cbbEndereco');
+        cbbEndereco.textContent = '';
+        cbbEndereco.innerHTML += `<option selected value="NULL">Selecione o Endereço</option>`
+
         let URL = 'http://patanajanta.test/api';
         let self = this;
 
@@ -72,6 +79,12 @@ export default class Checkout extends Component {
 
             if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
                 alert('API Endereço - O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                cbbEndereco.disabled = false;
+                return;
+            }
+
+            if(erro.toString().includes('Request failed with status code 404')){
+                console.log(erro);
                 cbbEndereco.disabled = false;
                 return;
             }
@@ -148,6 +161,7 @@ export default class Checkout extends Component {
                 self.isDisabled(true);
 
                 document.getElementById('txtRua').value = self.state.enderecos[cbbEndereco.selectedIndex-1].rua;
+                document.getElementById('txtCEP').value = self.state.enderecos[cbbEndereco.selectedIndex-1].CEP;
                 document.getElementById('txtNumRua').value = self.state.enderecos[cbbEndereco.selectedIndex-1].numero;
                 document.getElementById('txtComplemento').value = self.state.enderecos[cbbEndereco.selectedIndex-1].complemento;
                 document.getElementById('txtBairro').value = self.state.enderecos[cbbEndereco.selectedIndex-1].bairro;
@@ -155,12 +169,14 @@ export default class Checkout extends Component {
                 document.getElementById('cbbUF').value = self.state.enderecos[cbbEndereco.selectedIndex-1].UF;
 
                 btnSalvar.disabled = true;
+                self.consumeAPICorreios(40010);
                 return;
             }
 
             self.isDisabled(false);
             btnSalvar.disabled = false;
             document.getElementById('txtRua').value = "";
+            document.getElementById('txtCEP').value = '';
             document.getElementById('txtNumRua').value = "";
             document.getElementById('txtComplemento').value = "";
             document.getElementById('txtBairro').value = "";
@@ -179,6 +195,10 @@ export default class Checkout extends Component {
 
         txtCep.addEventListener('blur', function(){
 
+            if(txtCep.value == null || txtCep.value.length == 0){
+                return;
+            }
+
             const msgTimeOut = "O sistema demorou muito para retornar os dados.\n\nPor favor, tente novamente mais tarde ou preencha os dados manualmente.";
             const msgCEPfalso = "O CEP informado não existe";
             let cep = txtCep.value;
@@ -191,7 +211,7 @@ export default class Checkout extends Component {
 
             //Define String de Requisição
             const strLinkRequest = `https://viacep.com.br/ws/${cep}/json/`;
-            alert(strLinkRequest)
+            console.log(strLinkRequest)
 
             axios({
                 method: "get",
@@ -217,9 +237,258 @@ export default class Checkout extends Component {
                 document.getElementById('cbbUF').value = resposta.data.uf;
 
             }).catch(function(erro){
+
+                if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
+                    alert(msgTimeOut)
+                    return
+                }
+
                 alert(erro)
             })
         })
+    }
+
+    cadastraEndereco = () => {
+
+        let btnSalvar = document.getElementById('btnSalvarEndereco');
+        let txtRua = document.getElementById('txtRua');
+        let txtCEP = document.getElementById('txtCEP');
+        let txtNumRua = document.getElementById('txtNumRua');
+        let txtComplemento = document.getElementById('txtComplemento');
+        let txtBairro = document.getElementById('txtBairro');
+        let txtCidade = document.getElementById('txtCidade');
+        let cbbUF = document.getElementById('cbbUF');
+        
+        let self = this;
+
+
+        btnSalvar.addEventListener('click', function(event){
+
+            event.preventDefault();
+
+            let URL = 'http://patanajanta.test/api';
+            let cep = txtCEP.value;
+
+            if(cep.includes("-")){
+                cep = cep.replace("-","");
+            }
+
+            self.disabled = true;
+            self.setState({lblBtnSalvar: 'Salvando...'});
+
+            let dadosCurrentUser = JSON.parse(localStorage.getItem('usuario'));
+            let endPoint = `/endereco/salvar/${dadosCurrentUser.id}`
+
+            URL += endPoint;
+
+            alert(URL)
+
+            axios({
+                method: 'post',
+                url: URL,
+                timeout: 15000,
+
+                data: {
+                    rua: txtRua.value,
+                    numero: txtNumRua.value,
+                    bairro: txtBairro.value,
+                    complemento: txtComplemento.value.toString,
+                    cidade: txtCidade.value,
+                    UF: cbbUF[cbbUF.selectedIndex].value,
+                    CEP: cep
+                }
+            }).then(function(){
+
+                alert('sucesso')
+
+                txtRua.value = '';
+                txtCEP.value = '';
+                txtNumRua.value = '';
+                txtComplemento.value = '';
+                txtBairro.value = '';
+                txtCidade.value = '';
+                cbbUF[0].selected = true;
+
+                self.disabled = true;
+                self.setState({lblBtnSalvar: 'Salvar'});
+
+                self.getEnderecos();
+
+            }).catch(function(error){
+
+                if(error.toString().includes('Network Error') || error.toString().includes('timeout of')){
+                    alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                    self.disabled = true;
+                    self.setState({lblBtnSalvar: 'Salvar'});
+                    return;
+                }
+
+                alert(error);
+                alert('Houve um erro ao realizar o cadastro. Por favor, tente novamente mais tarde');
+                self.disabled = true;
+                self.setState({lblBtnSalvar: 'Salvar'});
+
+            })
+        });
+    }
+
+    /* ================== API CORREIOS ========================================= */
+
+    convertStringToXML = (text) => {
+        let parserToXML = new DOMParser();
+        let respostaConvertida = parserToXML.parseFromString(text,"text/xml");
+    
+        console.log(respostaConvertida);
+    
+        return respostaConvertida;
+    }
+
+    getValueXML = (xml, tagName) =>{
+
+        return xml.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
+    }
+
+    consumeAPICorreios = (codigo_servico) =>{
+        
+        let cbbEndereco = document.getElementById('cbbEndereco');
+        let lblDiasUteisPAC = document.querySelector("#lblDiasUteisPAC");
+        let lblDataPrazoPAC = document.querySelector("#lblDataPrazoPAC");
+        let lblDiasUteisSedex = document.querySelector("#lblDiasUteisSedex");
+        let lblDataPrazoSedex = document.querySelector("#lblDataPrazoSedex");
+        let rdbSedex = document.querySelector("#rdbSedex");
+        let rdbPAC = document.querySelector("#rdbPAC");
+        let lblStatusRequisicao = document.querySelector("#lblStatusRequisicao");
+        let lblErroCEP = document.querySelector("#lblErroCEP");
+        let txtCEP = document.getElementById('txtCEP');
+        let self = this;
+
+        if(qtdRequisicaoCalculaPrazo==0){
+            lblDiasUteisPAC.textContent = '';
+            lblDataPrazoPAC.textContent = '';
+            lblDiasUteisSedex.textContent = '';
+            lblDataPrazoSedex.textContent = '';
+        }
+
+        cbbEndereco.disabled = true;
+
+        lblStatusRequisicao.style.display = "block";
+        lblStatusRequisicao.textContent = "Calculando prazo de entrega..."
+
+        rdbPAC.disabled = true;
+        rdbSedex.disabled = true;
+
+        const msgTimeOut = "O sistema demorou muito para retornar os dados.\nPor favor, tente novamente mais tarde.";
+        //const msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
+
+        let cep_origem = "01001000";         /* cep de origem apenas numeros */
+        let cep_destino = txtCEP.value;      /* cep de destino apenas numeros */
+
+        const strCalculaPrazo = `http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrazo?&nCdServico=${codigo_servico}&sCepOrigem=${cep_origem}&sCepDestino=${cep_destino}`
+        console.log(strCalculaPrazo);
+        
+        axios({
+            method: "get",
+            url: `https://cors-anywhere.herokuapp.com/${strCalculaPrazo}`,
+            timeout: 22000
+        })
+        //Caso Sucesso da requisição
+        .then(function(resposta){
+            console.log(resposta.data);
+            
+            //Converte resposta dada em String para XML 
+            let respostaConvertida = self.convertStringToXML(resposta.data);
+
+            let dias;
+            let dataLimite
+
+            try{
+                //Caso API tenha retornado algum erro de pesquisa
+                let msgErro = self.getValueXML(respostaConvertida,"MsgErro");
+                //alert(msgErro);
+
+                /* RETORNA MSG DE ERRO AO USUARIO */
+                lblStatusRequisicao.style.display = "block";
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = msgErro;
+
+
+                cbbEndereco.disabled = false;
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                
+            }catch(e){
+                
+                //Caso API tenha feito a requisição com sucesso
+
+
+                dias = self.getValueXML(respostaConvertida,"PrazoEntrega");
+                dataLimite = self.getValueXML(respostaConvertida,"DataMaxEntrega");
+
+
+                if(qtdRequisicaoCalculaPrazo==0){
+
+                    /* PREENCHE DADOS RECUPERADOS REFERENTES AO SEDEX */
+                    lblDiasUteisSedex.textContent = `${dias} Dias úteis`;
+                    lblDataPrazoSedex.textContent = `Data prevista: ${dataLimite}`;
+                    qtdRequisicaoCalculaPrazo++;
+                    self.consumeAPICorreios(41106);
+                }
+                else{
+
+                    /* PREENCHE DADOS RECUPERADOS REFERENTES AO PAC */
+                    lblDiasUteisPAC.textContent = `${dias} Dias úteis`;
+                    lblDataPrazoPAC.textContent = `Data prevista: ${dataLimite}`;
+                    qtdRequisicaoCalculaPrazo = 0;
+
+
+                    /* HABILITA RADIO BUTTONS APOS FIM DE SOLICITAÇÃO */
+                    rdbSedex.disabled = false;
+                    rdbPAC.disabled = false;
+                    cbbEndereco.disabled = false;
+
+                    /* EXIBE LABELS COM RETORNO DA API E OCULTA MSG DE ESPERA */
+                    lblDataPrazoPAC.style.display = "inline";
+                    lblDiasUteisPAC.style.display = "inline";
+                    lblDiasUteisSedex.style.display = "inline";
+                    lblDataPrazoSedex.style.display = "inline";
+                    lblStatusRequisicao.style.display = "none";
+                }
+                
+                /* alert("FIM REQUISICAO") */
+            }
+
+            console.log(dias,dataLimite);
+            
+        })
+        //Caso de erro
+        .catch(function(erro){
+            console.error(erro);
+
+            //Caso dê timeout
+            if(erro.toString().includes("timeout of")){
+
+                /* alert(msgTimeOut); */
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = msgTimeOut;
+                lblStatusRequisicao.style.display = "block";
+
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                cbbEndereco.disabled = false;
+                return;
+  
+            }
+            else{
+                /* PRINTA ERRO RETORNADO */
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = erro.toString();
+                lblStatusRequisicao.style.display = "block";
+
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                cbbEndereco.disabled = false;
+            }
+        });
     }
 
     render() {
@@ -249,7 +518,7 @@ export default class Checkout extends Component {
                                                 </div>
                                             </div>
                                             <select className="custom-select form-control" id='cbbEndereco'>
-                                                <option selected value="NULL">Selecione o Endereço</option>
+                                                {/* <option selected value="NULL">Selecione o Endereço</option> */}
                                             </select>
 
                                             <div className="row">
@@ -307,7 +576,7 @@ export default class Checkout extends Component {
                                                     </a>
                                                 </div>
                                                 <div className="col-12 mt-4 d-flex justify-content-center">
-                                                    <Button style="btn-padrao" type="submit" title="Salvar" id='btnSalvarEndereco' />
+                                                    <Button style="btn-padrao" type="submit" title={this.state.lblBtnSalvar} id='btnSalvarEndereco' />
                                                 </div>
                                             </div>
 
