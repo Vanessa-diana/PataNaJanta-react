@@ -138,10 +138,17 @@ class Login extends React.Component {
                                             </div>
                                         </div>
 
+<<<<<<< HEAD
                                         <div className="col-12 col-sm-6 col-lg-6 text-center">
                                             <div className="form-group">
                                                 <h2 className="cadastre">Ainda não é nosso cliente?</h2>
                                                 <a href="cadastro.html"><button type="button" className="btn-lg btn-search1">Cadastre-se</button></a>
+=======
+                                        <div class="col-12 col-sm-6 col-lg-6 text-center">
+                                            <div class="form-group">
+                                                <h2 class="cadastre">Ainda não é nosso cliente?</h2>
+                                                <a href="#/cadastro"><button type="button" class="btn-lg btn-search1">Cadastre-se</button></a>
+>>>>>>> e94dbfb93a2e6d495bd732c47be34650986108db
                                             </div>
                                         </div>
                                     </div>
