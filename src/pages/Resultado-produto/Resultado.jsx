@@ -52,6 +52,26 @@ export default class Resultado extends Component {
 
     
     }
+
+    btnCarrinho = (btnValue) => {
+
+        try{
+          //SALVA ITEM ATUAL NO LOCAL STORAGE
+          let item = JSON.parse(localStorage.getItem('resultadoPesquisa'));
+          localStorage.setItem('produto',JSON.stringify(item[btnValue]))
+
+          //REDIRECIONA O USUARIO PARA A PAGINA DE DETALHES
+          let currentURL = window.location.href;
+          let domain = currentURL.split("/");
+
+          window.location.replace(domain[0] + '#/detalhe');
+
+          //ATUALIZA PAGINA DE DETALHES PARA LUPA FUNCIONAR
+          window.location.reload(false);
+      }catch(e){
+          console.log(e);
+      }
+    }
    
 
     refreshFiltro = () =>{
@@ -71,7 +91,7 @@ export default class Resultado extends Component {
 
                                 if(item.id_tipo ==1 && item.vlr_aquisicao <=20){
                                 
-                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                  return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                             
                                 }
 
@@ -79,7 +99,7 @@ export default class Resultado extends Component {
 
                                 if(item.id_tipo ==2 && item.vlr_aquisicao <=20){
                                 
-                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                  return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                             
                                 }
 
@@ -88,7 +108,7 @@ export default class Resultado extends Component {
 
                                 if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=20)){
                                 
-                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                  return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                             
                                 }
 
@@ -101,7 +121,7 @@ export default class Resultado extends Component {
 
                             if(item.id_tipo ==1 && item.vlr_aquisicao <=40){
                             
-                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                              return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                         
                             }
 
@@ -109,7 +129,7 @@ export default class Resultado extends Component {
 
                             if(item.id_tipo ==2 && item.vlr_aquisicao <=40){
                             
-                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                              return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                         
                             }
 
@@ -118,7 +138,7 @@ export default class Resultado extends Component {
 
                             if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=40)){
                             
-                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                              return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                         
                             }
 
@@ -134,7 +154,7 @@ export default class Resultado extends Component {
 
                               if(item.id_tipo ==1 && item.vlr_aquisicao <=70){
                               
-                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                           
                               }
 
@@ -142,7 +162,7 @@ export default class Resultado extends Component {
 
                               if(item.id_tipo ==2 && item.vlr_aquisicao <=70){
                               
-                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                           
                               }
 
@@ -151,7 +171,7 @@ export default class Resultado extends Component {
 
                               if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=70)){
                               
-                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                                return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                           
                               }
 
@@ -168,7 +188,7 @@ export default class Resultado extends Component {
 
                           if(item.id_tipo ==1 && item.vlr_aquisicao <=150){
                           
-                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                       
                           }
 
@@ -176,7 +196,7 @@ export default class Resultado extends Component {
 
                           if(item.id_tipo ==2 && item.vlr_aquisicao <=150){
                           
-                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                       
                           }
 
@@ -185,7 +205,7 @@ export default class Resultado extends Component {
 
                           if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=150) ){
                           
-                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                       
                           }
 
@@ -202,7 +222,7 @@ export default class Resultado extends Component {
 
                         if(item.id_tipo ==1 && item.vlr_aquisicao >150){
                         
-                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                     
                         }
 
@@ -210,7 +230,7 @@ export default class Resultado extends Component {
 
                         if(item.id_tipo ==2 && item.vlr_aquisicao >150){
                         
-                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                     
                         }
 
@@ -219,7 +239,7 @@ export default class Resultado extends Component {
 
                         if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao >150) ){
                         
-                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
                     
                         }
 
@@ -264,7 +284,7 @@ export default class Resultado extends Component {
         return resultado.map((item,index)=> {
 
         
-              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+              return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
            
               
  
