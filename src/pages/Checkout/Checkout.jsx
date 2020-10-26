@@ -24,7 +24,6 @@ export default class Checkout extends Component {
         enderecos: [],
         UFs: [],
         lblBtnSalvar: 'Salvar',
-        valortotal: 0
     }
 
     componentDidMount()

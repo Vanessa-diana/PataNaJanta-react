@@ -41,6 +41,22 @@ export default class Carrinho extends Component {
         this.setState({descricao: dadosProduto.descricao})
     }
 
+    excluirItemCarrinho = (index) => {
+        
+        let temp = [];
+        let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+        for(let i=0;i<itens.length;i++){
+
+            if(i != index){
+                temp.push(itens[i]);
+            }
+        }
+
+        localStorage.setItem('carrinho',JSON.stringify(temp));
+        window.location.reload(false);
+    }
+
 
     render(){
         return (
@@ -52,7 +68,7 @@ export default class Carrinho extends Component {
                     {/* <!-- LISTA DE ITENS ADICIONADOS--> */}
                     <div className="row">
                         
-                       {carrinho.map(valor=>(
+                       {carrinho.map((valor,pos)=>(
                        <div className="col-12">
                             <div className="card card-itens">
                                 <div className="card-body row">
@@ -76,7 +92,7 @@ export default class Carrinho extends Component {
                                             <div className="col-5">
                                                 <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
                                             </div>
-                                            <small className="col-12 text-center excluir-produto">excluir</small>
+                                            <small id={`excluir-${pos}`} onClick={()=>this.excluirItemCarrinho(pos)}className="col-12 text-center excluir-produto">excluir</small>
                                         </div>
                                     
                                     </div>
