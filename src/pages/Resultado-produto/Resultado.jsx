@@ -58,59 +58,194 @@ export default class Resultado extends Component {
 
       localStorage.removeItem('filtroresultado')
       localStorage.removeItem('animal')
-
-      
+      localStorage.removeItem('filtrovalor')
+    
 
       return resultado.map((item,index)=> {
 
+        //primeiro veê a faixa de preço, depois combina com o tipo de animal
+        
+            if(filtrovalor ==20){
 
-//se for diferente de 1, se tiver false
+                          if(animal ==1){
 
+                                if(item.id_tipo ==1 && item.vlr_aquisicao <=20){
+                                
+                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            
+                                }
 
-          if(animal ==1){
+                              }else if(animal ==2){
 
-                if(item.id_tipo ==1){
-                
-                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
-            
-                }
-
-              }else if(animal ==2){
-
-                if(item.id_tipo ==2){
-                
-                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
-            
-                }
-
-
-              }else if(animal==3){
-
-                if(item.id_tipo ==1 || item.id_tipo ==2 ){
-                
-                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
-            
-                }
+                                if(item.id_tipo ==2 && item.vlr_aquisicao <=20){
+                                
+                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            
+                                }
 
 
-              }
+                              }else if(animal==3){
+
+                                if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=20)){
+                                
+                                  return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                            
+                                }
+
+
+                              }
+
+           }else if(filtrovalor==40){
+
+                          if(animal ==1){
+
+                            if(item.id_tipo ==1 && item.vlr_aquisicao <=40){
+                            
+                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                        
+                            }
+
+                          }else if(animal ==2){
+
+                            if(item.id_tipo ==2 && item.vlr_aquisicao <=40){
+                            
+                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                        
+                            }
+
+
+                          }else if(animal==3){
+
+                            if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=40)){
+                            
+                              return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                        
+                            }
+
+
+                          }
+
+
+
+           }else if(filtrovalor==70){
+
+
+                            if(animal ==1){
+
+                              if(item.id_tipo ==1 && item.vlr_aquisicao <=70){
+                              
+                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          
+                              }
+
+                            }else if(animal ==2){
+
+                              if(item.id_tipo ==2 && item.vlr_aquisicao <=70){
+                              
+                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          
+                              }
+
+
+                            }else if(animal==3){
+
+                              if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=70)){
+                              
+                                return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                          
+                              }
+
+
+                            }
+
+
+
+
+           }else if(filtrovalor==150){
+
+
+                        if(animal ==1){
+
+                          if(item.id_tipo ==1 && item.vlr_aquisicao <=150){
+                          
+                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                      
+                          }
+
+                        }else if(animal ==2){
+
+                          if(item.id_tipo ==2 && item.vlr_aquisicao <=150){
+                          
+                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                      
+                          }
+
+
+                        }else if(animal==3){
+
+                          if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao <=150) ){
+                          
+                            return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                      
+                          }
+
+
+                        }
+
+
+
+
+           }else if(filtrovalor==1000){
+
+
+                      if(animal ==1){
+
+                        if(item.id_tipo ==1 && item.vlr_aquisicao >150){
+                        
+                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                    
+                        }
+
+                      }else if(animal ==2){
+
+                        if(item.id_tipo ==2 && item.vlr_aquisicao >150){
+                        
+                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                    
+                        }
+
+
+                      }else if(animal==3){
+
+                        if((item.id_tipo ==1 || item.id_tipo ==2) && (item.vlr_aquisicao >150) ){
+                        
+                          return <Card value={index} image={item.img_produto} nome={item.nome} preco={item.vlr_aquisicao} /> 
+                    
+                        }
+
+
+                      }
 
 
 
 
 
- })
+           } //fim if
 
 
 
 
 
 
-     
+      }) //fim do map
 
 
 
-    }
+
+
+
+
+    } //fim refresh filtro
     
 
 
@@ -123,6 +258,7 @@ export default class Resultado extends Component {
        
         localStorage.removeItem('filtroresultado')
         localStorage.removeItem('animal')
+        localStorage.removeItem('filtrovalor')
         
 
         return resultado.map((item,index)=> {
@@ -144,14 +280,71 @@ export default class Resultado extends Component {
           var self = this
          
           let botaofiltrar = document.getElementById('btnfiltrarproduto');
-          
+      
+
+            let checkcachorro = document.getElementById('checkcachorro');         
+            let checkgato = document.getElementById('checkgato');
+            //RADIO VALORES:
+            let checkate20 = document.getElementById('checkate20');
+            let checkate40 = document.getElementById('checkate40');
+            let checkate70 = document.getElementById('checkate70');
+            let checkate150 = document.getElementById('checkate150');
+            let checkmaisde150 = document.getElementById('checkmaisde150');
+
+
+            //EVENTOS DE HABILITAR E DESABILITAR RADIO BUTTONS:
+
+            checkate20.addEventListener('change',function() {                
+                checkate20.checked=true;
+                checkate40.checked=false;
+                checkate70.checked=false;
+                checkate150.checked=false;
+                checkmaisde150.checked=false;
+
+            });
+            checkate40.addEventListener('change',function() {                
+              checkate20.checked=false;
+              checkate40.checked=true;
+              checkate70.checked=false;
+              checkate150.checked=false;
+              checkmaisde150.checked=false;
+
+          });
+            checkate70.addEventListener('change',function() {                
+              checkate20.checked=false;
+              checkate40.checked=false;
+              checkate70.checked=true;
+              checkate150.checked=false;
+              checkmaisde150.checked=false;
+
+          });
+            checkate150.addEventListener('change',function() {                
+              checkate20.checked=false;
+              checkate40.checked=false;
+              checkate70.checked=false;
+              checkate150.checked=true;
+              checkmaisde150.checked=false;
+
+          });
+            checkmaisde150.addEventListener('change',function() {                
+              checkate20.checked=false;
+              checkate40.checked=false;
+              checkate70.checked=false;
+              checkate150.checked=false;
+              checkmaisde150.checked=true;
+
+          });
+
+
+
+
+
+
 
 
           botaofiltrar.addEventListener('click', function(event){
 
-            let checkcachorro = document.getElementById('checkcachorro');         
-            let checkgato = document.getElementById('checkgato');
-
+            
             if(checkcachorro.checked && checkgato.checked){
                 localStorage.setItem('animal',3);
             }
@@ -163,6 +356,24 @@ export default class Resultado extends Component {
             }else if(checkcachorro.checked==false && checkgato.checked==false){
               localStorage.setItem('animal',3);
             }
+
+            //IF DOS RADIOBUTTONS DE VALOR:
+
+            if(checkate20.checked){
+              localStorage.setItem('filtrovalor',20);
+            }
+            else if(checkate40.checked){
+              localStorage.setItem('filtrovalor',40);
+
+            }else if(checkate70.checked){
+              localStorage.setItem('filtrovalor',70);
+            }else if(checkate150.checked){
+              localStorage.setItem('filtrovalor',150);
+            }
+            else if(checkmaisde150.checked){
+              localStorage.setItem('filtrovalor',1000);
+            }
+
 
 
          
@@ -277,29 +488,29 @@ export default class Resultado extends Component {
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
-                          <input id="checkde20ate40" type="radio" aria-label="Checkbox for following text input"/>
+                          <input id="checkate40" type="radio" aria-label="Checkbox for following text input"/>
                         </div>
                       </div>
-                      <h6 class="tipo">R$20,00 à R$40,00</h6>
+                      <h6 class="tipo">Até R$40,00</h6>
                     </div>
     
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
-                          <input id="checkde40ate70" type="radio" aria-label="Checkbox for following text input"/>
+                          <input id="checkate70" type="radio" aria-label="Checkbox for following text input"/>
                         </div>
                       </div>
-                      <h6 class="tipo">R$40,00 à R$70,00</h6>
+                      <h6 class="tipo">Até R$70,00</h6>
                     </div>
     
     
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
-                          <input id="checkde70ate150" type="radio" aria-label="Checkbox for following text input"/>
+                          <input id="checkate150" type="radio" aria-label="Checkbox for following text input"/>
                         </div>
                       </div>
-                      <h6 class="tipo">R$70,00 à R$150,00</h6>
+                      <h6 class="tipo">Até R$150,00</h6>
                     </div>
     
                     <div class="input-group mb-3">
