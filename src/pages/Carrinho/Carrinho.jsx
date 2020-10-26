@@ -5,6 +5,7 @@ import Title from '../../components/Titulo/Title'
 
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+let valor_total = 0;
 
 export default class Carrinho extends Component { 
         
@@ -33,6 +34,7 @@ export default class Carrinho extends Component {
         this.setState({img: dadosProduto.img_produto});
         this.setState({preco: dadosProduto.vlr_aquisicao})
         this.setState({descricao: dadosProduto.descricao})
+        this.calculaValorTotal();
     }
 
     excluirItemCarrinho = (index) => {
@@ -49,6 +51,19 @@ export default class Carrinho extends Component {
 
         localStorage.setItem('carrinho',JSON.stringify(temp));
         window.location.reload(false);
+    }
+
+    calculaValorTotal = () =>{
+
+        let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        
+        try{
+            for(let i=0;i<dadosCarrinho.length;i++){
+                valor_total+=dadosCarrinho[i].vlr_aquisicao;
+            }
+        }catch(e){
+            console.log('ERRO VALOR TOTAL = ' + e);
+        }
     }
 
 
@@ -77,16 +92,16 @@ export default class Carrinho extends Component {
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
                                         <div className='row'>
-                                            <div className="col-3">
+                                            {/* <div className="col-3">
                                                 <button onClick={this.diminuir} className='btn btn-quantidade'>-</button>
-                                            </div>
+                                            </div> */}
                                             <div className="col-4">
-                                                <input className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
+                                                <input disabled className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
                                             </div>
-                                            <div className="col-5">
+                                            {/* <div className="col-5">
                                                 <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
-                                            </div>
-                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto">excluir</small>
+                                            </div> */}
+                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 excluir-produto">excluir</small>
                                         </div>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
@@ -103,10 +118,10 @@ export default class Carrinho extends Component {
                     <div className="col-12 resumo-pedido mt-2">
                         <Title style = "titulo-carrinho" title='Resumo do Pedido'/>
                         <span>Subtotal</span>
-                        <span id="valor">R$ 180,90</span>
+                        <span id="valor">R$ {valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         <hr/>
                         <span>Total</span>
-                        <span id="valor">R$ 180,90</span>
+                        <span id="valor">R$ {valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         <span class="space"></span>
                         <div className="row">
                             <div className="col-xl-12 text-center mt-5">
