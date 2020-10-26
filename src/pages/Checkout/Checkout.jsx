@@ -11,22 +11,61 @@ import Button from '../../components/Button/Button'
 import axios from 'axios';
 
 let qtdRequisicaoCalculaPrazo = 0;
+let valor_total = 0;
 
 export default class Checkout extends Component {
+
+    constructor(props){
+        super(props);
+        valor_total = 0;
+    }
 
     state = {
         enderecos: [],
         UFs: [],
-        lblBtnSalvar: 'Salvar'
+        lblBtnSalvar: 'Salvar',
+        valortotal: 0
     }
 
     componentDidMount()
     {
+        let rdbPagCartao = document.querySelector("#rdbPagCartao");
+        let rdbPagBoleto = document.querySelector("#rdbPagBoleto");
+        this.calculaValorTotal();
+        let self = this;
         this.setEndereco();
         this.getEnderecos();
         this.consumeUFAPI();
         this.consumeCEP();
         this.cadastraEndereco();
+        this.populaMes();
+        this.populaAno();
+        this.showSedexAndPACLabel();
+
+        rdbPagCartao.addEventListener("click", function(){
+            self.desabilitaCartaoCredito(false);
+            self.setObrigatorio(true);
+        });
+        
+        rdbPagBoleto.addEventListener("click", function(){
+            self.desabilitaCartaoCredito(true);
+            self.limpaCamposCartao();
+            self.setObrigatorio(false);
+        });
+    }
+
+
+    calculaValorTotal = () =>{
+
+        let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        
+        try{
+            for(let i=0;i<dadosCarrinho.length;i++){
+                valor_total+=dadosCarrinho[i].vlr_aquisicao;
+            }
+        }catch(e){
+            console.log('ERRO VALOR TOTAL = ' + e);
+        }
     }
 
 
@@ -491,6 +530,103 @@ export default class Checkout extends Component {
         });
     }
 
+    showSedexAndPACLabel = () =>{
+        let rdbSedex = document.querySelector("#rdbSedex");
+        let rdbPAC = document.querySelector("#rdbPAC");
+        let lblTipoEntrega = document.getElementById("lblTipoEntrega")
+        let lblFreteGratis = document.getElementById("lblFreteGratis")
+
+        rdbPAC.addEventListener("click", function(){
+            lblTipoEntrega.textContent = "PAC:";
+            lblFreteGratis.textContent = "Frete grátis";
+        });
+
+        rdbSedex.addEventListener("click", function(){
+            lblTipoEntrega.textContent = "SEDEX:";
+            lblFreteGratis.textContent = "Frete grátis";
+        });
+    }
+
+
+    /* ===================== PAGAMENTO =================================== */
+
+    desabilitaCartaoCredito = (status) =>{
+
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        cbbMesValidade.disabled = status;
+        cbbAnoValidade.disabled = status;
+        txtNumCartao.disabled = status;
+        cbbQtdParcela.disabled = status;
+        txtNumCPF.disabled = status;
+        txtNomeTitularCartao.disabled = status;
+        txtNomeCVVCartao.disabled = status;
+    }
+    
+    setObrigatorio = (status) => {
+
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        txtNumCartao.required = status;
+        txtNumCPF.required = status;
+        txtNomeTitularCartao.required = status;
+        txtNomeCVVCartao.required = status;
+    }
+
+    populaMes = () =>{
+
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let zeroEsquerda;
+    
+        for(let i=1; i<=12;i++){
+    
+            if(i<10){
+                zeroEsquerda = "0";
+            }
+            else{
+                zeroEsquerda="";
+            }
+            cbbMesValidade.innerHTML += `<option value="${i}">${zeroEsquerda}${i}</option>`;
+        }
+    }
+
+    populaAno = () => {
+
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let anoAtual = new Date().getFullYear();
+    
+        for(let i=0; i<=10; i++){
+            cbbAnoValidade.innerHTML += `<option value=${i}>${anoAtual+i}</option>`;
+        }
+    }
+
+    limpaCamposCartao = () =>{
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        cbbMesValidade.selectedIndex = 0;
+        cbbAnoValidade.selectedIndex = 0;
+        txtNumCartao.value = "";
+        cbbQtdParcela.selectedIndex = 0;
+        txtNumCPF.value = "";
+        txtNomeTitularCartao.value = "";
+        txtNomeCVVCartao.value = "";
+    }
+
     render() {
         return (
             <>
@@ -528,11 +664,11 @@ export default class Checkout extends Component {
                                                 </div>
                                             </div>
 
-                                            <div className="row">
+                                            {/* <div className="row">
                                                 <div className="col-sm-12 espacoTop10">
                                                     <input type="text" className="form-control" id="txtNomeDest" placeholder="Destinatario" required />
                                                 </div>
-                                            </div>
+                                            </div> */}
 
                                             <div className="row">
                                                 <div className="col-sm-8 espacoTop10">
@@ -825,7 +961,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 mt-5 d-flex justify-content-between">
                                                     <label className="corBege">Sub-total: </label>
-                                                    <label className="corBege">R$ 00,00</label>
+                                                    <label className="corBege">R$ {valor_total.toFixed(2)}</label>
                                                 </div>
 
                                                 <div className="col-12">
@@ -839,7 +975,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 d-flex justify-content-between mt-5">
                                                     <h5 className="corMarrom">Total</h5>
-                                                    <h5 className="corMarrom">R$ 00,00</h5>
+                                                    <h5 className="corMarrom">R$ {valor_total.toFixed(2)}</h5>
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
