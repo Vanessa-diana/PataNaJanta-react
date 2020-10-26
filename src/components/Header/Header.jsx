@@ -144,7 +144,6 @@ export default class Header extends Component {
                 //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
                 if(localStorage.getItem('resultadoPesquisa') == null){
                     localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
-                    return
                 }
 
                 //Caso exista alguma consulta anterior guardada em LocalStorage
