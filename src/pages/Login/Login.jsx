@@ -7,10 +7,72 @@ let URL = 'http://patanajanta.test/api'
 
 class Login extends React.Component {
 
-    state = {
+    constructor(props){
+        super(props);
+
+    this.state =  {
+        valid:true,
         lblBotao: "Entrar"
+    };
+
+    this.validade = this.validaSenha.bind(this);
+
+    this.validade2 = this.validaDados.bind(this);
+
+   
+}
+
+     msgDados() {
+    alert("Formato de cpf ou email inválidos!");
+    return
+  }
+
+  msgSenha() {
+    alert("Senha deve ter no mínimo 8 caracteres, uma letra maiúscula e um número!");
+    return
+  }
+
+
+   validaSenha = (event) => {
+
+      
+       const rules = /^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+         const valid = rules.test(event.target.value);
+
+      this.setState({valid})  
+
     }
 
+
+
+    validaDados = (event) => {
+
+      
+ const dados = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})|^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$/; 
+ 
+/*  const cpf = /^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$/;
+ */
+        if(dados)
+           
+            {
+                const valid = dados.test(event.target.value);
+ 
+                this.setState({valid})  
+            }
+                 /* const valid = cpf.test(event.target.value);
+ 
+            this.setState({valid})    */
+
+
+        }
+
+
+       
+    
+
+        
+ 
+     
 
     componentDidMount() {
 
@@ -113,22 +175,21 @@ class Login extends React.Component {
 
                                              <Title title="Faça seu login" style="seuloguin text-center" /> 
                                                  
+                                             <div>
+                                                <input type="text" id="txtUsuario" className={`form-control cpf-form ${this.state.valid ? "valid" : "invalid"}` } placeholder="Digite seu CPF ou Email"  onChange={this.validaDados}/>
+                                             
+                                                </div>
+                                               
 
-                                                <input type="text" id="txtUsuario" className="form-control cpf-form" placeholder="Digite seu CPF ou Email" />
-
-                                                <div className="alert alert-danger alert-cpf" style={{ display: "none" }}>
-                                                    Digite um CPF válido
-                                    </div>
-
-
-                                                <input type="password" className="form-control senha-form"
-                                                    placeholder="Digite sua senha" id="senhaUsuario" required />
-                                                <div className="alert alert-danger alert-Senha" style={{ display: "none" }}>
-                                                    Digite uma senha válida
-                                    </div>
-
-
-
+                                                <div>
+                                                <input type="password" className={`form-control senha-form ${this.state.valid ? "valid" : "invalid"}`}
+                                                    placeholder="Digite sua senha" id="senhaUsuario" onChange={this.validaSenha}  required />
+                                             {!this.state.valid && <span><a href="url" onClick={this.msgDados}>Email</a> ou <a href="url" onClick={this.msgSenha}>Senha</a> inválidos!! Clique no nome para mais informações!!</span>}
+                                            
+                                             </div>
+                                           
+                                            
+                                            
                                                 <div className="text-center">
                                                     <button id="btnEntrar" type="submit" className="btn-lg btn-entrar">{this.state.lblBotao}</button>
                                                 </div>
@@ -139,7 +200,9 @@ class Login extends React.Component {
                                         </div>
 
                                         <div className="col-12 col-sm-6 col-lg-6 text-center">
+                                        
                                             <div className="form-group">
+                                            
                                             <Title title="Ainda não é nosso cliente?" style="cadastre text-center" /> 
                                                 <a href="cadastro.html"><button type="button" className="btn-lg btn-search1">Cadastre-se</button></a>
                                             </div>
