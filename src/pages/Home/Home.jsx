@@ -8,7 +8,7 @@ import axios from 'axios';
 /* const list = [];
 const listGato = []; */
 
-let index = -17;
+/* let index = -17; */
 
 export default class Home extends Component {
  
@@ -20,13 +20,10 @@ export default class Home extends Component {
         this.getGato()
     }
 
-    increment = () => {
-        index++;
-    }
-
     refreshCachorro = () => {
+        let index = -1;
        return this.state.list.map(item => {
-           this.increment();
+           index++;
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
              preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               onClick={this.getItemDetalheProduto} />
@@ -45,8 +42,9 @@ export default class Home extends Component {
     }
 
     refreshGato = () => {
+        let index = 3;
         return this.state.listGato.map(item => {
-            this.increment();
+            index++;
             return <Card value ={index} idBtn={`btn-compra-${index}`} image={item.img_produto} nome={item.nome}
             preco={item.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
              onClick={this.getItemDetalheProduto} />

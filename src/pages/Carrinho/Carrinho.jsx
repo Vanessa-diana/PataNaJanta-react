@@ -92,7 +92,7 @@ export default class Carrinho extends Component {
                                             <div className="col-5">
                                                 <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
                                             </div>
-                                            <small id={`excluir-${pos}`} onClick={()=>this.excluirItemCarrinho(pos)}className="col-12 text-center excluir-produto">excluir</small>
+                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto">excluir</small>
                                         </div>
                                     
                                     </div>
