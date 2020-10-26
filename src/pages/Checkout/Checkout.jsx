@@ -12,6 +12,7 @@ import axios from 'axios';
 
 let qtdRequisicaoCalculaPrazo = 0;
 let valor_total = 0;
+let opcPagamento = 4;
 
 export default class Checkout extends Component {
 
@@ -40,13 +41,16 @@ export default class Checkout extends Component {
         this.populaMes();
         this.populaAno();
         this.showSedexAndPACLabel();
+        this.finalizaPedido();
 
         rdbPagCartao.addEventListener("click", function(){
+            opcPagamento = 4;
             self.desabilitaCartaoCredito(false);
             self.setObrigatorio(true);
         });
         
         rdbPagBoleto.addEventListener("click", function(){
+            opcPagamento = 5;
             self.desabilitaCartaoCredito(true);
             self.limpaCamposCartao();
             self.setObrigatorio(false);
@@ -626,6 +630,77 @@ export default class Checkout extends Component {
         txtNomeCVVCartao.value = "";
     }
 
+
+    montaJSONPedido = () => {
+
+        let cbbEndereco = document.getElementById('cbbEndereco');
+        let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+        let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+
+        let dataAtual = `${new Date().getUTCFullYear()}-${new Date().getMonth()+1}-${new Date().getUTCDate()}`;
+        let arrayPedido = [];
+        let arrayItens = [];
+
+        let modeloUsuario = {
+            'id_usuario': `${dadosUsuario.id}`*1,
+            'id_endereco': `${cbbEndereco.options[cbbEndereco.selectedIndex].value}`*1,
+            'id_pagamento': `${opcPagamento}`*1,
+            'id_status': 1,
+            'numero_pedido':'X',
+            'data_emissao': dataAtual,
+            'valor_total': valor_total
+        }
+
+        //ADICIONA DADOS DO USUARIO AO JSON FINAL NA PRIMEIRA POSICAO
+        arrayPedido.push(modeloUsuario)
+
+
+        //ADICIONA NA SEGUNDA POSICAO DO ARRAY, UM ARRAY DE ITENS
+        for(let i=0; i<dadosCarrinho.length; i++){
+
+            let modeloItens = {
+                'id_pedido':0,
+                'id_produto':`${dadosCarrinho[i].idProduto}`*1,
+                'quantidade': `1`*1,
+                'vlr_unitario':`${dadosCarrinho[i].vlr_aquisicao}`*1
+            }
+
+            arrayItens.push(modeloItens);
+        }
+
+        arrayPedido.push(arrayItens);
+
+        return arrayPedido;
+    }
+
+    finalizaPedido = () =>{
+
+        let btnFinaliza = document.getElementById('btnFinalizaCompra');
+        let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+        let self = this;
+
+        btnFinaliza.addEventListener('click', function(event){
+
+            event.preventDefault();
+
+            let URL = 'http://patanajanta.test/api';
+            let endPoint = `/pedido/gerar/${dadosUsuario.id}`
+
+            URL+=endPoint;
+
+            console.log(self.montaJSONPedido())
+            localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
+            
+            axios.post(URL, self.montaJSONPedido())
+            .then(function(resp){
+                alert('SUCESSO')
+            })
+            .catch(function(erro){
+                alert(erro);
+            })
+        });
+    }
+
     render() {
         return (
             <>
@@ -850,7 +925,7 @@ export default class Checkout extends Component {
                                                 <div className="row">
                                                     <div className="col-12 col-sm-6 espacoTop10">
                                                         <div className="margemLeft20">
-                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagCartao" value="1" checked />
+                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagCartao" value="4" checked />
                                                             <label className="form-check-label corMarrom" for="rdbPagCartao">
                                                                 Cartão de Crédito
                                                             </label>
@@ -933,7 +1008,7 @@ export default class Checkout extends Component {
                                                     <div className="col-12 espacoTop10">
                                                         <div className="margemLeft20 divl293" >
 
-                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagBoleto" value="1" />
+                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagBoleto" value="5" />
                                                             <label className="form-check-label corMarrom" for="rdbPagBoleto">
                                                                 Boleto Bancário
                                                             </label>
@@ -978,7 +1053,7 @@ export default class Checkout extends Component {
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
-                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" /></a>
+                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/></a>
                                                 </div>
 
                                             </div>
