@@ -10,19 +10,65 @@ import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
 import Button from '../../components/Button/Button'
 import axios from 'axios';
 
+let qtdRequisicaoCalculaPrazo = 0;
+let valor_total = 0;
+let opcPagamento = 4;
+
 export default class Checkout extends Component {
+
+    constructor(props){
+        super(props);
+        valor_total = 0;
+    }
 
     state = {
         enderecos: [],
-        UFs: []
+        UFs: [],
+        lblBtnSalvar: 'Salvar',
     }
 
     componentDidMount()
     {
+        let rdbPagCartao = document.querySelector("#rdbPagCartao");
+        let rdbPagBoleto = document.querySelector("#rdbPagBoleto");
+        this.calculaValorTotal();
+        let self = this;
         this.setEndereco();
         this.getEnderecos();
         this.consumeUFAPI();
         this.consumeCEP();
+        this.cadastraEndereco();
+        this.populaMes();
+        this.populaAno();
+        this.showSedexAndPACLabel();
+        this.finalizaPedido();
+
+        rdbPagCartao.addEventListener("click", function(){
+            opcPagamento = 4;
+            self.desabilitaCartaoCredito(false);
+            self.setObrigatorio(true);
+        });
+        
+        rdbPagBoleto.addEventListener("click", function(){
+            opcPagamento = 5;
+            self.desabilitaCartaoCredito(true);
+            self.limpaCamposCartao();
+            self.setObrigatorio(false);
+        });
+    }
+
+
+    calculaValorTotal = () =>{
+
+        let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        
+        try{
+            for(let i=0;i<dadosCarrinho.length;i++){
+                valor_total+=dadosCarrinho[i].vlr_aquisicao;
+            }
+        }catch(e){
+            console.log('ERRO VALOR TOTAL = ' + e);
+        }
     }
 
 
@@ -44,6 +90,9 @@ export default class Checkout extends Component {
     getEnderecos = () => {
 
         let cbbEndereco = document.getElementById('cbbEndereco');
+        cbbEndereco.textContent = '';
+        cbbEndereco.innerHTML += `<option selected value="NULL">Selecione o Endereço</option>`
+
         let URL = 'http://patanajanta.test/api';
         let self = this;
 
@@ -72,6 +121,12 @@ export default class Checkout extends Component {
 
             if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
                 alert('API Endereço - O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                cbbEndereco.disabled = false;
+                return;
+            }
+
+            if(erro.toString().includes('Request failed with status code 404')){
+                console.log(erro);
                 cbbEndereco.disabled = false;
                 return;
             }
@@ -148,6 +203,7 @@ export default class Checkout extends Component {
                 self.isDisabled(true);
 
                 document.getElementById('txtRua').value = self.state.enderecos[cbbEndereco.selectedIndex-1].rua;
+                document.getElementById('txtCEP').value = self.state.enderecos[cbbEndereco.selectedIndex-1].CEP;
                 document.getElementById('txtNumRua').value = self.state.enderecos[cbbEndereco.selectedIndex-1].numero;
                 document.getElementById('txtComplemento').value = self.state.enderecos[cbbEndereco.selectedIndex-1].complemento;
                 document.getElementById('txtBairro').value = self.state.enderecos[cbbEndereco.selectedIndex-1].bairro;
@@ -155,12 +211,14 @@ export default class Checkout extends Component {
                 document.getElementById('cbbUF').value = self.state.enderecos[cbbEndereco.selectedIndex-1].UF;
 
                 btnSalvar.disabled = true;
+                self.consumeAPICorreios(40010);
                 return;
             }
 
             self.isDisabled(false);
             btnSalvar.disabled = false;
             document.getElementById('txtRua').value = "";
+            document.getElementById('txtCEP').value = '';
             document.getElementById('txtNumRua').value = "";
             document.getElementById('txtComplemento').value = "";
             document.getElementById('txtBairro').value = "";
@@ -179,6 +237,10 @@ export default class Checkout extends Component {
 
         txtCep.addEventListener('blur', function(){
 
+            if(txtCep.value == null || txtCep.value.length == 0){
+                return;
+            }
+
             const msgTimeOut = "O sistema demorou muito para retornar os dados.\n\nPor favor, tente novamente mais tarde ou preencha os dados manualmente.";
             const msgCEPfalso = "O CEP informado não existe";
             let cep = txtCep.value;
@@ -191,7 +253,7 @@ export default class Checkout extends Component {
 
             //Define String de Requisição
             const strLinkRequest = `https://viacep.com.br/ws/${cep}/json/`;
-            alert(strLinkRequest)
+            console.log(strLinkRequest)
 
             axios({
                 method: "get",
@@ -217,9 +279,426 @@ export default class Checkout extends Component {
                 document.getElementById('cbbUF').value = resposta.data.uf;
 
             }).catch(function(erro){
+
+                if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
+                    alert(msgTimeOut)
+                    return
+                }
+
                 alert(erro)
             })
         })
+    }
+
+    cadastraEndereco = () => {
+
+        let btnSalvar = document.getElementById('btnSalvarEndereco');
+        let txtRua = document.getElementById('txtRua');
+        let txtCEP = document.getElementById('txtCEP');
+        let txtNumRua = document.getElementById('txtNumRua');
+        let txtComplemento = document.getElementById('txtComplemento');
+        let txtBairro = document.getElementById('txtBairro');
+        let txtCidade = document.getElementById('txtCidade');
+        let cbbUF = document.getElementById('cbbUF');
+        
+        let self = this;
+
+
+        btnSalvar.addEventListener('click', function(event){
+
+            event.preventDefault();
+
+            let URL = 'http://patanajanta.test/api';
+            let cep = txtCEP.value;
+
+            if(cep.includes("-")){
+                cep = cep.replace("-","");
+            }
+
+            self.disabled = true;
+            self.setState({lblBtnSalvar: 'Salvando...'});
+
+            let dadosCurrentUser = JSON.parse(localStorage.getItem('usuario'));
+            let endPoint = `/endereco/salvar/${dadosCurrentUser.id}`
+
+            URL += endPoint;
+
+            alert(URL)
+
+            axios({
+                method: 'post',
+                url: URL,
+                timeout: 15000,
+
+                data: {
+                    rua: txtRua.value,
+                    numero: txtNumRua.value,
+                    bairro: txtBairro.value,
+                    complemento: txtComplemento.value.toString,
+                    cidade: txtCidade.value,
+                    UF: cbbUF[cbbUF.selectedIndex].value,
+                    CEP: cep
+                }
+            }).then(function(){
+
+                /* alert('Endereço cadastrado com sucesso!') */
+
+                txtRua.value = '';
+                txtCEP.value = '';
+                txtNumRua.value = '';
+                txtComplemento.value = '';
+                txtBairro.value = '';
+                txtCidade.value = '';
+                cbbUF[0].selected = true;
+
+                self.disabled = true;
+                self.setState({lblBtnSalvar: 'Salvar'});
+
+                self.getEnderecos();
+
+            }).catch(function(error){
+
+                if(error.toString().includes('Network Error') || error.toString().includes('timeout of')){
+                    alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                    self.disabled = true;
+                    self.setState({lblBtnSalvar: 'Salvar'});
+                    return;
+                }
+
+                alert(error);
+                alert('Houve um erro ao realizar o cadastro. Por favor, tente novamente mais tarde');
+                self.disabled = true;
+                self.setState({lblBtnSalvar: 'Salvar'});
+
+            })
+        });
+    }
+
+    /* ================== API CORREIOS ========================================= */
+
+    convertStringToXML = (text) => {
+        let parserToXML = new DOMParser();
+        let respostaConvertida = parserToXML.parseFromString(text,"text/xml");
+    
+        console.log(respostaConvertida);
+    
+        return respostaConvertida;
+    }
+
+    getValueXML = (xml, tagName) =>{
+
+        return xml.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
+    }
+
+    consumeAPICorreios = (codigo_servico) =>{
+        
+        let cbbEndereco = document.getElementById('cbbEndereco');
+        let lblDiasUteisPAC = document.querySelector("#lblDiasUteisPAC");
+        let lblDataPrazoPAC = document.querySelector("#lblDataPrazoPAC");
+        let lblDiasUteisSedex = document.querySelector("#lblDiasUteisSedex");
+        let lblDataPrazoSedex = document.querySelector("#lblDataPrazoSedex");
+        let rdbSedex = document.querySelector("#rdbSedex");
+        let rdbPAC = document.querySelector("#rdbPAC");
+        let lblStatusRequisicao = document.querySelector("#lblStatusRequisicao");
+        let lblErroCEP = document.querySelector("#lblErroCEP");
+        let txtCEP = document.getElementById('txtCEP');
+        let self = this;
+
+        if(qtdRequisicaoCalculaPrazo==0){
+            lblDiasUteisPAC.textContent = '';
+            lblDataPrazoPAC.textContent = '';
+            lblDiasUteisSedex.textContent = '';
+            lblDataPrazoSedex.textContent = '';
+        }
+
+        cbbEndereco.disabled = true;
+
+        lblStatusRequisicao.style.display = "block";
+        lblStatusRequisicao.textContent = "Calculando prazo de entrega..."
+
+        rdbPAC.disabled = true;
+        rdbSedex.disabled = true;
+
+        const msgTimeOut = "O sistema demorou muito para retornar os dados.\nPor favor, tente novamente mais tarde.";
+        //const msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
+
+        let cep_origem = "01001000";         /* cep de origem apenas numeros */
+        let cep_destino = txtCEP.value;      /* cep de destino apenas numeros */
+
+        const strCalculaPrazo = `http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrazo?&nCdServico=${codigo_servico}&sCepOrigem=${cep_origem}&sCepDestino=${cep_destino}`
+        console.log(strCalculaPrazo);
+        
+        axios({
+            method: "get",
+            url: `https://cors-anywhere.herokuapp.com/${strCalculaPrazo}`,
+            timeout: 22000
+        })
+        //Caso Sucesso da requisição
+        .then(function(resposta){
+            console.log(resposta.data);
+            
+            //Converte resposta dada em String para XML 
+            let respostaConvertida = self.convertStringToXML(resposta.data);
+
+            let dias;
+            let dataLimite
+
+            try{
+                //Caso API tenha retornado algum erro de pesquisa
+                let msgErro = self.getValueXML(respostaConvertida,"MsgErro");
+                //alert(msgErro);
+
+                /* RETORNA MSG DE ERRO AO USUARIO */
+                lblStatusRequisicao.style.display = "block";
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = msgErro;
+
+
+                cbbEndereco.disabled = false;
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                
+            }catch(e){
+                
+                //Caso API tenha feito a requisição com sucesso
+
+
+                dias = self.getValueXML(respostaConvertida,"PrazoEntrega");
+                dataLimite = self.getValueXML(respostaConvertida,"DataMaxEntrega");
+
+
+                if(qtdRequisicaoCalculaPrazo==0){
+
+                    /* PREENCHE DADOS RECUPERADOS REFERENTES AO SEDEX */
+                    lblDiasUteisSedex.textContent = `${dias} Dias úteis`;
+                    lblDataPrazoSedex.textContent = `Data prevista: ${dataLimite}`;
+                    qtdRequisicaoCalculaPrazo++;
+                    self.consumeAPICorreios(41106);
+                }
+                else{
+
+                    /* PREENCHE DADOS RECUPERADOS REFERENTES AO PAC */
+                    lblDiasUteisPAC.textContent = `${dias} Dias úteis`;
+                    lblDataPrazoPAC.textContent = `Data prevista: ${dataLimite}`;
+                    qtdRequisicaoCalculaPrazo = 0;
+
+
+                    /* HABILITA RADIO BUTTONS APOS FIM DE SOLICITAÇÃO */
+                    rdbSedex.disabled = false;
+                    rdbPAC.disabled = false;
+                    cbbEndereco.disabled = false;
+
+                    /* EXIBE LABELS COM RETORNO DA API E OCULTA MSG DE ESPERA */
+                    lblDataPrazoPAC.style.display = "inline";
+                    lblDiasUteisPAC.style.display = "inline";
+                    lblDiasUteisSedex.style.display = "inline";
+                    lblDataPrazoSedex.style.display = "inline";
+                    lblStatusRequisicao.style.display = "none";
+                }
+                
+                /* alert("FIM REQUISICAO") */
+            }
+
+            console.log(dias,dataLimite);
+            
+        })
+        //Caso de erro
+        .catch(function(erro){
+            console.error(erro);
+
+            //Caso dê timeout
+            if(erro.toString().includes("timeout of")){
+
+                /* alert(msgTimeOut); */
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = msgTimeOut;
+                lblStatusRequisicao.style.display = "block";
+
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                cbbEndereco.disabled = false;
+                return;
+  
+            }
+            else{
+                /* PRINTA ERRO RETORNADO */
+                lblStatusRequisicao.style.color = "red";
+                lblStatusRequisicao.textContent = erro.toString();
+                lblStatusRequisicao.style.display = "block";
+
+                rdbPAC.disabled = false;
+                rdbSedex.disabled = false;
+                cbbEndereco.disabled = false;
+            }
+        });
+    }
+
+    showSedexAndPACLabel = () =>{
+        let rdbSedex = document.querySelector("#rdbSedex");
+        let rdbPAC = document.querySelector("#rdbPAC");
+        let lblTipoEntrega = document.getElementById("lblTipoEntrega")
+        let lblFreteGratis = document.getElementById("lblFreteGratis")
+
+        rdbPAC.addEventListener("click", function(){
+            lblTipoEntrega.textContent = "PAC:";
+            lblFreteGratis.textContent = "Frete grátis";
+        });
+
+        rdbSedex.addEventListener("click", function(){
+            lblTipoEntrega.textContent = "SEDEX:";
+            lblFreteGratis.textContent = "Frete grátis";
+        });
+    }
+
+
+    /* ===================== PAGAMENTO =================================== */
+
+    desabilitaCartaoCredito = (status) =>{
+
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        cbbMesValidade.disabled = status;
+        cbbAnoValidade.disabled = status;
+        txtNumCartao.disabled = status;
+        cbbQtdParcela.disabled = status;
+        txtNumCPF.disabled = status;
+        txtNomeTitularCartao.disabled = status;
+        txtNomeCVVCartao.disabled = status;
+    }
+    
+    setObrigatorio = (status) => {
+
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        txtNumCartao.required = status;
+        txtNumCPF.required = status;
+        txtNomeTitularCartao.required = status;
+        txtNomeCVVCartao.required = status;
+    }
+
+    populaMes = () =>{
+
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let zeroEsquerda;
+    
+        for(let i=1; i<=12;i++){
+    
+            if(i<10){
+                zeroEsquerda = "0";
+            }
+            else{
+                zeroEsquerda="";
+            }
+            cbbMesValidade.innerHTML += `<option value="${i}">${zeroEsquerda}${i}</option>`;
+        }
+    }
+
+    populaAno = () => {
+
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let anoAtual = new Date().getFullYear();
+    
+        for(let i=0; i<=10; i++){
+            cbbAnoValidade.innerHTML += `<option value=${i}>${anoAtual+i}</option>`;
+        }
+    }
+
+    limpaCamposCartao = () =>{
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+        cbbMesValidade.selectedIndex = 0;
+        cbbAnoValidade.selectedIndex = 0;
+        txtNumCartao.value = "";
+        cbbQtdParcela.selectedIndex = 0;
+        txtNumCPF.value = "";
+        txtNomeTitularCartao.value = "";
+        txtNomeCVVCartao.value = "";
+    }
+
+
+    montaJSONPedido = () => {
+
+        let cbbEndereco = document.getElementById('cbbEndereco');
+        let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+        let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+
+        let dataAtual = `${new Date().getUTCFullYear()}-${new Date().getMonth()+1}-${new Date().getUTCDate()}`;
+        let arrayPedido = [];
+        let arrayItens = [];
+
+        let modeloUsuario = {
+            'id_usuario': `${dadosUsuario.id}`*1,
+            'id_endereco': `${cbbEndereco.options[cbbEndereco.selectedIndex].value}`*1,
+            'id_pagamento': `${opcPagamento}`*1,
+            'id_status': 1,
+            'numero_pedido':'X',
+            'data_emissao': dataAtual,
+            'valor_total': valor_total
+        }
+
+        //ADICIONA DADOS DO USUARIO AO JSON FINAL NA PRIMEIRA POSICAO
+        arrayPedido.push(modeloUsuario)
+
+
+        //ADICIONA NA SEGUNDA POSICAO DO ARRAY, UM ARRAY DE ITENS
+        for(let i=0; i<dadosCarrinho.length; i++){
+
+            let modeloItens = {
+                'id_pedido':0,
+                'id_produto':`${dadosCarrinho[i].idProduto}`*1,
+                'quantidade': `1`*1,
+                'vlr_unitario':`${dadosCarrinho[i].vlr_aquisicao}`*1
+            }
+
+            arrayItens.push(modeloItens);
+        }
+
+        arrayPedido.push(arrayItens);
+
+        return arrayPedido;
+    }
+
+    finalizaPedido = () =>{
+
+        let btnFinaliza = document.getElementById('btnFinalizaCompra');
+        let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+        let self = this;
+
+        btnFinaliza.addEventListener('click', function(event){
+
+            event.preventDefault();
+
+            let URL = 'http://patanajanta.test/api';
+            let endPoint = `/pedido/gerar/${dadosUsuario.id}`
+
+            URL+=endPoint;
+
+            console.log(self.montaJSONPedido())
+            localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
+            
+            axios.post(URL, self.montaJSONPedido())
+            .then(function(resp){
+                alert('SUCESSO')
+            })
+            .catch(function(erro){
+                alert(erro);
+            })
+        });
     }
 
     render() {
@@ -249,7 +728,7 @@ export default class Checkout extends Component {
                                                 </div>
                                             </div>
                                             <select className="custom-select form-control" id='cbbEndereco'>
-                                                <option selected value="NULL">Selecione o Endereço</option>
+                                                {/* <option selected value="NULL">Selecione o Endereço</option> */}
                                             </select>
 
                                             <div className="row">
@@ -259,11 +738,11 @@ export default class Checkout extends Component {
                                                 </div>
                                             </div>
 
-                                            <div className="row">
+                                            {/* <div className="row">
                                                 <div className="col-sm-12 espacoTop10">
                                                     <input type="text" className="form-control" id="txtNomeDest" placeholder="Destinatario" required />
                                                 </div>
-                                            </div>
+                                            </div> */}
 
                                             <div className="row">
                                                 <div className="col-sm-8 espacoTop10">
@@ -307,7 +786,7 @@ export default class Checkout extends Component {
                                                     </a>
                                                 </div>
                                                 <div className="col-12 mt-4 d-flex justify-content-center">
-                                                    <Button style="btn-padrao" type="submit" title="Salvar" id='btnSalvarEndereco' />
+                                                    <Button style="btn-padrao" type="submit" title={this.state.lblBtnSalvar} id='btnSalvarEndereco' />
                                                 </div>
                                             </div>
 
@@ -446,7 +925,7 @@ export default class Checkout extends Component {
                                                 <div className="row">
                                                     <div className="col-12 col-sm-6 espacoTop10">
                                                         <div className="margemLeft20">
-                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagCartao" value="1" checked />
+                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagCartao" value="4" checked />
                                                             <label className="form-check-label corMarrom" for="rdbPagCartao">
                                                                 Cartão de Crédito
                                                             </label>
@@ -529,7 +1008,7 @@ export default class Checkout extends Component {
                                                     <div className="col-12 espacoTop10">
                                                         <div className="margemLeft20 divl293" >
 
-                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagBoleto" value="1" />
+                                                            <input className="form-check-input" type="radio" name="FormPagamento" id="rdbPagBoleto" value="5" />
                                                             <label className="form-check-label corMarrom" for="rdbPagBoleto">
                                                                 Boleto Bancário
                                                             </label>
@@ -556,7 +1035,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 mt-5 d-flex justify-content-between">
                                                     <label className="corBege">Sub-total: </label>
-                                                    <label className="corBege">R$ 00,00</label>
+                                                    <label className="corBege">R$ {valor_total.toFixed(2)}</label>
                                                 </div>
 
                                                 <div className="col-12">
@@ -570,11 +1049,11 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 d-flex justify-content-between mt-5">
                                                     <h5 className="corMarrom">Total</h5>
-                                                    <h5 className="corMarrom">R$ 00,00</h5>
+                                                    <h5 className="corMarrom">R$ {valor_total.toFixed(2)}</h5>
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
-                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" /></a>
+                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/></a>
                                                 </div>
 
                                             </div>

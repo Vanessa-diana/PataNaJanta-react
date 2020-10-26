@@ -23,7 +23,7 @@ export default props =>
                             <img src={user} height="32x" />
                         </h2>
 
-                        <h5> <a href=""><p className=" mt-5 pseuespaco"> Seus endereços de entrega.</p></a></h5>
+                        <h5> <a href="#/enderecocliente"><p className=" mt-5 pseuespaco"> Seus endereços de entrega.</p></a></h5>
                     </div>
                 </div>
             </div>
