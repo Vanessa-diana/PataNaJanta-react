@@ -337,7 +337,7 @@ export default class Checkout extends Component {
                 }
             }).then(function(){
 
-                alert('sucesso')
+                /* alert('Endereço cadastrado com sucesso!') */
 
                 txtRua.value = '';
                 txtCEP.value = '';
