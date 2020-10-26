@@ -173,6 +173,8 @@ export default class Header extends Component {
 
                     window.location.replace(domain[0] + "#/resultadoproduto");
 
+                    window.location.reload(false);
+
                 }else{
                     window.location.reload(false);
                 }
