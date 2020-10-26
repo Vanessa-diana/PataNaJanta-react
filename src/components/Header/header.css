@@ -6,6 +6,9 @@
     transition: top 1.0s;
     z-index: 999;
 }
+.itens{
+    color: #351912;
+}
 
 /* EFEITO DE DESAPARECER AO DESCER A PAGINA */
 @media screen and (max-height:699px) and (max-width:769px){

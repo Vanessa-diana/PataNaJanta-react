@@ -5,7 +5,9 @@ import Lupa from '../../images/lupa.png'
 import Cart from '../../images/cart.png'
 import User from '../../images/user.png'
 import axios from 'axios';
+import Carrinho from '../../pages/Carrinho/Carrinho'
 
+let carrinho = JSON.parse(localStorage.getItem('carrinho'));
 
 export default class Header extends Component {
 
@@ -61,6 +63,7 @@ export default class Header extends Component {
                 <>
                 <div class="dropdown-menu mr-2 menu-dropdown">
                     <a class="dropdown-item linkNav" href="#/historicopedido">Pedidos</a>
+                    <a class="dropdown-item linkNav" href="#/seuespaco">Meu espaço</a>
                     <a class="dropdown-item linkNav" href="#/login" id='dropSair'>Sair</a>
                 </div>
                 </>
@@ -203,6 +206,7 @@ export default class Header extends Component {
                             <div className="col-6 text-center carrinho mt-3">
                                 <a href="#/carrinho" style={{ color: '#b7773f' }}><img src={Cart} className="img-fluid" width="33px" />
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
+                                    <strong className='itens'>{carrinho ==null ?'': 'Itens: ' +carrinho.length}</strong>
                             </div>
                             <div class="col-6 text-center mt-4">
                                 <a href={this.state.link_url}>
