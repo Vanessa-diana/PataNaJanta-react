@@ -9,19 +9,13 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho'));
 export default class Carrinho extends Component { 
         
     state = {
-        numero: 1,
-        nome: '',
-        img: '',
-        preco: 0,
-        descricao: '',
-          
+        numero: 1
+           
     }
 
     aumentar = () =>{
         this.setState({numero:this.state.numero + 1})
     }
-
-
 
     diminuir = () => {
         this.setState({numero:this.state.numero -1})
@@ -79,7 +73,7 @@ export default class Carrinho extends Component {
                                         <h6>{valor.nome}</h6>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span >{valor.vlr_aquisicao}</span>
+                                        <span >{valor.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
                                         <div className='row'>
@@ -94,10 +88,9 @@ export default class Carrinho extends Component {
                                             </div>
                                             <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto">excluir</small>
                                         </div>
-                                    
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span >{(this.state.numero * valor.vlr_aquisicao).toFixed(2)}</span>
+                                        <span >{(this.state.numero * valor.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                     </div>
                                 </div>
                             </div>

@@ -59,12 +59,11 @@ export default class Detalhes extends Component {
 
     }
 
-
     //ADC ITENS NO CARRINHO
     addItemCarrinho = (btnValue)=>{
 
         try{
-
+            //alert(JSON.parse(localStorage.getItem('carrinho')).length);
             if(localStorage.getItem('carrinho') == null){
                 let temp = [];
                 temp.push(JSON.parse(localStorage.getItem('produto')))
@@ -73,20 +72,18 @@ export default class Detalhes extends Component {
             else{
                 let temp = [];
                 let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
-                
                 for(let i=0; i<jsonProdutos.length; i++){
                     temp.push(jsonProdutos[i]);
                 }
-
-                temp.push(JSON.parse(localStorage.getItem('produto')));
-                localStorage.setItem('carrinho',JSON.stringify(temp));
+                temp.push(JSON.parse(localStorage.getItem('produto')));  
+                localStorage.setItem('carrinho',JSON.stringify(temp))
             }
         }catch(e){
             console.log(e);
             alert(e)
         }
-    }
 
+    }
 
     zoom = (imgID, zoom) =>{
             var img, glass, w, h, bw;
@@ -178,30 +175,12 @@ export default class Detalhes extends Component {
                                         </div>
                                       
                                     {/* PRECO PRODUTO + PRECO PARCELADO PRODUTO */}
-                                    <div className="row">
-                                        <div className="col-6 col-sm-6">
-                                            <h3 id="preco_produto">Por:{this.state.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-                                            <h6 id="preco_produto_parcelado">Ou até 3x de {(this.state.preco/3).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} sem juros</h6>
+                                        <div className="col-12 col-sm-12">
+                                            <h3 id="preco_produto">{this.state.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
+                                            <div id="preco_produto_parcelado">Ou até 3x de {(this.state.preco/3).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} sem juros</div>
                                         </div>
-                                          {/* Quantidade  */}
-                                        <div className="col-6 col-sm-6">
-                                            <h3 id="lbl_qtd">Quantidade</h3>
-                                             <div className='row'>
-                                                <div className="col-1">
-                                                    <button onClick={this.diminuir} className='btn btn-quantidade'>-</button>
-                                                </div>
-                                                <div className="col-2 mr-2 ml-1">
-                                                    <input className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
-                                                </div>
-                                                <div className="col-2 d-flex justify-content-start">
-                                                    <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
-                                                </div>
-                                            
-                                            
-                                            </div>
-                                        </div>
- 
-                                    </div>
+
+                            
     
                                     <div id="container_btn_comprar" className="container">
                                         <div className="row">

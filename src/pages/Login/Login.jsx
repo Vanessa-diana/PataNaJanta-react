@@ -117,14 +117,14 @@ class Login extends React.Component {
 
                                                 <div class="alert alert-danger alert-cpf" style={{ display: "none" }}>
                                                     Digite um CPF válido
-                                    </div>
+                                                </div>
 
 
                                                 <input type="password" class="form-control senha-form"
                                                     placeholder="Digite sua senha" id="senhaUsuario" />
                                                 <div class="alert alert-danger alert-Senha" style={{ display: "none" }}>
                                                     Digite uma senha válida
-                                    </div>
+                                                </div>
 
 
 

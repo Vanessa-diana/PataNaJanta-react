@@ -11,6 +11,8 @@ import DetalheProduto from '../pages/DetalhesProduto/Detalhes'
 import HistoricoPedido from '../pages/HistoricoDePedido/HistoricoDePedido'
 import Sucesso from '../pages/SucessoPedido/Sucesso'
 import ResultadoProduto from '../pages/Resultado-produto/Resultado'
+import EnderecoCliente from '../pages/Endereco-cliente/EnderecoCliente'
+import SeuEspaco from '../pages/SeuEspaco/SeuEspaco'
 
 
 export default props => (
@@ -26,6 +28,8 @@ export default props => (
     <Route path = '/historicopedido' component={HistoricoPedido}/>
     <Route path = '/sucessopedido' component={Sucesso}/>
     <Route path = '/resultadoproduto' component={ResultadoProduto}/>
+    <Route path = '/seuespaco' component={SeuEspaco}/>
+    <Route path = '/enderecocliente' component = {EnderecoCliente}/>
     <Redirect from='*' to='/home'/>
     </Router>
 )
