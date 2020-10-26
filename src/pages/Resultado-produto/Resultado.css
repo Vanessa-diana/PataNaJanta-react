@@ -32,10 +32,12 @@ margin-bottom: 0.625rem;
 .tipo{
 
     margin: 0.3125rem;
+    font-size: medium;
 }
 
 .filtrocard{
     margin-left:0.625rem;
+    margin: 0.625rem;
     
 }
 
@@ -82,11 +84,9 @@ margin-bottom: 0.625rem;
 
     .tipo{
         font-size: smaller;
-        text-align: start;
+        text-align: center;
         
     }
-
-   
 
 }
 

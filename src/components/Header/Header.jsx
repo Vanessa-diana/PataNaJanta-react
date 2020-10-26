@@ -173,6 +173,20 @@ export default class Header extends Component {
                     localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
                 } */
 
+                let currentURL = window.location.href;
+
+                if(currentURL.includes("#/resultadoproduto")==false){
+                    
+                    let domain = currentURL.split("/");
+
+                    window.location.replace(domain[0] + "#/resultadoproduto");
+
+                    window.location.reload(false);
+
+                }else{
+                    window.location.reload(false);
+                }
+
     
             }).catch(function(erro){
                 if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
