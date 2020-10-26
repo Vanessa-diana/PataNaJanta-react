@@ -68,3 +68,14 @@
     color: #351912;
 }
  
+.valid{
+    border:1px solid green;
+    outline:none;
+    
+}
+
+.invalid{
+    border:1px solid red;
+    outline:none;
+}
+

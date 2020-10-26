@@ -91,18 +91,14 @@ export default class Cadastro extends Component {
                                             <h5>Nome</h5>
                                             <input type="text" className="form-control nome-form" placeholder="Digite seu nome"
                                                 required id='txtNome'/>
-                                            <div className="alert alert-danger alert-nome display-cadastro" role="alert">
-                                                Digite um Nome Válido
-                                    </div>
+                                       
                                         </div>
 
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <h5>Sobrenome</h5>
                                             <input type="text" className="form-control sobrenome-form"
                                                 placeholder="Digite seu sobrenome" required id='txtSobrenome'/>
-                                            <div className="alert alert-danger alert-sobrenome display-cadastro" role="alert">
-                                                digite um sobrenome válido
-                                    </div>
+                                          
                                         </div>
                                     </div>
 
@@ -110,9 +106,7 @@ export default class Cadastro extends Component {
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <h5>CPF</h5>
                                             <input type="text" className="form-control cpf-form" placeholder="Digite seu CPF" required id='txtCPF'/>
-                                            <div className="alert alert-danger alert-cpf display-cadastro" role="alert">
-                                                Digite um CPF válido
-                                    </div>
+                                        
                                         </div>
 
                                         <div className="col-12 col-sm-6 col-lg-6">
@@ -150,9 +144,7 @@ export default class Cadastro extends Component {
                                             <h5> Email</h5>
                                             <input type="email" className="form-control email-form" placeholder="Digite um email válido"
                                                 required id='txtEmail'/>
-                                            <div className="alert alert-danger alert-email display-cadastro" role="alert">
-                                                Email no formato incorreto
-                                    </div>
+                                      
                                         </div>
 
                                         <div className="col-12 col-sm-6">
@@ -161,18 +153,12 @@ export default class Cadastro extends Component {
                                                     <h5>Senha</h5>
                                                     <input type="password" className="form-control senha" name="senha"
                                                         placeholder="Crie uma senha" required id='txtSenha'/>
-
-                                                    <div className="alert alert-danger alert-senha display-cadastro" role="alert">
-                                                        Digite uma senha válida
-                                            </div>
                                                 </div>
                                                 <div className="col-12 col-sm-6">
                                                     <h5>Confirmar</h5>
                                                     <input type="password" className="form-control confsenha-form" name="senha1"
                                                         placeholder="Confirme a senha" required id='txtConfSenha'/>
-                                                    <div className="alert alert-danger alert-confsenha display-cadastro" role="alert">
-                                                        Senha muito curta ou não confere!
-                                            </div>
+                                                  
                                                 </div>
                                             </div>
                                         </div>
