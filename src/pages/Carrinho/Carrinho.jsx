@@ -47,13 +47,13 @@ export default class Carrinho extends Component {
             <div className="row">
                 <div className="col-12 col-xl-8 col-md-6">
                     <Title title = "Meu carrinho" style = "titulo-carrinho mt-4 ml-2"/>
-                    <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">1</b> itens</p>
+                        <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">{carrinho.length}</b> itens</p>
                     
                     {/* <!-- LISTA DE ITENS ADICIONADOS--> */}
                     <div className="row">
-                        {carrinho.forEach(item => {
-                            item.forEach(valor=> {
-                       return <div className="col-12">
+                        
+                       {carrinho.map(valor=>(
+                       <div className="col-12">
                             <div className="card card-itens">
                                 <div className="card-body row">
                                     <div className="col-12 col-sm-6 col-xl-2 text-center">
@@ -86,9 +86,8 @@ export default class Carrinho extends Component {
                                 </div>
                             </div>
                         </div>
-                               
-                            })
-                        })}
+                       ))}   
+
                     </div>
                 </div>
                 <div class="col-12 col-xl-4 col-md-6">
@@ -102,7 +101,7 @@ export default class Carrinho extends Component {
                         <span class="space"></span>
                         <div className="row">
                             <div className="col-xl-12 text-center mt-5">
-                                <a href="#/checkout"><Button style ="btn-padrao" title ="Finalizar compra"/></a> 
+                                <a href={localStorage.getItem('usuario') ? "#/checkout" : "#/login"}><Button style ="btn-padrao" title ="Finalizar compra"/></a> 
                             </div>
                         </div>
                         <div className="row">

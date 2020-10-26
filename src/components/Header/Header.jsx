@@ -201,7 +201,7 @@ export default class Header extends Component {
                     <div class="col-12 col-sm-3">
                         <div class="row">
                             <div className="col-6 text-center carrinho mt-3">
-                                <a href="#/carrinho" style={{ color: '#b7773f' }}><img src={Cart} className="img-fluid" width="33px" />
+                                <a href={localStorage.getItem('usuario') ? "#/carrinho" : '#/login'} style={{ color: '#b7773f' }}><img src={Cart} className="img-fluid" width="33px" />
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
                             </div>
                             <div class="col-6 text-center mt-4">

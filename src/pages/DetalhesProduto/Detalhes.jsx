@@ -63,15 +63,11 @@ export default class Detalhes extends Component {
     //ADC ITENS NO CARRINHO
     addItemCarrinho = (btnValue)=>{
 
-        console.log(btnValue)
-        console.log(this.state.listProdutos)
-        alert('teste')
-
         try{
 
             if(localStorage.getItem('carrinho') == null){
                 let temp = [];
-                temp.push(localStorage.getItem('produto'))
+                temp.push(JSON.parse(localStorage.getItem('produto')))
                 localStorage.setItem('carrinho',JSON.stringify(temp))
             }
             else{
@@ -82,10 +78,8 @@ export default class Detalhes extends Component {
                     temp.push(jsonProdutos[i]);
                 }
 
-                temp.push(localStorage.getItem('produto'));
-                localStorage.setItem('carrinho',JSON.stringify(temp))
-
-               
+                temp.push(JSON.parse(localStorage.getItem('produto')));
+                localStorage.setItem('carrinho',JSON.stringify(temp));
             }
         }catch(e){
             console.log(e);
