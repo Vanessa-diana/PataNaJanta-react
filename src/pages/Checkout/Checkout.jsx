@@ -693,7 +693,12 @@ export default class Checkout extends Component {
             
             axios.post(URL, self.montaJSONPedido())
             .then(function(resp){
-                alert('SUCESSO')
+                // alert('SUCESSO')
+                
+                let currentURL = window.location.href;
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + "#/sucessopedido");
            
             })
             .catch(function(erro){
@@ -1054,9 +1059,8 @@ export default class Checkout extends Component {
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
-                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/></a>
+                                                    <Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
