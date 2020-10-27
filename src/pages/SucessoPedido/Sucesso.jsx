@@ -35,9 +35,6 @@ export default class SucessoPedido extends Component{
      
     }
 
-    
-
- 
 render() {
     return ( 
 
@@ -62,7 +59,7 @@ render() {
         <div class="row">
             <div class="col-12 mt-5 text-center">
                 <a href="#/home">
-                    <Button title = 'Voltar' style = 'btn-secundario col-md-12 col-12 btn mb-4'/>
+                    <Button onClick = '#/home' title = 'Voltar' style = 'btn-secundario col-md-12 col-12 btn mb-4'/>
                 </a>
             </div>
         </div>
