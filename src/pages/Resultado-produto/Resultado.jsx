@@ -27,6 +27,7 @@ const list =  [];
 const listaprodtermo = [];
 
 let resultado = JSON.parse(localStorage.getItem('resultadoPesquisa'));
+// resultado.sort();
 
 let filtroresultado = localStorage.getItem('filtroresultado');
 
@@ -34,6 +35,9 @@ let animal = localStorage.getItem('animal'); //vai 1, 2 ou 3 - 1 cachorro, 2 gat
 
 let filtrovalor = localStorage.getItem('filtrovalor'); // vai pesquisar no map do card, se for 
 
+let verificatipo = localStorage.getItem('verificatipo');
+
+let titulo = localStorage.getItem('titulo');   
 
 //if (item.id_tipo = animal and item.valor < filtro valor ) //deixar pre selecionado +150 pra nao pesquisar nulo
 
@@ -50,6 +54,7 @@ export default class Resultado extends Component {
 
         this.getCategorias();
 
+    
     
     }
 
@@ -73,6 +78,15 @@ export default class Resultado extends Component {
       }
     }
    
+    
+
+
+
+
+
+
+
+
 
     refreshFiltro = () =>{
 
@@ -89,6 +103,7 @@ export default class Resultado extends Component {
 
                           if(animal ==1){
 
+                            
                                 if(item.id_tipo ==1 && item.vlr_aquisicao <=20){
                                 
                                   return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
@@ -268,6 +283,15 @@ export default class Resultado extends Component {
     } //fim refresh filtro
     
 
+    pegarTitulo = () => {
+
+        return titulo
+      
+
+    }
+
+
+
 
     refresh = () => {
       
@@ -279,6 +303,7 @@ export default class Resultado extends Component {
         localStorage.removeItem('filtroresultado')
         localStorage.removeItem('animal')
         localStorage.removeItem('filtrovalor')
+        localStorage.removeItem('verificatipo')
         
 
         return resultado.map((item,index)=> {
@@ -299,6 +324,8 @@ export default class Resultado extends Component {
 
           var self = this
          
+         
+
           let botaofiltrar = document.getElementById('btnfiltrarproduto');
       
 
@@ -310,6 +337,9 @@ export default class Resultado extends Component {
             let checkate70 = document.getElementById('checkate70');
             let checkate150 = document.getElementById('checkate150');
             let checkmaisde150 = document.getElementById('checkmaisde150');
+
+            
+            
 
 
             //EVENTOS DE HABILITAR E DESABILITAR RADIO BUTTONS:
@@ -452,7 +482,7 @@ export default class Resultado extends Component {
 
             <div class="row titulo" >
             <div class="col-md-12 col-12 text-center mt-4">
-                <h2>Resultados para "Produto procurado"</h2>
+                <h2>Resultados de "{this.pegarTitulo()}"</h2>
             </div>
     
             </div>

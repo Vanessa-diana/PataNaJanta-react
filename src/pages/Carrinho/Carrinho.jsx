@@ -14,16 +14,16 @@ export default class Carrinho extends Component {
            
     }
 
-    aumentar = () =>{
-        this.setState({numero:this.state.numero + 1})
-    }
+    // aumentar = () =>{
+    //     this.setState({numero:this.state.numero + 1})
+    // }
 
-    diminuir = () => {
-        this.setState({numero:this.state.numero -1})
-        if((this.state.numero) <= 0) {
-            return this.setState({numero:this.state.numero = 0})
-        }
-    }
+    // diminuir = () => {
+    //     this.setState({numero:this.state.numero -1})
+    //     if((this.state.numero) <= 0) {
+    //         return this.setState({numero:this.state.numero = 0})
+    //     }
+    // }
 
     componentDidMount()
     {

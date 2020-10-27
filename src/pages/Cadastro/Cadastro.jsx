@@ -93,7 +93,6 @@ export default class Cadastro extends Component {
                             <div className="col-12">
                                 <div className="container">
                                     <div className="row">
-
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <h5>Nome</h5>
                                             <input type="text" className="form-control nome-form" placeholder="Digite seu nome"
