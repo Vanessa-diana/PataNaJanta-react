@@ -694,6 +694,7 @@ export default class Checkout extends Component {
             axios.post(URL, self.montaJSONPedido())
             .then(function(resp){
                 alert('SUCESSO')
+           
             })
             .catch(function(erro){
                 alert(erro);
