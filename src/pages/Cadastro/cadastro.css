@@ -23,12 +23,15 @@
  
  
 .btn-jacadastrado{
-    color: #fff;
-    background-color: #b7773f;
-    border: solid 2px #b7773f;
+    color:white;
+    background-color: #b86360;
+    border: solid 2px #b86360;
+    min-width: 15rem;
+    max-width: 30rem;
  }
 .btn-jacadastrado:hover{
     
+    background-color: #966462;
     color: white;
  }
  
