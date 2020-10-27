@@ -41,8 +41,6 @@ export default class Detalhes extends Component {
                 window.location.replace(domain[0] + '#/carrinho');
                 window.location.reload(false);
         })
-        
-    
     }
 
 
