@@ -7,6 +7,7 @@ hr{
 .titulo-principal{
     font-size: 1.4rem;
     font-weight: bold;
+    display: inline;
 }
 .titulo{
     font-size: 1.3rem;

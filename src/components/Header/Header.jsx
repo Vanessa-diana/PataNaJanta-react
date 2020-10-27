@@ -221,9 +221,9 @@ export default class Header extends Component {
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
                                     <strong className='itens'>{carrinho ==null ?'': 'Itens: ' +carrinho.length}</strong>
                             </div>
-                            <div class="col-6 text-center mt-4">
+                            <div class="col-6 text-center mt-3">
                                 <a href={this.state.link_url}>
-                                    <img src={User} width="30px" />
+                                    <img src={User} width="25px" />
                                 </a>
                                 <div class="container-fluid" style={{ display: 'block' }}>
                                     <ul class="nav d-flex justify-content-center">
