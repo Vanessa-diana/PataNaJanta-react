@@ -695,10 +695,19 @@ export default class Checkout extends Component {
             .then(function(resp){
                 // alert('SUCESSO')
                 
+                //REDIRECIONA PARA PAGINA SUCESSO PEDIDO
+
                 let currentURL = window.location.href;
                 let domain = currentURL.split("/");
 
                 window.location.replace(domain[0] + "#/sucessopedido");
+
+                //ZERA CARRINHO APÓS A COMPRA
+                let temp = [];
+                let itens = JSON.parse(localStorage.getItem('carrinho'));
+                localStorage.setItem('carrinho',JSON.stringify(temp));
+                window.location.reload(false);
+
            
             })
             .catch(function(erro){
