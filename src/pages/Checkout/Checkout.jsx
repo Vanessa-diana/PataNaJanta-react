@@ -660,7 +660,7 @@ export default class Checkout extends Component {
 
             let modeloItens = {
                 'id_pedido':0,
-                'id_produto':`${dadosCarrinho[i].idProduto}`*1,
+                'id_produto':`${dadosCarrinho[i].id}`*1,
                 'quantidade': `1`*1,
                 'vlr_unitario':`${dadosCarrinho[i].vlr_aquisicao}`*1
             }

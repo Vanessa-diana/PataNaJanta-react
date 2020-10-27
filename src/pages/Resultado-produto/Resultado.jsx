@@ -5,7 +5,6 @@ import axios from 'axios'
 import '../Resultado-produto/Resultado.css';
 import Card from './../../components/Card/Card'
 import Botao from '../../components/Button/Button'
-import '../../components/Card/card.css'
 
 const URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
 
@@ -480,7 +479,7 @@ export default class Resultado extends Component {
             
 <>
 
-            <div class="row titulo" >
+            <div class="row" >
             <div class="col-md-12 col-12 text-center mt-4">
                 <h2>Resultados de "{this.pegarTitulo()}"</h2>
             </div>
@@ -491,7 +490,7 @@ export default class Resultado extends Component {
 
    
 
-            <div class="row titulo">
+            <div class="row">
             
                 <div class="col-md-3 text-start  filtro" >
     
