@@ -2,6 +2,7 @@
     color:#b7773f;
     margin-top: 1.25rem;
     
+    
 }
  
 .logos{
@@ -12,11 +13,11 @@
 }
  
  .formulario{
-    margin-top: 1.25rem;
+    margin-top: 0.25rem;
     border-radius: 0.62rem;
     border:1px solid black;
-    padding-top: 3.12rem;
-    padding-bottom: 0.62rem;
+    padding-top: 1.12rem;
+    padding-bottom: 1.62rem;
   
 }
  
@@ -72,7 +73,7 @@
 .btn-cadastrar{
     color:white;
     background-color: #b86360;
-    border: solid 2px #b7773f;
+    border: solid 2px #b86360;
     min-width: 15rem;
     max-width: 30rem;
 }
