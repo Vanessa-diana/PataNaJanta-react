@@ -79,19 +79,22 @@
 /* ========================================================== */
 
 .carrinho-header{
+    font-size: 13px;
     color: white; 
     margin-top: 5px
+    
 }
 
 
 .carrinho{
-    padding-top: 2px; 
+    /* padding-top: 2.5px;  */
     margin-top: 1rem;
     text-align: center; 
     display:inline-block; 
     display: block;
     margin-top: '16px';
     text-align: 'center'
+   
 }
 
 
