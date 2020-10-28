@@ -448,10 +448,18 @@ export default class Checkout extends Component {
                 let msgErro = self.getValueXML(respostaConvertida,"MsgErro");
                 //alert(msgErro);
 
-                /* RETORNA MSG DE ERRO AO USUARIO */
-                lblStatusRequisicao.style.display = "block";
-                lblStatusRequisicao.style.color = "red";
-                lblStatusRequisicao.textContent = msgErro;
+                if(!msgErro.includes('SQL')){
+                    /* RETORNA MSG DE ERRO AO USUARIO */
+                    lblStatusRequisicao.style.display = "block";
+                    lblStatusRequisicao.style.color = "red";
+                    lblStatusRequisicao.textContent = msgErro;
+                }
+                else{
+                    let msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
+                    lblStatusRequisicao.style.display = "block";
+                    lblStatusRequisicao.style.color = "red";
+                    lblStatusRequisicao.textContent = msgErro;
+                }
 
 
                 cbbEndereco.disabled = false;
@@ -517,13 +525,15 @@ export default class Checkout extends Component {
                 rdbPAC.disabled = false;
                 rdbSedex.disabled = false;
                 cbbEndereco.disabled = false;
+                
                 return;
   
             }
             else{
                 /* PRINTA ERRO RETORNADO */
+                let msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
                 lblStatusRequisicao.style.color = "red";
-                lblStatusRequisicao.textContent = erro.toString();
+                lblStatusRequisicao.textContent = msgErro;
                 lblStatusRequisicao.style.display = "block";
 
                 rdbPAC.disabled = false;
