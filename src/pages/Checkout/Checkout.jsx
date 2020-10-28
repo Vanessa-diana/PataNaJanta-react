@@ -323,7 +323,7 @@ export default class Checkout extends Component {
 
             URL += endPoint;
 
-            alert(URL)
+            // alert(URL)
 
             axios({
                 method: 'post',

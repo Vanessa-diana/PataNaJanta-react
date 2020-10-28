@@ -426,7 +426,7 @@ export default class Resultado extends Component {
 
 
          
-              alert("clicou!")                    
+              // alert("clicou!")                    
           
                              
 
