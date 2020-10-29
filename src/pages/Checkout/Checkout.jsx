@@ -50,10 +50,28 @@ export default class Checkout extends Component {
         });
         
         rdbPagBoleto.addEventListener("click", function(){
+
+            let cbbMesValidade = document.querySelector("#cbbMesValidade");
+            let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+            let txtNumCartao = document.querySelector("#txtNumCartao");
+            let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+            let txtNumCPF = document.querySelector("#txtNumCPF");
+            let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+            let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+            rdbPagBoleto.checked = true;
             opcPagamento = 5;
             self.desabilitaCartaoCredito(true);
             self.limpaCamposCartao();
             self.setObrigatorio(false);
+
+            cbbMesValidade.style.borderColor = '#ced4da';
+            cbbAnoValidade.style.borderColor = '#ced4da';
+            txtNumCartao.style.borderColor = '#ced4da';
+            cbbQtdParcela.style.borderColor = '#ced4da';
+            txtNumCPF.style.borderColor = '#ced4da';
+            txtNomeTitularCartao.style.borderColor = '#ced4da'
+            txtNomeCVVCartao.style.borderColor = '#ced4da'
         });
     }
 
@@ -861,7 +879,11 @@ export default class Checkout extends Component {
 
         if(cbbEndereco.options[cbbEndereco.selectedIndex].value == 'NULL'){
             alert('Por favor, selecione um endereço para entrega de sua compra');
+            cbbEndereco.style.borderColor = 'red';
             return false;
+        }
+        else{
+            cbbEndereco.style.borderColor = '#ced4da';
         }
 
         if(rdbPAC.checked==false && rdbSedex.checked == false){
@@ -1356,7 +1378,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 mt-5 d-flex justify-content-between">
                                                     <label className="corBege">Sub-total: </label>
-                                                    <label className="corBege">R$ {valor_total.toFixed(2)}</label>
+                                                    <label className="corBege">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
                                                 </div>
 
                                                 <div className="col-12">
@@ -1370,7 +1392,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 d-flex justify-content-between mt-5">
                                                     <h5 className="corMarrom">Total</h5>
-                                                    <h5 className="corMarrom">R$ {valor_total.toFixed(2)}</h5>
+                                                    <h5 className="corMarrom">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h5>
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
