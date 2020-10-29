@@ -16,6 +16,8 @@ export default class Cadastro extends Component {
             event.preventDefault();
 
             self.gravaDados();
+
+           
         })
     }
 
@@ -56,7 +58,12 @@ export default class Cadastro extends Component {
               }
         }).then(function(resposta){
             console.log(resposta.data)
-            alert('SUCESSO')
+            alert('USUÁRIO CADASTRADO COM SUCESSO')
+
+            let currentURL = window.location.href;
+            let domain = currentURL.split("/");
+
+            window.location.replace(domain[0] + "#/login");
             
         }).catch(function(erro){
             alert(erro)
@@ -86,7 +93,6 @@ export default class Cadastro extends Component {
                             <div className="col-12">
                                 <div className="container">
                                     <div className="row">
-
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <h5>Nome</h5>
                                             <input type="text" className="form-control nome-form" placeholder="Digite seu nome"

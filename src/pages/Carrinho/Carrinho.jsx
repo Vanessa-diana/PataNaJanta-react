@@ -14,16 +14,16 @@ export default class Carrinho extends Component {
            
     }
 
-    aumentar = () =>{
-        this.setState({numero:this.state.numero + 1})
-    }
+    // aumentar = () =>{
+    //     this.setState({numero:this.state.numero + 1})
+    // }
 
-    diminuir = () => {
-        this.setState({numero:this.state.numero -1})
-        if((this.state.numero) <= 0) {
-            return this.setState({numero:this.state.numero = 0})
-        }
-    }
+    // diminuir = () => {
+    //     this.setState({numero:this.state.numero -1})
+    //     if((this.state.numero) <= 0) {
+    //         return this.setState({numero:this.state.numero = 0})
+    //     }
+    // }
 
     componentDidMount()
     {
@@ -118,10 +118,10 @@ export default class Carrinho extends Component {
                     <div className="col-12 resumo-pedido mt-2">
                         <Title style = "titulo-carrinho" title='Resumo do Pedido'/>
                         <span>Subtotal</span>
-                        <span id="valor">R$ {valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                        <span id="valor">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         <hr/>
                         <span>Total</span>
-                        <span id="valor">R$ {valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                        <span id="valor">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         <span class="space"></span>
                         <div className="row">
                             <div className="col-xl-12 text-center mt-5">

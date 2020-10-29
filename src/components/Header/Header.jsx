@@ -11,10 +11,14 @@ let carrinho = JSON.parse(localStorage.getItem('carrinho'));
 
 export default class Header extends Component {
 
+    
     state = {
         lbl_titulo: 'Entre ou Cadastre-se',
-        link_url: '#'
+        link_url: '#',
+        categorias : []
     }
+
+
 
     componentDidMount()
     {
@@ -49,10 +53,13 @@ export default class Header extends Component {
             this.setState({link_url: '#/login'})
         }
 
+        // this.pegarcachorro();
         this.mostraPainel();
         this.mostraCategorias();
         this.buscaProdutoPesquisa();
-    }
+
+
+    } //fim did mont
 
 
     mostraPainel = () => {
@@ -72,6 +79,125 @@ export default class Header extends Component {
     }
 
 
+    pegarcachorro =(nomecategoria) => {
+
+        let URL = 'http://patanajanta.test/api/produto/listar/Cachorro/'
+        let endPoint = nomecategoria
+
+        localStorage.setItem('verificatipo',1);
+        localStorage.setItem('titulo',nomecategoria+' para cachorro');
+
+        URL+=endPoint;
+        
+        axios({
+            method: 'get',
+            url: URL,
+            timeout: 15000
+        }).then(function(resposta){
+
+            //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+            if(localStorage.getItem('resultadoPesquisa') == null){
+                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+            }
+
+            //Caso exista alguma consulta anterior guardada em LocalStorage
+            localStorage.removeItem('resultadoPesquisa');
+            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+
+            
+
+            let currentURL = window.location.href;
+
+            if(currentURL.includes("#/resultadoproduto")==false){
+                
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + "#/resultadoproduto");
+
+                window.location.reload(false);
+
+            }else{
+                window.location.reload(false);
+            }
+
+
+        }).catch(function(erro){
+            if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
+                alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                return;
+            }
+
+            console.log(`CATCH AXIOS = ${erro}`);
+        })
+
+    } //fim pegar cachorro
+
+
+    pegargato =(nomecategoria) => {
+
+        let URL = 'http://patanajanta.test/api/produto/listar/Gato/'
+        let endPoint = nomecategoria
+
+        localStorage.setItem('titulo',nomecategoria+' para gato');
+
+        URL+=endPoint;
+        
+        axios({
+            method: 'get',
+            url: URL,
+            timeout: 15000
+        }).then(function(resposta){
+
+            //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+            if(localStorage.getItem('resultadoPesquisa') == null){
+                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+            }
+
+            //Caso exista alguma consulta anterior guardada em LocalStorage
+            localStorage.removeItem('resultadoPesquisa');
+            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+
+            localStorage.setItem('verificatipo',2);
+
+            let currentURL = window.location.href;
+
+            if(currentURL.includes("#/resultadoproduto")==false){
+                
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + "#/resultadoproduto");
+
+                window.location.reload(false);
+
+            }else{
+                window.location.reload(false);
+            }
+
+
+        }).catch(function(erro){
+            if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
+                alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                return;
+            }
+
+            console.log(`CATCH AXIOS = ${erro}`);
+        })
+
+    } //fim pegar GATO
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
     mostraCategorias = () => {
 
 
@@ -81,24 +207,32 @@ export default class Header extends Component {
         let conteudoDropGato = document.getElementById("div-dropdown-gato");
         let dropdownGato = document.getElementById("dropdownGato");
 
+        let itemCachorro = document.getElementsByClassName("elemento");
+
+
         dropdownCachorro.disabled = true;
         dropdownGato.disabled = true;
+
+
 
         let URL = "http://patanajanta.test/api";
         let endPoint = "/produto/listarcategorias"
 
         URL+=endPoint;
 
+        var self = this
         axios({
             method: 'get',
             url: URL,
             timeout: 15000
         }).then(function(resposta){
 
-            for(let i=0;i<resposta.data.length;i++){
-                conteudoDropCachorro.innerHTML += `<a class="dropdown-item linkNav" href="#/resultadoproduto">${resposta.data[i].descricao}</a>`
-                conteudoDropGato.innerHTML += `<a class="dropdown-item linkNav" href="#/resultadoproduto">${resposta.data[i].descricao}</a>`;
-            }
+            self.setState({categorias: resposta.data})
+            console.log(self.state.categorias)
+            // for(let i=0;i<resposta.data.length;i++){
+            //     conteudoDropCachorro.innerHTML += `<button class="dropdown-item elemento linkNav"  onClick={() => this.pegarcachorro(${resposta.data[i].descricao})}  id="${resposta.data[i].descricao}" >${resposta.data[i].descricao}</button>`
+            //     conteudoDropGato.innerHTML += `<a class="dropdown-item elemento linkNav" id="${resposta.data[i].descricao}" href="#/resultadoproduto">${resposta.data[i].descricao}</a>`;
+            // }
             dropdownCachorro.disabled = false;
             dropdownGato.disabled = false;
 
@@ -124,6 +258,8 @@ export default class Header extends Component {
         let btnPesquisar = document.getElementById('btnPesquisar');
 
         btnPesquisar.addEventListener('click', function(event){
+
+            localStorage.setItem('titulo',txtPesquisa.value );
 
             event.preventDefault();
 
@@ -171,6 +307,8 @@ export default class Header extends Component {
                     localStorage.removeItem('resultadoPesquisa');
                     localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
                 } */
+
+
 
                 let currentURL = window.location.href;
 
@@ -221,9 +359,9 @@ export default class Header extends Component {
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
                                     <strong className='itens'>{carrinho ==null ?'': 'Itens: ' +carrinho.length}</strong>
                             </div>
-                            <div class="col-6 text-center mt-4">
+                            <div class="col-6 text-center mt-3">
                                 <a href={this.state.link_url}>
-                                    <img src={User} width="30px" />
+                                    <img src={User} width="25px" />
                                 </a>
                                 <div class="container-fluid" style={{ display: 'block' }}>
                                     <ul class="nav d-flex justify-content-center">
@@ -250,6 +388,20 @@ export default class Header extends Component {
                                 <div class="dropdown-menu menu" id="div-dropdown-cachorro">
                                     
                                     {/* CONSUMO API AQUI mostraCategorias*/}
+
+
+
+                                    {this.state.categorias.map((item)=> {
+
+                                        return <button class="dropdown-item elemento linkNav" id={item.descricao}  onClick={ () => this.pegarcachorro(item.descricao)} >{item.descricao}</button>
+
+                                    })}
+
+
+
+
+
+
                                 
                                 </div>
                             </li>
@@ -264,7 +416,15 @@ export default class Header extends Component {
 
                                 <div class="dropdown-menu menu" id='div-dropdown-gato'>
                                     
-                                    {/* CONSUMO API AQUI mostraCategorias */}
+                                    
+
+                                    {this.state.categorias.map((item)=> {
+
+                                        return <button class="dropdown-item elemento linkNav" id={item.descricao}  onClick={ () => this.pegargato(item.descricao)} >{item.descricao}</button>
+
+                                    })}
+
+
 
                                 </div>
                             </li>
@@ -275,6 +435,7 @@ export default class Header extends Component {
                     </div>
                     <div class="col-md-2 col-12 text-center pt-3">
                         <a class="text-center link-menu" href="#/faleconosco">Contatos</a>
+                       
                     </div>
                 </div>
             </div>

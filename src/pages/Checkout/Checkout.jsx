@@ -323,7 +323,7 @@ export default class Checkout extends Component {
 
             URL += endPoint;
 
-            alert(URL)
+            // alert(URL)
 
             axios({
                 method: 'post',
@@ -660,7 +660,7 @@ export default class Checkout extends Component {
 
             let modeloItens = {
                 'id_pedido':0,
-                'id_produto':`${dadosCarrinho[i].idProduto}`*1,
+                'id_produto':`${dadosCarrinho[i].id}`*1,
                 'quantidade': `1`*1,
                 'vlr_unitario':`${dadosCarrinho[i].vlr_aquisicao}`*1
             }
@@ -693,7 +693,22 @@ export default class Checkout extends Component {
             
             axios.post(URL, self.montaJSONPedido())
             .then(function(resp){
-                alert('SUCESSO')
+                // alert('SUCESSO')
+                
+                //REDIRECIONA PARA PAGINA SUCESSO PEDIDO
+
+                let currentURL = window.location.href;
+                let domain = currentURL.split("/");
+
+                window.location.replace(domain[0] + "#/sucessopedido");
+
+                //ZERA CARRINHO APÓS A COMPRA
+                let temp = [];
+                let itens = JSON.parse(localStorage.getItem('carrinho'));
+                localStorage.setItem('carrinho',JSON.stringify(temp));
+                window.location.reload(false);
+
+           
             })
             .catch(function(erro){
                 alert(erro);
@@ -1053,9 +1068,8 @@ export default class Checkout extends Component {
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
-                                                    <a href="#/sucessopedido"><Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/></a>
+                                                    <Button title="Finalizar Compra" style="btn-padrao" id='btnFinalizaCompra'/>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
