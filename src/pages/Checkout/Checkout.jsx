@@ -587,10 +587,10 @@ export default class Checkout extends Component {
                     lblStatusRequisicao.style.color = "red";
                     lblStatusRequisicao.textContent = msgErro;
 
-                    /* rdbPAC.disabled = false;
-                    rdbSedex.disabled = false; */
+                    rdbPAC.disabled = false;
+                    rdbSedex.disabled = false;
 
-                    rdbPAC.disabled = true;
+                    /* rdbPAC.disabled = true;
                     rdbSedex.disabled = true;
 
                     cbbEndereco.options[0].selected = true;
@@ -601,7 +601,7 @@ export default class Checkout extends Component {
                     txtComplemento.value = '';
                     txtBairro.value = '';
                     txtCidade.value = '';
-                    cbbUF[0].selected = true;
+                    cbbUF[0].selected = true; */
 
                     self.isDisabled(false);
                 }
@@ -665,12 +665,12 @@ export default class Checkout extends Component {
                 lblStatusRequisicao.textContent = msgTimeOut;
                 lblStatusRequisicao.style.display = "block";
 
-                /* rdbPAC.disabled = false;
+                rdbPAC.disabled = false;
                 rdbSedex.disabled = false;
                 cbbEndereco.disabled = false; 
-                return */
+                return
 
-                rdbPAC.disabled = true;
+                /* rdbPAC.disabled = true;
                 rdbSedex.disabled = true;
                 cbbEndereco.disabled = false;
 
@@ -686,7 +686,7 @@ export default class Checkout extends Component {
 
                 self.isDisabled(false);
                 
-                return;
+                return; */
   
             }
             else{
@@ -696,13 +696,13 @@ export default class Checkout extends Component {
                 lblStatusRequisicao.textContent = msgErro;
                 lblStatusRequisicao.style.display = "block";
 
-                /* rdbPAC.disabled = false;
+                rdbPAC.disabled = false;
                 rdbSedex.disabled = false;
                 cbbEndereco.disabled = false;
 
-                return; */
+                return;
 
-                rdbPAC.disabled = true;
+                /* rdbPAC.disabled = true;
                 rdbSedex.disabled = true;
                 cbbEndereco.disabled = false;
 
@@ -716,7 +716,7 @@ export default class Checkout extends Component {
                 txtCidade.value = '';
                 cbbUF[0].selected = true;
 
-                self.isDisabled(false);
+                self.isDisabled(false); */
             }
         });
     }
