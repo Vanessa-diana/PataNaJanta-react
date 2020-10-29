@@ -125,7 +125,7 @@ export default class Carrinho extends Component {
                         <span class="space"></span>
                         <div className="row">
                             <div className="col-xl-12 text-center mt-5">
-                                <a href={localStorage.getItem('usuario') ? "#/checkout" : "#/login"}><Button style ="btn-padrao" title ="Finalizar compra"/></a> 
+                                <a href={localStorage.getItem('usuario') ? JSON.parse(localStorage.getItem('carrinho')).length != 0 ? "#/checkout" : "#/home" : '#/login'}><Button style ="btn-padrao" title ="Finalizar compra"/></a> 
                             </div>
                         </div>
                         <div className="row">

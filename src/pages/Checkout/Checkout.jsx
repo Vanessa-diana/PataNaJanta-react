@@ -50,10 +50,28 @@ export default class Checkout extends Component {
         });
         
         rdbPagBoleto.addEventListener("click", function(){
+
+            let cbbMesValidade = document.querySelector("#cbbMesValidade");
+            let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+            let txtNumCartao = document.querySelector("#txtNumCartao");
+            let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+            let txtNumCPF = document.querySelector("#txtNumCPF");
+            let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+            let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+
+            rdbPagBoleto.checked = true;
             opcPagamento = 5;
             self.desabilitaCartaoCredito(true);
             self.limpaCamposCartao();
             self.setObrigatorio(false);
+
+            cbbMesValidade.style.borderColor = '#ced4da';
+            cbbAnoValidade.style.borderColor = '#ced4da';
+            txtNumCartao.style.borderColor = '#ced4da';
+            cbbQtdParcela.style.borderColor = '#ced4da';
+            txtNumCPF.style.borderColor = '#ced4da';
+            txtNomeTitularCartao.style.borderColor = '#ced4da'
+            txtNomeCVVCartao.style.borderColor = '#ced4da'
         });
     }
 
@@ -227,6 +245,9 @@ export default class Checkout extends Component {
         })
     }
 
+    validaRegex = (regexString, elemento) => {
+        return regexString.test(elemento.value);
+    }
 
 
     //CONSUME API CEP - VIA CEP
@@ -234,6 +255,8 @@ export default class Checkout extends Component {
 
         let txtCep = document.getElementById('txtCEP');
         let msgErro = document.getElementById('msgErro');
+        msgErro.style.display = "none";
+        let self = this;
 
         txtCep.addEventListener('blur', function(){
 
@@ -251,42 +274,51 @@ export default class Checkout extends Component {
                 cep = cep.replace("-","");
             }
 
-            //Define String de Requisição
-            const strLinkRequest = `https://viacep.com.br/ws/${cep}/json/`;
-            console.log(strLinkRequest)
+            if(self.validaRegex(/^[0-9]{5}?\-?[0-9]{3}$/, this)){
 
-            axios({
-                method: "get",
-                url: strLinkRequest,
-                timeout: 15000
-            })
-    
-            .then(function(resposta){
-    
-                //Caso o usuário tenha digitado um CPF inexistente
-                if(resposta.data.erro == true){
-                    //Caso CEP Inexistente na base de dados
-                    msgErro.textContent = msgCEPfalso;
-                    msgErro.style.display = "block";
-                    return;
-                }
+                //Define String de Requisição
+                const strLinkRequest = `https://viacep.com.br/ws/${cep}/json/`;
+                console.log(strLinkRequest)
 
-                msgErro.style.display = "none";
-                document.getElementById('txtRua').value = resposta.data.logradouro;
-                document.getElementById('txtComplemento').value = resposta.data.complemento;
-                document.getElementById('txtBairro').value = resposta.data.bairro;
-                document.getElementById('txtCidade').value = resposta.data.localidade;
-                document.getElementById('cbbUF').value = resposta.data.uf;
+                axios({
+                    method: "get",
+                    url: strLinkRequest,
+                    timeout: 15000
+                })
+        
+                .then(function(resposta){
+        
+                    //Caso o usuário tenha digitado um CPF inexistente
+                    if(resposta.data.erro == true){
+                        //Caso CEP Inexistente na base de dados
+                        msgErro.textContent = msgCEPfalso;
+                        msgErro.style.display = "block";
+                        return;
+                    }
 
-            }).catch(function(erro){
+                    msgErro.style.display = "none";
+                    document.getElementById('txtRua').value = resposta.data.logradouro;
+                    document.getElementById('txtComplemento').value = resposta.data.complemento;
+                    document.getElementById('txtBairro').value = resposta.data.bairro;
+                    document.getElementById('txtCidade').value = resposta.data.localidade;
+                    document.getElementById('cbbUF').value = resposta.data.uf;
 
-                if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                    alert(msgTimeOut)
-                    return
-                }
+                }).catch(function(erro){
 
-                alert(erro)
-            })
+                    if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
+                        alert(msgTimeOut)
+                        return
+                    }
+
+                    alert(erro)
+                });
+                
+                return;
+            }
+
+            msgErro.textContent = 'CEP inválido';
+            msgErro.style.display = "block";
+            return;
         })
     }
 
@@ -314,6 +346,74 @@ export default class Checkout extends Component {
             if(cep.includes("-")){
                 cep = cep.replace("-","");
             }
+
+
+            //VERIFICA CEP VAZIO
+            if(txtCEP.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtCEP.style.borderColor = 'red';
+                return;
+            }
+            else{
+                txtCEP.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA RUA VAZIA
+            if(txtRua.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtRua.style.borderColor = 'red';
+                return;
+            }
+            else{
+                txtRua.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA NUMERO VAZIO
+            if(txtNumRua.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtNumRua.style.borderColor = 'red';
+                return;
+            }
+            else{
+                txtNumRua.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA BAIRRO VAZIO
+            if(txtBairro.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtBairro.style.borderColor = 'red';
+                return;
+            }
+            else{
+                txtBairro.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CIDADE VAZIO
+            if(txtCidade.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtCidade.style.borderColor = 'red';
+                return;
+            }
+            else{
+                txtCidade.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA COMBOBOX VAZIA
+            if(cbbUF.options[cbbUF.selectedIndex].value == 'NULL'){
+                alert('O campo informado não pode estar vazio');
+                cbbUF.style.borderColor = 'red';
+                return;
+            }
+            else{
+                cbbUF.style.borderColor = '#ced4da';
+            }
+
+
 
             self.disabled = true;
             self.setState({lblBtnSalvar: 'Salvando...'});
@@ -391,6 +491,13 @@ export default class Checkout extends Component {
     }
 
     consumeAPICorreios = (codigo_servico) =>{
+
+        let txtRua = document.getElementById('txtRua');
+        let txtNumRua = document.getElementById('txtNumRua');
+        let txtComplemento = document.getElementById('txtComplemento');
+        let txtBairro = document.getElementById('txtBairro');
+        let txtCidade = document.getElementById('txtCidade');
+        let cbbUF = document.getElementById('cbbUF');
         
         let cbbEndereco = document.getElementById('cbbEndereco');
         let lblDiasUteisPAC = document.querySelector("#lblDiasUteisPAC");
@@ -402,6 +509,7 @@ export default class Checkout extends Component {
         let lblStatusRequisicao = document.querySelector("#lblStatusRequisicao");
         let lblErroCEP = document.querySelector("#lblErroCEP");
         let txtCEP = document.getElementById('txtCEP');
+        lblStatusRequisicao.style.color = '#351912'
         let self = this;
 
         if(qtdRequisicaoCalculaPrazo==0){
@@ -448,15 +556,58 @@ export default class Checkout extends Component {
                 let msgErro = self.getValueXML(respostaConvertida,"MsgErro");
                 //alert(msgErro);
 
-                /* RETORNA MSG DE ERRO AO USUARIO */
-                lblStatusRequisicao.style.display = "block";
-                lblStatusRequisicao.style.color = "red";
-                lblStatusRequisicao.textContent = msgErro;
+                if(!msgErro.includes('SQL')){
+                    /* RETORNA MSG DE ERRO AO USUARIO */
+                    let msgRisco = 'A área informada está classificada como área de risco ou área de difícil acesso pelos Correios. Por favor, utilize outro endereço.'
+                    lblStatusRequisicao.style.display = "block";
+                    lblStatusRequisicao.style.color = "red";
+                    lblStatusRequisicao.textContent = msgRisco;
+
+                    /* rdbPAC.disabled = false;
+                    rdbSedex.disabled = false; */
+
+                    rdbPAC.disabled = true;
+                    rdbSedex.disabled = true;
+
+                    cbbEndereco.options[0].selected = true;
+
+                    txtRua.value = '';
+                    txtCEP.value = '';
+                    txtNumRua.value = '';
+                    txtComplemento.value = '';
+                    txtBairro.value = '';
+                    txtCidade.value = '';
+                    cbbUF[0].selected = true;
+
+                    self.isDisabled(false);
+                }
+                else{
+                    let msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
+                    lblStatusRequisicao.style.display = "block";
+                    lblStatusRequisicao.style.color = "red";
+                    lblStatusRequisicao.textContent = msgErro;
+
+                    /* rdbPAC.disabled = false;
+                    rdbSedex.disabled = false; */
+
+                    rdbPAC.disabled = true;
+                    rdbSedex.disabled = true;
+
+                    cbbEndereco.options[0].selected = true;
+
+                    txtRua.value = '';
+                    txtCEP.value = '';
+                    txtNumRua.value = '';
+                    txtComplemento.value = '';
+                    txtBairro.value = '';
+                    txtCidade.value = '';
+                    cbbUF[0].selected = true;
+
+                    self.isDisabled(false);
+                }
 
 
                 cbbEndereco.disabled = false;
-                rdbPAC.disabled = false;
-                rdbSedex.disabled = false;
                 
             }catch(e){
                 
@@ -514,21 +665,58 @@ export default class Checkout extends Component {
                 lblStatusRequisicao.textContent = msgTimeOut;
                 lblStatusRequisicao.style.display = "block";
 
-                rdbPAC.disabled = false;
+                /* rdbPAC.disabled = false;
                 rdbSedex.disabled = false;
+                cbbEndereco.disabled = false; 
+                return */
+
+                rdbPAC.disabled = true;
+                rdbSedex.disabled = true;
                 cbbEndereco.disabled = false;
+
+                cbbEndereco.options[0].selected = true;
+
+                txtRua.value = '';
+                txtCEP.value = '';
+                txtNumRua.value = '';
+                txtComplemento.value = '';
+                txtBairro.value = '';
+                txtCidade.value = '';
+                cbbUF[0].selected = true;
+
+                self.isDisabled(false);
+                
                 return;
   
             }
             else{
                 /* PRINTA ERRO RETORNADO */
+                let msgErro = 'Houve um erro inesperado com o serviço de frete dos Correios. Por favor, tente novamente.'
                 lblStatusRequisicao.style.color = "red";
-                lblStatusRequisicao.textContent = erro.toString();
+                lblStatusRequisicao.textContent = msgErro;
                 lblStatusRequisicao.style.display = "block";
 
-                rdbPAC.disabled = false;
+                /* rdbPAC.disabled = false;
                 rdbSedex.disabled = false;
                 cbbEndereco.disabled = false;
+
+                return; */
+
+                rdbPAC.disabled = true;
+                rdbSedex.disabled = true;
+                cbbEndereco.disabled = false;
+
+                cbbEndereco.options[0].selected = true;
+
+                txtRua.value = '';
+                txtCEP.value = '';
+                txtNumRua.value = '';
+                txtComplemento.value = '';
+                txtBairro.value = '';
+                txtCidade.value = '';
+                cbbUF[0].selected = true;
+
+                self.isDisabled(false);
             }
         });
     }
@@ -673,6 +861,143 @@ export default class Checkout extends Component {
         return arrayPedido;
     }
 
+    verificaCompleto = () => {
+        let cbbEndereco = document.getElementById('cbbEndereco');
+        let cbbMesValidade = document.querySelector("#cbbMesValidade");
+        let cbbAnoValidade = document.querySelector("#cbbAnoValidade");
+        let txtNumCartao = document.querySelector("#txtNumCartao");
+        let cbbQtdParcela = document.querySelector("#cbbQtdParcela");
+        let txtNumCPF = document.querySelector("#txtNumCPF");
+        let txtNomeTitularCartao = document.querySelector("#txtNomeTitularCartao");
+        let txtNomeCVVCartao = document.querySelector("#txtNomeCVVCartao");
+        let rdbPagCartao = document.querySelector("#rdbPagCartao");
+        let rdbPagBoleto = document.querySelector("#rdbPagBoleto");
+        let rdbSedex = document.querySelector("#rdbSedex");
+        let rdbPAC = document.querySelector("#rdbPAC");
+
+        let self = this;
+
+        if(cbbEndereco.options[cbbEndereco.selectedIndex].value == 'NULL'){
+            alert('Por favor, selecione um endereço para entrega de sua compra');
+            cbbEndereco.style.borderColor = 'red';
+            return false;
+        }
+        else{
+            cbbEndereco.style.borderColor = '#ced4da';
+        }
+
+        if(rdbPAC.checked==false && rdbSedex.checked == false){
+            alert('Por favor, escolha um serviço de entrega para sua compra');
+            return false;
+        }
+
+        if(rdbPagBoleto.checked == false && rdbPagCartao.checked == false){
+            alert('Por favor, selecione uma opção de pagamento.')
+            return false;
+        }
+
+        if(rdbPagCartao.checked == true){
+
+            //VERIFICA N CARTAO VAZIO OU INVÁLIDO
+            if(txtNumCartao.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtNumCartao.style.borderColor = 'red';
+                return false;
+            }
+            else if(self.validaRegex(/^[0-9]*$/,txtNumCartao)==false){
+                alert('O campo informado deve ser preenchido apenas com números');
+                txtNumCartao.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                txtNumCartao.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CBB PARCELAS
+            if(cbbQtdParcela.options[cbbQtdParcela.selectedIndex].value == 'NULL'){
+                alert('Selecione uma opção válida no campo informado');
+                cbbQtdParcela.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                cbbQtdParcela.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CPF
+            if(txtNumCPF.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtNumCPF.style.borderColor = 'red';
+                return false;
+            }
+            else if(self.validaRegex(/^\d{3}?\.?\d{3}?\.?\d{3}?\-?\d{2}$/, txtNumCPF) == false){
+                alert('Por favor, digite um CPF válido');
+                txtNumCPF.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                txtNumCPF.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA NOME IMPRESSO CARTAO
+            if(txtNomeTitularCartao.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtNomeTitularCartao.style.borderColor = 'red';
+                return false;
+            }
+            else if(self.validaRegex(/^[a-zA-Z\s]*$/, txtNomeTitularCartao) == false){
+                alert('Por favor, digite um nome válido no campo informado');
+                txtNomeTitularCartao.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                txtNumCPF.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CBB MES VALIDADE
+            if(cbbMesValidade.options[cbbMesValidade.selectedIndex].value == 'NULL'){
+                alert('Selecione uma opção válida no campo informado');
+                cbbMesValidade.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                cbbMesValidade.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CBB ANO VALIDADE
+            if(cbbAnoValidade.options[cbbAnoValidade.selectedIndex].value == 'NULL'){
+                alert('Selecione uma opção válida no campo informado');
+                cbbAnoValidade.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                cbbAnoValidade.style.borderColor = '#ced4da';
+            }
+
+
+            //VERIFICA CVV
+            if(txtNomeCVVCartao.value.length == 0){
+                alert('O campo informado não pode estar vazio');
+                txtNomeCVVCartao.style.borderColor = 'red';
+                return false;
+            }
+            else if(self.validaRegex(/^[0-9]*$/,txtNomeCVVCartao) == false){
+                alert('O campo informado deve ser preenchido apenas com números');
+                txtNomeCVVCartao.style.borderColor = 'red';
+                return false;
+            }
+            else{
+                txtNomeCVVCartao.style.borderColor = '#ced4da';
+            }
+        }
+
+        return true;
+    }
+
     finalizaPedido = () =>{
 
         let btnFinaliza = document.getElementById('btnFinalizaCompra');
@@ -683,36 +1008,39 @@ export default class Checkout extends Component {
 
             event.preventDefault();
 
-            let URL = 'http://patanajanta.test/api';
-            let endPoint = `/pedido/gerar/${dadosUsuario.id}`
+            if(self.verificaCompleto()){
 
-            URL+=endPoint;
+                let URL = 'http://patanajanta.test/api';
+                let endPoint = `/pedido/gerar/${dadosUsuario.id}`
 
-            console.log(self.montaJSONPedido())
-            localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
-            
-            axios.post(URL, self.montaJSONPedido())
-            .then(function(resp){
-                // alert('SUCESSO')
+                URL+=endPoint;
+
+                console.log(self.montaJSONPedido())
+                localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
                 
-                //REDIRECIONA PARA PAGINA SUCESSO PEDIDO
+                axios.post(URL, self.montaJSONPedido())
+                .then(function(resp){
+                    // alert('SUCESSO')
+                    
+                    //REDIRECIONA PARA PAGINA SUCESSO PEDIDO
 
-                let currentURL = window.location.href;
-                let domain = currentURL.split("/");
+                    let currentURL = window.location.href;
+                    let domain = currentURL.split("/");
 
-                window.location.replace(domain[0] + "#/sucessopedido");
+                    window.location.replace(domain[0] + "#/sucessopedido");
 
-                //ZERA CARRINHO APÓS A COMPRA
-                let temp = [];
-                let itens = JSON.parse(localStorage.getItem('carrinho'));
-                localStorage.setItem('carrinho',JSON.stringify(temp));
-                window.location.reload(false);
+                    //ZERA CARRINHO APÓS A COMPRA
+                    let temp = [];
+                    let itens = JSON.parse(localStorage.getItem('carrinho'));
+                    localStorage.setItem('carrinho',JSON.stringify(temp));
+                    window.location.reload(false);
 
-           
-            })
-            .catch(function(erro){
-                alert(erro);
-            })
+            
+                })
+                .catch(function(erro){
+                    alert(erro);
+                })
+            }
         });
     }
 
@@ -958,7 +1286,7 @@ export default class Checkout extends Component {
 
                                                 <div className="row">
                                                     <div className="col-12 espacoTop10">
-                                                        <input type="text" className="form-control" id="txtNumCartao" placeholder="Número do cartão de crédito" required />
+                                                        <input maxlength='16' type="text" className="form-control" id="txtNumCartao" placeholder="Número do cartão de crédito" required />
                                                     </div>
                                                 </div>
 
@@ -1050,7 +1378,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 mt-5 d-flex justify-content-between">
                                                     <label className="corBege">Sub-total: </label>
-                                                    <label className="corBege">R$ {valor_total.toFixed(2)}</label>
+                                                    <label className="corBege">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</label>
                                                 </div>
 
                                                 <div className="col-12">
@@ -1064,7 +1392,7 @@ export default class Checkout extends Component {
 
                                                 <div className="col-12 d-flex justify-content-between mt-5">
                                                     <h5 className="corMarrom">Total</h5>
-                                                    <h5 className="corMarrom">R$ {valor_total.toFixed(2)}</h5>
+                                                    <h5 className="corMarrom">{valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h5>
                                                 </div>
                                                 <span class="space"></span>
                                                 <div className="col-12 mt-5 text-center">
