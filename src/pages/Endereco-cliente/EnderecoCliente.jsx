@@ -8,12 +8,15 @@ export default class EnderecoCliente extends Component{
 
     state = {
         enderecos: [],
-        user:''
+        user:'',
+        texto: 'Procurando endereços...',
+        img: ''
       }
 
       componentDidMount() {
 
         this.buscarEndereco();
+    
         
     }
 
@@ -23,21 +26,49 @@ export default class EnderecoCliente extends Component{
         URL += this.state.user.id;
 
         axios.get(`${URL}`)
-        .then(resp => this.setState({enderecos: resp.data}))
+        .then(resp => {
+            this.setState({enderecos: resp.data})    
+        })
+        .catch(error => {
+            this.setState({texto: 'Não há endereços cadastrados'})
+            this.setState({img:'https://files.slack.com/files-pri/TR19JDESX-F01D5QVBM9D/05b399773502ff839bf2183a22ae8253.gif'})
+            
+        })
+
+    }
+ 
+    removerEndereco = (endereco) =>{
+        let URL = 'http://patanajanta.test/api/endereco/deletar'
+        axios.delete(`${URL}/${endereco.id}`)
+        .then(resp => window.location.reload(false));      
+                                    
     }
 
-render() {
-        return (    
-            <div className="container">
+    render() {
+        if(this.state.enderecos == 0){
+            return <> 
+            <div className="row mt-5">
+                        <div className="col-12">
+                            <Title title={this.state.texto} style="titulo-card ml-1 text-center"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12 text-center mt-2">
+                            <img src={this.state.img}/>
+                        </div>
+                  </div>
+                  </> 
+       
+                         
+    }return <div className="container">
                     <div className="row mt-5">
                         <div className="col-12">
-                            <Title title="Seus endereços cadastrados" style="titulo-card ml-1"/>
+                            <Title title="Seus endereços cadastrados" style="titulo-card ml-1 mt-3"/>
                         </div>
                     </div>
                     <div className="row mb-2 text-center">
-                        {this.state.enderecos.map(item=>(
-                        <div className="col-5 col-md-5 col-xl-5 card-group ml-2">
-                            {item.key}
+                        {this.state.enderecos.map(item =>(
+                        <div  key = {item.id} className="col-5 col-md-5 col-xl-5 card-group ml-2">
                             <div className="card quadro mt-3">
                                 <div className="card-body col-12 text-left">
                                     <div className="row">
@@ -53,12 +84,12 @@ render() {
                                         </div> 
                                     </div>
                                 </div>
+                                <button className= 'btn bt-remover mb-2' onClick={(id) => this.removerEndereco(item)}>Remover</button>
                             </div>
                         </div>
                         ))}
                     </div>
                 </div>
 
-        )}
+        }
 }
-
