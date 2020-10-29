@@ -63,7 +63,7 @@ export default class EnderecoCliente extends Component{
     }return <div className="container">
                     <div className="row mt-5">
                         <div className="col-12">
-                            <Title title="Seus endereços cadastrados" style="titulo-card ml-1 mt-3"/>
+                            <Title title="Meus endereços cadastrados" style="titulo-card ml-1 mt-3"/>
                         </div>
                     </div>
                     <div className="row mb-2 text-center">
