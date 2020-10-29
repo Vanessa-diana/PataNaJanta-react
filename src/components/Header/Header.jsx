@@ -84,8 +84,10 @@ export default class Header extends Component {
         let URL = 'http://patanajanta.test/api/produto/listar/Cachorro/'
         let endPoint = nomecategoria
 
-        localStorage.setItem('verificatipo',1);
+        // localStorage.setItem('verificatipo',1);
         localStorage.setItem('titulo',nomecategoria+' para cachorro');
+
+        localStorage.setItem('tipoanimal', 'cachorro');
 
         URL+=endPoint;
         
@@ -95,6 +97,8 @@ export default class Header extends Component {
             timeout: 15000
         }).then(function(resposta){
 
+            
+            
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
                 localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
@@ -140,6 +144,8 @@ export default class Header extends Component {
 
         localStorage.setItem('titulo',nomecategoria+' para gato');
 
+        localStorage.setItem('tipoanimal', 'gato');
+
         URL+=endPoint;
         
         axios({
@@ -147,6 +153,8 @@ export default class Header extends Component {
             url: URL,
             timeout: 15000
         }).then(function(resposta){
+
+            
 
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
@@ -285,6 +293,8 @@ export default class Header extends Component {
                             timeout: 15000
                         }).then(function(resposta){
 
+                            
+                            localStorage.removeItem('tipoanimal')
                             localStorage.setItem('titulo',txtPesquisa.value );
                             //CASO API RETORNE 404
 
