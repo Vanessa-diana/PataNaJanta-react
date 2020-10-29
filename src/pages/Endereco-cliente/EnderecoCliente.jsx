@@ -31,7 +31,7 @@ export default class EnderecoCliente extends Component{
         })
         .catch(error => {
             this.setState({texto: 'Não há endereços cadastrados'})
-            this.setState({img:'https://files.slack.com/files-pri/TR19JDESX-F01D5QVBM9D/05b399773502ff839bf2183a22ae8253.gif'})
+            this.setState({img:'https://i.ibb.co/WngpGsR/05b399773502ff839bf2183a22ae8253.gif'})
             
         })
 
