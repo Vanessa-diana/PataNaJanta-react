@@ -274,7 +274,7 @@ export default class Header extends Component {
             
                 }else{
 
-                    var alphaExp = /^[a-zA-Z-0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+$/;
+                    var alphaExp = /^[a-zA-Z-0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ-\s]+$/;
                     if(txtPesquisa.value.match(alphaExp)){
                     
 
