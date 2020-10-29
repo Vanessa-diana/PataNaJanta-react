@@ -267,7 +267,7 @@ export default class Header extends Component {
 
         btnPesquisar.addEventListener('click', function(event){
 
-            if(txtPesquisa.value=="" ||txtPesquisa.value==null ){
+            if(txtPesquisa.value=="" ||txtPesquisa.value==null || txtPesquisa.value==" "){
             
                 alert("Insira algum termo para pesquisar")
                 return
