@@ -84,8 +84,10 @@ export default class Header extends Component {
         let URL = 'http://patanajanta.test/api/produto/listar/Cachorro/'
         let endPoint = nomecategoria
 
-        localStorage.setItem('verificatipo',1);
+        // localStorage.setItem('verificatipo',1);
         localStorage.setItem('titulo',nomecategoria+' para cachorro');
+
+        localStorage.setItem('tipoanimal', 'cachorro');
 
         URL+=endPoint;
         
@@ -95,6 +97,8 @@ export default class Header extends Component {
             timeout: 15000
         }).then(function(resposta){
 
+            
+            
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
                 localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
@@ -140,6 +144,8 @@ export default class Header extends Component {
 
         localStorage.setItem('titulo',nomecategoria+' para gato');
 
+        localStorage.setItem('tipoanimal', 'gato');
+
         URL+=endPoint;
         
         axios({
@@ -147,6 +153,8 @@ export default class Header extends Component {
             url: URL,
             timeout: 15000
         }).then(function(resposta){
+
+            
 
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
@@ -259,80 +267,102 @@ export default class Header extends Component {
 
         btnPesquisar.addEventListener('click', function(event){
 
-            localStorage.setItem('titulo',txtPesquisa.value );
-
-            event.preventDefault();
-
-            let URL = 'http://patanajanta.test/api'
-            let endPoint = `/produto/buscarProdutoTermo/${txtPesquisa.value}`
-
-            URL+=endPoint;
+            if(txtPesquisa.value=="" ||txtPesquisa.value==null || txtPesquisa.value==" "){
             
-            axios({
-                method: 'get',
-                url: URL,
-                timeout: 15000
-            }).then(function(resposta){
-
-    
-                //CASO API RETORNE 404
-
-                //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
-                if(localStorage.getItem('resultadoPesquisa') == null){
-                    localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
-                }
-
-                //Caso exista alguma consulta anterior guardada em LocalStorage
-                localStorage.removeItem('resultadoPesquisa');
-                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
-
-
-                //CASO API RETORNE 201
-                /* try{
-
-                    //CASO API RETORNE NENHUM DADO
-                    if(resposta.data.erro.length != 0){
-                        return;
-                    }
-
-                }catch(e){
-
-                    //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
-                    if(localStorage.getItem('resultadoPesquisa') == null){
-                        localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
-                        return
-                    }
-
-                    //Caso exista alguma consulta anterior guardada em LocalStorage
-                    localStorage.removeItem('resultadoPesquisa');
-                    localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
-                } */
-
-
-
-                let currentURL = window.location.href;
-
-                if(currentURL.includes("#/resultadoproduto")==false){
-                    
-                    let domain = currentURL.split("/");
-
-                    window.location.replace(domain[0] + "#/resultadoproduto");
-
-                    window.location.reload(false);
-
+                alert("Insira algum termo para pesquisar")
+                return
+            
                 }else{
-                    window.location.reload(false);
-                }
 
-    
-            }).catch(function(erro){
-                if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
-                    alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
-                    return;
-                }
+                    var alphaExp = /^[a-zA-Z-0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ-\s]+$/;
+                    if(txtPesquisa.value.match(alphaExp)){
+                    
 
-                console.log(`CATCH AXIOS = ${erro}`);
-            })
+                        
+
+                        event.preventDefault();
+
+                        let URL = 'http://patanajanta.test/api'
+                        let endPoint = `/produto/buscarProdutoTermo/${txtPesquisa.value}`
+
+                        URL+=endPoint;
+                        
+                        axios({
+                            method: 'get',
+                            url: URL,
+                            timeout: 15000
+                        }).then(function(resposta){
+
+                            
+                            localStorage.removeItem('tipoanimal')
+                            localStorage.setItem('titulo',txtPesquisa.value );
+                            //CASO API RETORNE 404
+
+                            //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+                            if(localStorage.getItem('resultadoPesquisa') == null){
+                                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                            }
+
+                            //Caso exista alguma consulta anterior guardada em LocalStorage
+                            localStorage.removeItem('resultadoPesquisa');
+                            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+
+
+                            //CASO API RETORNE 201
+                            /* try{
+
+                                //CASO API RETORNE NENHUM DADO
+                                if(resposta.data.erro.length != 0){
+                                    return;
+                                }
+
+                            }catch(e){
+
+                                //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
+                                if(localStorage.getItem('resultadoPesquisa') == null){
+                                    localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                                    return
+                                }
+
+                                //Caso exista alguma consulta anterior guardada em LocalStorage
+                                localStorage.removeItem('resultadoPesquisa');
+                                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                            } */
+
+
+
+                            let currentURL = window.location.href;
+
+                            if(currentURL.includes("#/resultadoproduto")==false){
+                                
+                                let domain = currentURL.split("/");
+
+                                window.location.replace(domain[0] + "#/resultadoproduto");
+
+                                window.location.reload(false);
+
+                            }else{
+                                window.location.reload(false);
+                            }
+
+                
+                        }).catch(function(erro){
+                            if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
+                                alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                                return;
+                            }
+
+                            alert("Nenhum produto encontrado com esse termo");
+                        })
+
+                        }else{
+                            alert("Utilize apenas letras e numeros na sua busca, sem caracteres como : ? ! . , ")
+                            return
+                        }
+
+
+
+                    } return
 
         })
     }

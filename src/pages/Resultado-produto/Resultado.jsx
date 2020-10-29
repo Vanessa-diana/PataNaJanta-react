@@ -36,6 +36,9 @@ let filtrovalor = localStorage.getItem('filtrovalor'); // vai pesquisar no map d
 
 let verificatipo = localStorage.getItem('verificatipo');
 
+let tipoanimal = localStorage.getItem('tipoanimal');
+
+
 let titulo = localStorage.getItem('titulo');   
 
 //if (item.id_tipo = animal and item.valor < filtro valor ) //deixar pre selecionado +150 pra nao pesquisar nulo
@@ -53,6 +56,7 @@ export default class Resultado extends Component {
 
         this.getCategorias();
 
+       
     
     
     }
@@ -77,7 +81,88 @@ export default class Resultado extends Component {
       }
     }
    
-    
+    carregamentoRadios = () => {
+
+      let checkcachorro = document.getElementById('checkcachorro');         
+      let checkgato = document.getElementById('checkgato');
+      //RADIO VALORES:
+      let checkate20 = document.getElementById('checkate20');
+      let checkate40 = document.getElementById('checkate40');
+      let checkate70 = document.getElementById('checkate70');
+      let checkate150 = document.getElementById('checkate150');
+      let checkmaisde150 = document.getElementById('checkmaisde150');
+
+      
+
+
+      if(tipoanimal=='cachorro'){
+        checkcachorro.checked=true;
+        checkcachorro.disabled=true;
+        checkgato.disabled=true;
+      }
+      if(tipoanimal=='gato'){
+        checkgato.checked=true;
+        checkgato.disabled=true;
+        checkcachorro.disabled=true;
+      }
+
+      if(animal==3){
+                  
+        checkcachorro.checked=true;
+        checkgato.checked=true;
+
+    }
+    else if(animal==1){
+      checkcachorro.checked =true
+      checkgato.checked=false
+      
+
+    }else if(animal==2){
+      checkcachorro.checked=false 
+      checkgato.checked=true
+     
+    }
+
+    //IF DOS RADIOBUTTONS DE VALOR:
+
+    if(filtrovalor==20){
+      checkate20.checked=true
+      
+    }
+    else if(filtrovalor==40){
+      checkate40.checked=true
+     
+    }else if(filtrovalor==70){
+
+      checkate70.checked=true
+
+    }else if(filtrovalor==150){
+      checkate150.checked=true
+
+    }
+    else if(filtrovalor==1000){
+      checkmaisde150.checked=true
+    }
+
+    //somente no primeiro carregamento
+      if(
+        checkate20.checked==false &&
+        checkate40.checked==false &&
+        checkate70.checked==false &&
+        checkate150.checked==false &&
+        checkmaisde150.checked==false 
+      ){
+        checkate150.checked=true;
+      }
+
+
+
+
+
+//aqui no final tirar do local estorage o verifica tipo, pra quando carregar de novo setar
+
+
+    }
 
 
 
@@ -89,10 +174,15 @@ export default class Resultado extends Component {
 
     refreshFiltro = () =>{
 
-      localStorage.removeItem('filtroresultado')
-      localStorage.removeItem('animal')
-      localStorage.removeItem('filtrovalor')
-    
+
+
+              localStorage.removeItem('filtroresultado')
+              localStorage.removeItem('animal')
+              localStorage.removeItem('filtrovalor')
+            
+
+
+
 
       return resultado.map((item,index)=> {
 
@@ -323,19 +413,19 @@ export default class Resultado extends Component {
 
           var self = this
          
-         
+          this.carregamentoRadios();
 
           let botaofiltrar = document.getElementById('btnfiltrarproduto');
       
 
-            let checkcachorro = document.getElementById('checkcachorro');         
-            let checkgato = document.getElementById('checkgato');
+            var checkcachorro = document.getElementById('checkcachorro');         
+            var checkgato = document.getElementById('checkgato');
             //RADIO VALORES:
-            let checkate20 = document.getElementById('checkate20');
-            let checkate40 = document.getElementById('checkate40');
-            let checkate70 = document.getElementById('checkate70');
-            let checkate150 = document.getElementById('checkate150');
-            let checkmaisde150 = document.getElementById('checkmaisde150');
+            var checkate20 = document.getElementById('checkate20');
+            var checkate40 = document.getElementById('checkate40');
+            var checkate70 = document.getElementById('checkate70');
+            var checkate150 = document.getElementById('checkate150');
+            var checkmaisde150 = document.getElementById('checkmaisde150');
 
             
             
@@ -565,7 +655,7 @@ export default class Resultado extends Component {
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
-                            <input id="checkmaisde150" type="radio" aria-label="Checkbox for following text input"/>
+                            <input id="checkmaisde150"  type="radio" aria-label="Checkbox for following text input"/>
                           </div>
                         </div>
                         <h6 class="tipo">Mais de R$150,00</h6>
