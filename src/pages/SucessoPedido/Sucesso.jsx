@@ -49,7 +49,7 @@ render() {
             <div class="col-12">
                 <h6>PEDIDO FINALIZADO COM SUCESSO!</h6>
             <div>
-                <p>Numero do seu pedido é: {this.state.numeroPedido}</p> 
+                <strong>Número do seu pedido é: {this.state.numeroPedido}</strong> 
 
             </div>
                 <h6>Obrigado por comprar na nossa loja.</h6>
