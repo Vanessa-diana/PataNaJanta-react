@@ -16,3 +16,11 @@
     border-color: gray;
   
 }
+
+.bt-remover{
+    width: 6.25rem;
+    height: 2.5rem;
+    background-color: #b86360;
+    color: #fff;
+    margin-left: 20rem;
+}
