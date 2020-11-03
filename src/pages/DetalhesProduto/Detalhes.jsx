@@ -60,6 +60,52 @@ export default class Detalhes extends Component {
     //ADC ITENS NO CARRINHO
     addItemCarrinho = (btnValue)=>{
 
+        //ADD PRODUTOS NO CARRINHO
+        try{
+            let existe = 0;
+
+            if(localStorage.getItem('carrinho') == null){
+                let temp = [];
+                temp.push(JSON.parse(localStorage.getItem('produto')))
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+            }
+            else{
+                let dadosProdutoAtual = JSON.parse(localStorage.getItem('produto'));
+                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
+                let dadosQtdItem = JSON.parse(localStorage.getItem('qtdItem'));
+                let temp = [];
+                let tempQtd = [];
+
+                for(let i=0; i<jsonProdutos.length; i++){
+                    
+                    temp.push(jsonProdutos[i]);
+                    tempQtd.push(dadosQtdItem[i]);
+
+                    //VERIFICA SE PRODUTO JA EXISTE NA CESTA E MUDA VALOR DA VARIAVEL DE VERIFICACAO
+                    if (jsonProdutos[i].id == dadosProdutoAtual.id){
+                        existe++;
+
+                        //AUMENTA EM +1 A QTD DO ITEM REPETIDO DA CESTA
+                        let novaQtd = dadosQtdItem[i].item+1;
+                        tempQtd[i] = {'item':novaQtd};
+                    }
+                }
+                
+                //VERIFICA VALOR DA VARIAVEL DE VERIFICACAO E REALIZA ACAO
+                if(existe == 0){
+                    temp.push(JSON.parse(localStorage.getItem('produto'))); 
+                }else{
+                    alert('JA EXISTE');
+                    localStorage.setItem('qtdItem',JSON.stringify(tempQtd))
+                    return;
+                }
+                localStorage.setItem('carrinho',JSON.stringify(temp))
+            }
+        }catch(e){
+            console.log(e);
+            alert(e)
+        }
+
         //add qtd Produtos --> Padrão = 1
         try{
             if(localStorage.getItem('qtdItem') == null){
@@ -83,27 +129,6 @@ export default class Detalhes extends Component {
             }
         }catch(e){
             alert('ERRO ADC QTD = ' + e);
-        }
-
-        try{
-            //alert(JSON.parse(localStorage.getItem('carrinho')).length);
-            if(localStorage.getItem('carrinho') == null){
-                let temp = [];
-                temp.push(JSON.parse(localStorage.getItem('produto')))
-                localStorage.setItem('carrinho',JSON.stringify(temp))
-            }
-            else{
-                let temp = [];
-                let jsonProdutos = JSON.parse(localStorage.getItem('carrinho'));
-                for(let i=0; i<jsonProdutos.length; i++){
-                    temp.push(jsonProdutos[i]);
-                }
-                temp.push(JSON.parse(localStorage.getItem('produto')));  
-                localStorage.setItem('carrinho',JSON.stringify(temp))
-            }
-        }catch(e){
-            console.log(e);
-            alert(e)
         }
 
     }
