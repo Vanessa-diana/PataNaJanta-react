@@ -31,8 +31,27 @@ export default class SucessoPedido extends Component{
         .then(resp => {
             let ultimo = resp.data[resp.data.length-1]
             this.setState({numeroPedido:ultimo.numero_pedido})
+
+            this.enviaEmailPedido(ultimo.numero_pedido);
         })
      
+    }
+
+
+    enviaEmailPedido = (numeroPedido) => {
+        let dadosCliente = JSON.parse(localStorage.getItem('usuario'));
+        let URL = 'http://patanajanta.test/api';
+        let endPoint = `/sucessopedido/email/enviar/${dadosCliente.nome}/${dadosCliente.email}/${numeroPedido}`
+        URL += endPoint;
+
+        axios.get(`${URL}`)
+        .then(resp => {
+            console.log('Email enviado com sucesso');
+        })
+        .catch((erro)=>{
+            console.log('Erro ao enviar email = ' + erro);
+        })
+
     }
 
 render() {
