@@ -1018,23 +1018,21 @@ export default class Checkout extends Component {
                 URL+=endPoint;
 
                 console.log(self.montaJSONPedido())
-                localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
+                //localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
                 
                 axios.post(URL, self.montaJSONPedido())
                 .then(function(resp){
-                    // alert('SUCESSO')
                     
                     //REDIRECIONA PARA PAGINA SUCESSO PEDIDO
-
                     let currentURL = window.location.href;
                     let domain = currentURL.split("/");
 
                     window.location.replace(domain[0] + "#/sucessopedido");
 
-                    //ZERA CARRINHO APÓS A COMPRA
-                    let temp = [];
+                    //ZERA CARRINHO E ITENS APÓS A COMPRA
                     let itens = JSON.parse(localStorage.getItem('carrinho'));
-                    localStorage.setItem('carrinho',JSON.stringify(temp));
+                    localStorage.setItem('carrinho',JSON.stringify([]));
+                    localStorage.setItem('qtdItem',JSON.stringify([]));
                     window.location.reload(false);
 
             
