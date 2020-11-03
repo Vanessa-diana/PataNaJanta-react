@@ -57,7 +57,7 @@ render() {
                             </div>
                             <div className="col-12 col-sm-6">
                                 <h6 className="subtitulo">Data adicionada</h6>
-                                <p>{item.data_emissao.replace(/(\d*)-(\d*)-(\d*).*/, '$3-$2-$1')}</p>
+                                <p>{item.data_emissao.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1')}</p>
                             </div>
                             <div className="col-12 col-sm-6">
                                 <h6 className="subtitulo">Status do Pedido</h6>
