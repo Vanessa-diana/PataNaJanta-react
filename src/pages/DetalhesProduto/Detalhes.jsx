@@ -95,7 +95,7 @@ export default class Detalhes extends Component {
                 if(existe == 0){
                     temp.push(JSON.parse(localStorage.getItem('produto'))); 
                 }else{
-                    alert('JA EXISTE');
+                    //alert('JA EXISTE');
                     localStorage.setItem('qtdItem',JSON.stringify(tempQtd))
                     return;
                 }
