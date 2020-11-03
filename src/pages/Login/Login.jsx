@@ -52,6 +52,7 @@ class Login extends React.Component {
                     try {
                         localStorage.setItem('usuario', JSON.stringify(resp.data[0]));
                         localStorage.setItem('carrinho',JSON.stringify([]))
+                        localStorage.setItem('qtdItem', JSON.stringify([]));
 
                         let currentURL = window.location.href;
                         let domain = currentURL.split("/");

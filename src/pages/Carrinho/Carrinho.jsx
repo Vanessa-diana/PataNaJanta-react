@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import '../Carrinho/carrinho.css'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Titulo/Title'
+import { event } from 'jquery';
 
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho'));
 let valor_total = 0;
+let qtdItens = JSON.parse(localStorage.getItem("qtdItem"));
 
 export default class Carrinho extends Component { 
         
@@ -14,16 +16,82 @@ export default class Carrinho extends Component {
            
     }
 
-    // aumentar = () =>{
-    //     this.setState({numero:this.state.numero + 1})
-    // }
+    aumentar = (index) =>{
 
-    // diminuir = () => {
-    //     this.setState({numero:this.state.numero -1})
-    //     if((this.state.numero) <= 0) {
-    //         return this.setState({numero:this.state.numero = 0})
-    //     }
-    // }
+        try{
+            let input = document.getElementById(`quantidade-${index}`);
+            
+            //UPDATE LOCAL STORAGE ITENS
+            let temp = [];
+            let jsonQtd = JSON.parse(localStorage.getItem('qtdItem'));
+            
+            for(let i =0; i<jsonQtd.length; i++){
+                
+                if(i != index){
+                    temp.push(jsonQtd[i]);
+                }else{
+                    let qtdAtualizado = jsonQtd[i].item+1;
+                    let objQtd = {'item':qtdAtualizado};
+                    temp.push(objQtd);
+                }
+            }
+
+            localStorage.setItem('qtdItem', JSON.stringify(temp));
+
+
+            //RECUPERA E SETA VALOR ATUALIZADO
+            let qtdItens = JSON.parse(localStorage.getItem("qtdItem"));
+            input.value = qtdItens[index].item;
+            window.location.reload(false);
+
+        }catch(e){
+            console.log('ERRO AUMENTAR = ' + e)
+        }
+    }
+
+    diminuir = (index) => {
+
+        try{
+            let input = document.getElementById(`quantidade-${index}`);
+            let spamValue = document.getElementById(`spam-valor-${index}`)
+
+            //UPDATE LOCAL STORAGE ITENS
+            let temp = [];
+            let jsonQtd = JSON.parse(localStorage.getItem('qtdItem'));
+            
+            for(let i =0; i<jsonQtd.length; i++){
+                
+                if(i != index){
+                    temp.push(jsonQtd[i]);
+                }else{
+                    if(jsonQtd[i].item>1){
+                        let qtdAtualizado = jsonQtd[i].item-1;
+                        let objQtd = {'item':qtdAtualizado};
+                        temp.push(objQtd);
+                    }
+                    else{
+                        temp.push(jsonQtd[i]);
+                    }
+                }
+            }
+
+            localStorage.setItem('qtdItem', JSON.stringify(temp));
+
+
+            //RECUPERA E SETA VALOR ATUALIZADO
+            let qtdItens = JSON.parse(localStorage.getItem("qtdItem"));
+            input.value = qtdItens[index].item;
+            window.location.reload(false);
+
+        }catch(e){
+            console.log('ERRO DIMINUIR = ' + e);
+        }
+
+        /* this.setState({numero:this.state.numero -1})
+        if((this.state.numero) <= 0) {
+            return this.setState({numero:this.state.numero = 0})
+        } */
+    }
 
     componentDidMount()
     {
@@ -38,7 +106,20 @@ export default class Carrinho extends Component {
     }
 
     excluirItemCarrinho = (index) => {
+
+        //REMOVE QTD ITEM
+        let tempQtd = [];
+        let qtd = JSON.parse(localStorage.getItem('qtdItem'));
+
+        for(let i = 0; i<qtd.length; i++){
+            if(i != index){
+                tempQtd.push(qtd[i]);
+            }
+        }
+        localStorage.setItem('qtdItem', JSON.stringify(tempQtd));
         
+
+        //REMOVE ITEM DO CARRINHO
         let temp = [];
         let itens = JSON.parse(localStorage.getItem('carrinho'));
 
@@ -56,10 +137,11 @@ export default class Carrinho extends Component {
     calculaValorTotal = () =>{
 
         let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        let qtd = JSON.parse(localStorage.getItem('qtdItem'));
         
         try{
             for(let i=0;i<dadosCarrinho.length;i++){
-                valor_total+=dadosCarrinho[i].vlr_aquisicao;
+                valor_total+=dadosCarrinho[i].vlr_aquisicao * qtd[i].item;
             }
         }catch(e){
             console.log('ERRO VALOR TOTAL = ' + e);
@@ -92,20 +174,20 @@ export default class Carrinho extends Component {
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
                                         <div className='row'>
-                                            {/* <div className="col-3">
-                                                <button onClick={this.diminuir} className='btn btn-quantidade'>-</button>
-                                            </div> */}
-                                            <div className="col-4">
-                                                <input disabled className ='quantidade'type="text" name="quantidade" id="quantidade" value = {this.state.numero}/>
+                                            <div className="col-3">
+                                                <button onClick={()=>this.diminuir(pos)} className='btn btn-quantidade'>-</button>
                                             </div>
-                                            {/* <div className="col-5">
-                                                <button onClick={this.aumentar} className='btn btn-quantidade'>+</button>
-                                            </div> */}
-                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 excluir-produto">excluir</small>
+                                            <div className="col-4">
+                                                <input disabled className ='quantidade'type="text" name="quantidade" id={`quantidade-${pos}`} value = {qtdItens[pos].item}/>
+                                            </div>
+                                            <div className="col-5">
+                                                <button onClick={()=>this.aumentar(pos)} className='btn btn-quantidade'>+</button>
+                                            </div>
+                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto">excluir</small>
                                         </div>
                                     </div>
                                     <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span >{(this.state.numero * valor.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                        <span id={`spam-valor-${pos}`}>{(qtdItens[pos].item * valor.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                     </div>
                                 </div>
                             </div>

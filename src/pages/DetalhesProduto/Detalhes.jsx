@@ -60,6 +60,31 @@ export default class Detalhes extends Component {
     //ADC ITENS NO CARRINHO
     addItemCarrinho = (btnValue)=>{
 
+        //add qtd Produtos --> Padrão = 1
+        try{
+            if(localStorage.getItem('qtdItem') == null){
+                let temp = [];
+                let objQtd = {'item':1};
+
+                temp.push(objQtd);
+                localStorage.setItem('qtdItem', JSON.stringify(temp));
+            }
+            else{
+                let temp = [];
+                let jsonQtd = JSON.parse(localStorage.getItem('qtdItem'));
+                
+                for(let i =0; i<jsonQtd.length; i++){
+                    temp.push(jsonQtd[i]);
+                }
+
+                let objQtd = {'item':1};
+                temp.push(objQtd);
+                localStorage.setItem('qtdItem', JSON.stringify(temp));
+            }
+        }catch(e){
+            alert('ERRO ADC QTD = ' + e);
+        }
+
         try{
             //alert(JSON.parse(localStorage.getItem('carrinho')).length);
             if(localStorage.getItem('carrinho') == null){
