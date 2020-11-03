@@ -30,7 +30,7 @@ export default class SucessoPedido extends Component{
         axios.get(`${URL}`)
         .then(resp => {
             let ultimo = resp.data[resp.data.length-1]
-            this.setState({numeroPedido:ultimo.id})
+            this.setState({numeroPedido:ultimo.numero_pedido})
         })
      
     }
