@@ -79,10 +79,11 @@ export default class Checkout extends Component {
     calculaValorTotal = () =>{
 
         let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        let qtd = JSON.parse(localStorage.getItem('qtdItem'));
         
         try{
             for(let i=0;i<dadosCarrinho.length;i++){
-                valor_total+=dadosCarrinho[i].vlr_aquisicao;
+                valor_total+=dadosCarrinho[i].vlr_aquisicao * qtd[i].item;
             }
         }catch(e){
             console.log('ERRO VALOR TOTAL = ' + e);
@@ -824,6 +825,7 @@ export default class Checkout extends Component {
         let cbbEndereco = document.getElementById('cbbEndereco');
         let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
         let dadosCarrinho = JSON.parse(localStorage.getItem('carrinho'));
+        let dadosQtdItens = JSON.parse(localStorage.getItem('qtdItem'));
 
         let dataAtual = `${new Date().getUTCFullYear()}-${new Date().getMonth()+1}-${new Date().getUTCDate()}`;
         let arrayPedido = [];
@@ -849,7 +851,7 @@ export default class Checkout extends Component {
             let modeloItens = {
                 'id_pedido':0,
                 'id_produto':`${dadosCarrinho[i].id}`*1,
-                'quantidade': `1`*1,
+                'quantidade': `${dadosQtdItens[i].item}`*1,
                 'vlr_unitario':`${dadosCarrinho[i].vlr_aquisicao}`*1
             }
 
