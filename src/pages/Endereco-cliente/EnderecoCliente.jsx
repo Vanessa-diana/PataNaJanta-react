@@ -90,10 +90,10 @@ export default class EnderecoCliente extends Component{
                                     </div>
                                     <div className="row no-gutters mt-2">
                                         <div className="col-8 d-flex justify-content-end">
-                                          <a href='#/formendereco'><button className= 'btn bt-botao mb-2'onClick={(id) => this.editarEndereco(item)}>Editar</button></a>
+                                          <a href='#/formendereco'><button className= 'btn bt-botao mb-2'onClick={( ) => this.editarEndereco(item)}>Editar</button></a>
                                         </div>
                                         <div className="col-4 d-flex justify-content-end">
-                                           <button className= 'btn bt-botao mb-2' onClick={(id) => this.removerEndereco(item)}>Remover</button>
+                                           <button className= 'btn bt-botao mb-2' onClick={( ) => this.removerEndereco(item)}>Remover</button>
                                         </div>
                                     </div>
                                 </div>

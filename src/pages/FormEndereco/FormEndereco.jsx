@@ -32,13 +32,13 @@ export default class FormEndereco extends Component {
     }
 
     atualizar = () => {
-        
         let URL = 'http://patanajanta.test/api/endereco/atualizar/'
         let json = this.state;
         let enderecoAlterado = JSON.parse(localStorage.getItem('enderecoAtual'));  
         URL += enderecoAlterado.id;
         axios.put(`${URL}`,json)
-           .then(resp => window.location.reload(false))
+           .then(resp => document.location.reload(true));
+           
 
         localStorage.setItem('enderecoAtual',JSON.stringify(json))
              
@@ -55,8 +55,7 @@ export default class FormEndereco extends Component {
 render() {
         
     return (
-    
-        
+           
         <div className="container formulario-endereco mt-3">
             <div className="row">
                 <div className="col-12">
