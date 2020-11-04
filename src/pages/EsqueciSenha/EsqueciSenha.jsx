@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../EsqueciSenha/esquecisenha.css'
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 
 export default class EsqueciSenha extends Component{
@@ -25,7 +26,12 @@ novaSenha = () => {
         txtInput.disabled = true;
 
         if(txtInput.value.length == 0){
-            alert('O campo indicado não pode estar vazio!')
+            Swal.fire({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              });
             txtInput.style.borderColor = 'red';
 
             this.disabled = false;
