@@ -26,12 +26,14 @@ novaSenha = () => {
         txtInput.disabled = true;
 
         if(txtInput.value.length == 0){
+
             Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Cool'
-              });
+                title: 'Atenção!',
+                text: 'O campo não pode estar vazio!',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+
             txtInput.style.borderColor = 'red';
 
             this.disabled = false;
@@ -47,11 +49,22 @@ novaSenha = () => {
         axios.get(URL)
         .then((resp)=>{
             if(resp.data.status == 'sucesso'){
-                alert('Email enviado com sucesso! Por favor, verifique a caixa de entrada do e-mail vinculado a seu usuário.');
+
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Email enviado com sucesso! Por favor, verifique a caixa de entrada do e-mail vinculado a seu usuário.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
                 txtInput.value = '';
             }
             else{
-                alert(resp.data.status);
+                Swal.fire({
+                    title: 'Erro!',
+                    text: resp.data.status,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
                 txtInput.value = '';
             }
 
@@ -59,7 +72,13 @@ novaSenha = () => {
             txtInput.disabled = false;
         })
         .catch((erro)=>{
-            alert('ERRO AO ENVIAR EMAIL = ' + erro);
+
+            Swal.fire({
+                title: 'Erro!',
+                text: 'ERRO AO ENVIAR EMAIL = ' + erro,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
 
             this.disabled = false;
             txtInput.disabled = false;
