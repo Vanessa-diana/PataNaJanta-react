@@ -31,8 +31,8 @@ export default class Cadastro extends Component {
         let self = this
 
         //validação campo nome
-        const nomeRegex = /^[a-zA-Z\s]*$/;
-
+        const nomeRegex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/
+        
         if (nome.value.length == 0) {
             alert('o campo indicado não pode ser vazio')
             nome.style.borderColor = "red";
@@ -45,8 +45,9 @@ export default class Cadastro extends Component {
 
         } else {
             nome.style.borderColor = "#ced4da"
+          
         }
-
+        
 
         //validação campo sobrenome
 
@@ -232,6 +233,7 @@ export default class Cadastro extends Component {
         let self = this;
         let cbbGeneroValue = cbbGenero.options[cbbGenero.selectedIndex].value
         btnCadastrar.disabled = true;
+    
         this.setState({ lblBotao: "Cadastrando..." })
 
         if (this.validaCampos()) {
