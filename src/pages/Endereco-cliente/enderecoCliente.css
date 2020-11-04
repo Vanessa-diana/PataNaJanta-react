@@ -5,6 +5,7 @@
 }
 .campo{
     color: #b7773f;
+    font-weight: bold;
 }
 
 .dado{
@@ -17,10 +18,14 @@
   
 }
 
-.bt-remover{
+.bt-botao{
     width: 6.25rem;
     height: 2.5rem;
     background-color: #b86360;
     color: #fff;
-    margin-left: 20rem;
+    align-items: center;
 }
+
+
+
+

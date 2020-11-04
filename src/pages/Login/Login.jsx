@@ -125,15 +125,18 @@ class Login extends React.Component {
                                                 <div class="alert alert-danger alert-Senha" style={{ display: "none" }}>
                                                     Digite uma senha válida
                                                 </div>
-
+                                                <div className="row mt-4">
+                                                    <div className="col-6">
+                                                        <a className= 'link-reset-senha'href="#/esquecisenha">Esqueceu sua senha?</a>
+                                                    </div>
+                                                      
+                                                </div>
 
 
                                                 <div class="text-center">
                                                     <button id="btnEntrar" type="submit" class="btn-lg btn-entrar">{this.state.lblBotao}</button>
-                                                </div>
-
-
-
+                                                  </div>
+                                     
                                             </div>
                                         </div>
 

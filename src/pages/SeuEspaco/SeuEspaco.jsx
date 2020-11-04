@@ -2,7 +2,6 @@ import React from 'react';
 import './seuespaco.css';
 import user from '../../images/user.png'
 import Title from '../../components/Titulo/Title';
-import Button from '../../components/Button/Button';
 
 
 export default props =>
