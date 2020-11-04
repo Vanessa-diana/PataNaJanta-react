@@ -14,9 +14,12 @@ export default class EnderecoCliente extends Component{
     }
 
       componentDidMount() {
-
         this.buscarEndereco();
         
+    }
+
+    componentDidUpdate(){
+        this.buscarEndereco();
     }
 
     buscarEndereco = ()=>{

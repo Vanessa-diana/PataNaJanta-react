@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import '../FormEndereco/formEndereco.css'
 
-
 export default class FormEndereco extends Component {
    
 
@@ -31,23 +30,17 @@ export default class FormEndereco extends Component {
         
     }
 
-    atualizar = () => {
+  
+    atualizar = (e) => {
+        e.preventDefault()
         let URL = 'http://patanajanta.test/api/endereco/atualizar/'
         let json = this.state;
         let enderecoAlterado = JSON.parse(localStorage.getItem('enderecoAtual'));  
         URL += enderecoAlterado.id;
         axios.put(`${URL}`,json)
-           .then(resp => document.location.reload(true));
-           
-
-        localStorage.setItem('enderecoAtual',JSON.stringify(json))
-             
-        alert('atualizado com sucesso')
-
-        let currentURL = window.location.href;
-        let domain = currentURL.split("/");
-
-        window.location.replace(domain[0] + '#/enderecocliente');
+           .then(resp => resp.data);
+                    
+        window.location.href = '#/enderecocliente'
         localStorage.removeItem('enderecoAtual')
   
     }
@@ -89,6 +82,7 @@ render() {
                             <input type="submit" className= 'btn btn-padrao' value="Salvar"/>
                         </div>
                       </form>
+                      
                 </div>
             </div>
         </div>
