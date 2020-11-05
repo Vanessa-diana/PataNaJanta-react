@@ -44,10 +44,9 @@ export default class EnderecoCliente extends Component{
         //Alerta de confirmação
 
         Swal.fire({
-            position: 'top-center',
+            title: 'Atenção!',
             icon: 'warning',
             text: 'Deseja realmente remover o endereço cadastrado?',
-            customClass: 'swal-alert',
             confirmButtonText: 'Remover',
             showCancelButton: true,
             confirmButtonColor: "#b86360",
@@ -60,16 +59,15 @@ export default class EnderecoCliente extends Component{
                 .then(resp => resp.data);
 
                 Swal.fire({
-                    position: 'top-center',
+                    title: 'Sucesso!',
                     icon: 'success',
                     text: 'Endereço removido',
-                    customClass: 'swal-wide',
                     buttons: 'OK',
                     confirmButtonColor: "#b86360",
-                    timer: 40000,
-                }).then(function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.reload(false)
+
+                    }).then(function(isConfirm) {
+                        if (isConfirm) {
+                            window.location.reload(false)
                     }  
                 })       
 

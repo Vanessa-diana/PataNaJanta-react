@@ -52,10 +52,9 @@ export default class FormEndereco extends Component {
         //Alerta de endereço salvo
 
         Swal.fire({
-            position: 'top-center',
+            title: 'Sucesso!',
             icon: 'success',
             text: 'Endereço salvo com sucesso',
-            customClass: 'swal-alert',
             buttons: 'OK',
             confirmButtonColor: "#b86360",
             timer: 40000,
