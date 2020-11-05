@@ -258,11 +258,7 @@ export default class Header extends Component {
                     buttons: 'OK',
                     confirmButtonColor: "#b86360",
                                                 
-                }).then(function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.reload(false)
-                    }  
-                })  
+                })
 
                 dropdownCachorro.disabled = false;
                 dropdownGato.disabled = false;
