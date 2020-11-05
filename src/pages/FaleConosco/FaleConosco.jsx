@@ -77,12 +77,12 @@ export default class FaleConosco extends Component {
                     return
                 }
                 self.setState({ lbl_botao: "Enviar" });
-                alert("Houve um erro ao enviar a mensagem, tente novamente mais tarde.")
+                self.swall("Houve um erro ao enviar a mensagem, tente novamente mais tarde.")
 
             }).catch(erro => {
                 btn.disabled = false;
                 self.setState({ lbl_botao: "Enviar" });
-                alert("Houve um erro ao enviar a mensagem, tente novamente mais tarde.")
+                self.swall("Houve um erro ao enviar a mensagem, tente novamente mais tarde.")
 
             })
             url = 'http://patanajanta.test/';
