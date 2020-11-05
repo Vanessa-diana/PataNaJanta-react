@@ -23,13 +23,22 @@ export default class FormEndereco extends Component {
              
     }
   
-
+    
     alteraEndereco = (event) => {
         let nome = event.target.name;
         let valor = event.target.value;
         this.setState({[nome]: valor});
     }
 
+    buscarEndereco = ()=>{
+        let URL = 'http://patanajanta.test/api/endereco/buscar/'
+        this.state.user = JSON.parse(localStorage.getItem('usuario'));
+        URL += this.state.user.id;
+
+        axios.get(`${URL}`)
+        .then(resp => (resp.data))
+            
+    }
 
     atualizar = (e) => {
         e.preventDefault()
@@ -38,29 +47,28 @@ export default class FormEndereco extends Component {
         let enderecoAlterado = JSON.parse(localStorage.getItem('enderecoAtual'));  
         URL += enderecoAlterado.id;
         axios.put(`${URL}`,json)
-           .then(resp => resp.data);
+           .then(this.buscarEndereco());
 
         //Alerta de endereço salvo
 
         Swal.fire({
             position: 'top-center',
             icon: 'success',
-            title: 'Endereço salvo com sucesso',
-            customClass: 'swal-wide',
-            showConfirmButton: true,
+            text: 'Endereço salvo com sucesso',
+            customClass: 'swal-alert',
+            buttons: 'OK',
             confirmButtonColor: "#b86360",
-            timer: 40000
-          })
-        
-        
-      
-        //redireciona página      
-                    
-        window.location.href = '#/enderecocliente'
-        localStorage.removeItem('enderecoAtual')
-  
+            timer: 40000,
+
+             
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location.href = '#/enderecocliente'
+            }  
+        })        
+                   
     }
- 
+
 render() {
         
     return (
@@ -95,8 +103,9 @@ render() {
                             <input name="UF" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="UF" defaultValue={this.state.UF}/>
                         </div>
                         <div className="col text-center">
-                            <input type="submit" className= 'btn btn-padrao' value="Salvar"/>
-                        </div>
+                            <input type="submit" className= 'btn btn-padrao mr-5' value="Salvar"/>
+                           <a href="#enderecocliente"><input type="text" className= 'btn btn-secundario' value="Cancelar"/></a> 
+                       </div>
                     </form>
                 </div>
             </div>

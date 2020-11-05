@@ -2,24 +2,23 @@ import React, { Component } from 'react'
 import Title from '../../components/Titulo/Title'
 import '../Endereco-cliente/enderecoCliente.css'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default class EnderecoCliente extends Component{
 
-    state = {
-        enderecos: [],
-        user:'',
-        texto: 'Procurando endereços...',
-        img: ''
-       
-    }
 
-      componentDidMount() {
-        this.buscarEndereco();
-        
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            enderecos: [],
+            user:'',
+            texto: 'Procurando endereços...',
+            img: ''
+           
+        }
 
-    componentDidUpdate(){
         this.buscarEndereco();
+             
     }
 
     buscarEndereco = ()=>{
@@ -41,12 +40,47 @@ export default class EnderecoCliente extends Component{
       }
  
     removerEndereco = (endereco) =>{
-        let URL = 'http://patanajanta.test/api/endereco/deletar'
-        axios.delete(`${URL}/${endereco.id}`)
-        .then(resp => window.location.reload(false));      
-                                    
+
+        //Alerta de confirmação
+
+        Swal.fire({
+            position: 'top-center',
+            icon: 'warning',
+            text: 'Deseja realmente remover o endereço cadastrado?',
+            customClass: 'swal-alert',
+            confirmButtonText: 'Remover',
+            showCancelButton: true,
+            confirmButtonColor: "#b86360",
+            cancelButtonText: 'Cancelar'
+                           
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let URL = 'http://patanajanta.test/api/endereco/deletar'
+                axios.delete(`${URL}/${endereco.id}`)
+                .then(resp => resp.data);
+
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    text: 'Endereço removido',
+                    customClass: 'swal-wide',
+                    buttons: 'OK',
+                    confirmButtonColor: "#b86360",
+                    timer: 40000,
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.reload(false)
+                    }  
+                })       
+
+            }else if (result.isDenied) {
+                window.location.href = '#/enderecocliente'
+              }  
+        })        
+                   
     }
 
+          
     editarEndereco = (item) =>{
        localStorage.setItem('enderecoAtual',JSON.stringify(item))
                            
