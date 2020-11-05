@@ -351,7 +351,7 @@ validaCampos = () => {
                                 <input name="email" type="email" className="form-control email-form col-8" placeholder="Digite um email válido"
                                     required id='txtEmail' />
                             </div>
-                            <div class="form-group form-check text-right">
+                            <div class="form-group form-check check">
                                 <input type="checkbox" class="form-check-input" id="chkSenha"/>
                                 <label class="form-check-label" for="chkSenha">Desejo alterar minha senha</label>
                             </div>
