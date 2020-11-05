@@ -423,6 +423,7 @@ export default class Checkout extends Component {
             let endPoint = `/endereco/salvar/${dadosCurrentUser.id}`
 
             URL += endPoint;
+            
 
             // alert(URL)
 
@@ -443,6 +444,7 @@ export default class Checkout extends Component {
             }).then(function(){
 
                 /* alert('Endereço cadastrado com sucesso!') */
+                //limpar os campos
 
                 txtRua.value = '';
                 txtCEP.value = '';

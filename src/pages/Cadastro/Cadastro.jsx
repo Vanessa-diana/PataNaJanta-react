@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../Cadastro/cadastro.css'
 import User from '../../images/user.png'
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
 
@@ -31,33 +32,34 @@ export default class Cadastro extends Component {
         let self = this
 
         //validação campo nome
-        const nomeRegex = /^[a-zA-Z\s]*$/;
-
+        const nomeRegex = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/
+        
         if (nome.value.length == 0) {
-            alert('o campo indicado não pode ser vazio')
+            self.swall('o campo indicado não pode ser vazio')
             nome.style.borderColor = "red";
             return false
         } else if (nomeRegex.test(nome.value) == false) {
 
-            alert('O campo indicado só aceita letras')
+            self.swall('O campo indicado só aceita letras')
             nome.style.borderColor = "red";
             return false
 
         } else {
             nome.style.borderColor = "#ced4da"
+          
         }
-
+        
 
         //validação campo sobrenome
 
 
         if (sobrenome.value.length == 0) {
-            alert('o campo indicado não pode ser vazio')
+            self.swall('o campo indicado não pode ser vazio')
             sobrenome.style.borderColor = "red";
             return false
         } else if (nomeRegex.test(sobrenome.value) == false) {
 
-            alert('O campo indicado só aceita letras')
+            self.swall('O campo indicado só aceita letras')
             sobrenome.style.borderColor = "red";
             return false
 
@@ -71,11 +73,11 @@ export default class Cadastro extends Component {
 
         if (CPF.value.length == 0) {
 
-            alert('O campo indicado não pode ser vazio')
+            self.swall('O campo indicado não pode ser vazio')
             CPF.style.borderColor = "red";
             return false
         } else if (RegexCPF.test(CPF.value) == false) {
-            alert('CPF inválido')
+            self.swall('CPF inválido')
             CPF.style.borderColor = "red";
             return false
         } else {
@@ -87,7 +89,7 @@ export default class Cadastro extends Component {
         // validação genero
 
         if (cbbGenero.options[cbbGenero.selectedIndex].value == "NULL") {
-            alert('Selecione uma opção válida no campo indicado')
+            self.swall('Selecione uma opção válida no campo indicado')
             cbbGenero.style.borderColor = "red";
             return false
         } else {
@@ -107,7 +109,7 @@ export default class Cadastro extends Component {
 
         if (txtDataNascimento.value.length == 0) {
 
-            alert('O campo não pode ser vazio ou a data não existe')
+            self.swall('O campo não pode ser vazio ou a data não existe')
 
             txtDataNascimento.style.borderColor = "red";
             return false
@@ -117,19 +119,19 @@ export default class Cadastro extends Component {
 
             if (anoAtual - anoUsuario <= 18) {
 
-                alert('Usuário não pode ser menor de idade');
+                self.swall('Usuário não pode ser menor de idade');
 
                 txtDataNascimento.style.borderColor = "red";
                 return false
             }
 
         } else {
-            alert('O ano de nascimento não pode ser superior ao ano atual')
+            self.swall('O ano de nascimento não pode ser superior ao ano atual')
             txtDataNascimento.style.borderColor = "red";
             return false
         }
         if (regexData.test(dataFormatada) == false) {
-            alert('Data inválida')
+            self.swall('Data inválida')
             txtDataNascimento.style.borderColor = "red";
             return false
         } else {
@@ -139,14 +141,14 @@ export default class Cadastro extends Component {
 
         // validação celular
 
-        const regexCelular = /^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$/;
+        const regexCelular =  /^(\d{2}\s)?(\d{4,5}\d{4})$/;
 
         if (txtCelular.value.length == 0) {
-            alert('O campo indicado não pode ser vazio')
+            self.swall('O campo indicado não pode ser vazio')
             txtCelular.style.borderColor = "red";
             return false
         } else if (regexCelular.test(txtCelular.value) == false) {
-            alert('Celular inválido')
+            self.swall('Celular inválido')
             txtCelular.style.borderColor = "red";
             return false
         } else {
@@ -157,11 +159,11 @@ export default class Cadastro extends Component {
         const regexEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
 
         if (txtEmail.value.length == 0) {
-            alert('O campo indicado não pode ser vazio')
+            self.swall('O campo indicado não pode ser vazio')
             txtEmail.style.borderColor = "red";
             return false
         } else if (regexEmail.test(txtEmail.value) == false) {
-            alert('Email inválido')
+            self.swall('Email inválido')
             txtEmail.style.borderColor = "red";
             return false
         } else {
@@ -169,14 +171,15 @@ export default class Cadastro extends Component {
         }
 
         //validação senha
-        let regexSenha = /^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+        let regexSenha =  /^(?=.*\d)(?=.*[a-zA-Z]).{6,20}$/
+        
 
         if (txtSenha.value.length == 0) {
-            alert('O campo indicado não pode ser vazio')
+            self.swall('O campo indicado não pode ser vazio')
             txtSenha.style.borderColor = "red";
             return false
         } else if (regexSenha.test(txtSenha.value) == false) {
-            alert("A senha deve ter no mínimo 8 digitos, uma letra maiúscula e um número")
+            self.swall("A senha deve ter no mínimo 8 digitos, uma letra maiúscula e um número")
             txtSenha.style.borderColor = "red";
             return false
         } else {
@@ -186,7 +189,7 @@ export default class Cadastro extends Component {
         // validação senha
 
         if (txtConfSenha.value != txtSenha.value) {
-            alert("Senhas não conferem")
+            self.swall("Senhas não conferem")
             txtConfSenha.style.borderColor = "red";
             return false
         } else {
@@ -198,6 +201,16 @@ export default class Cadastro extends Component {
 
     }
 
+
+
+swall = (mensagem) =>{
+    Swal.fire({
+        title: 'Atenção!',
+        text: mensagem,
+        icon: 'warning',
+        confirmButtonText: 'OK'
+    });
+}
     componentDidMount() {
         let btnCadastrar = document.getElementById("btnCadastrar");
         let self = this;
@@ -232,6 +245,7 @@ export default class Cadastro extends Component {
         let self = this;
         let cbbGeneroValue = cbbGenero.options[cbbGenero.selectedIndex].value
         btnCadastrar.disabled = true;
+    
         this.setState({ lblBotao: "Cadastrando..." })
 
         if (this.validaCampos()) {
@@ -267,7 +281,7 @@ export default class Cadastro extends Component {
                 }
             }).then(function (resposta) {
                 console.log(resposta.data)
-                alert('USUÁRIO CADASTRADO COM SUCESSO')
+                self.swall('USUÁRIO CADASTRADO COM SUCESSO')
 
                 let currentURL = window.location.href;
                 let domain = currentURL.split("/");
@@ -275,7 +289,7 @@ export default class Cadastro extends Component {
                 window.location.replace(domain[0] + "#/login");
 
             }).catch(function (erro) {
-                alert(erro)
+                self.swall(erro)
                 btnCadastrar.disabled = false;
                 self.setState({ lblBotao: "Cadastrar" })
             })
@@ -358,7 +372,7 @@ export default class Cadastro extends Component {
                                         <div className="col-12 col-sm-6 col-lg-6">
                                             <h5>Telefone celular</h5>
                                             <input name="telefone" type="tel" className="form-control tel-form"
-                                                placeholder="(00) 00000-0000" required id='txtCelular' />
+                                                placeholder="00 000000000" maxLength="12"  required id='txtCelular' />
 
                                         </div>
                                     </div>
