@@ -16,7 +16,9 @@ class Login extends React.Component {
             title: 'Atenção!',
             text: mensagem,
             icon: 'warning',
-            confirmButtonText: 'OK'
+            customClass: 'swal-wide',
+            showConfirmButton: true,
+            confirmButtonColor: "#B86360",
         });
     }
 

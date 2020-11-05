@@ -5,7 +5,7 @@ import Lupa from '../../images/lupa.png'
 import Cart from '../../images/cart.png'
 import User from '../../images/user.png'
 import axios from 'axios';
-import Carrinho from '../../pages/Carrinho/Carrinho'
+import Swal from 'sweetalert2';
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho'));
 
@@ -247,7 +247,23 @@ export default class Header extends Component {
         }).catch(function(erro){
 
             if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
-                alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
+                
+                 //ALERTA PERSONALIZADA
+
+                 Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    html: 'O banco de dados demorou muito para responder, <br> por favor tente mais tarde!',
+                    customClass: 'swal-alert',
+                    buttons: 'OK',
+                    confirmButtonColor: "#b86360",
+                                                
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.reload(false)
+                    }  
+                })  
+
                 dropdownCachorro.disabled = false;
                 dropdownGato.disabled = false;
                 return;
@@ -268,8 +284,23 @@ export default class Header extends Component {
         btnPesquisar.addEventListener('click', function(event){
 
             if(txtPesquisa.value=="" ||txtPesquisa.value==null || txtPesquisa.value==" "){
-            
-                alert("Insira algum termo para pesquisar")
+                
+                //ALERTA PERSONALIZADA
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: 'Insira algum termo para pesquisar',
+                    customClass: 'swal-alert',
+                    buttons: 'OK',
+                    confirmButtonColor: "#b86360",
+                                                
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.reload(false)
+                    }  
+                })  
+
                 return
             
                 }else{
@@ -352,12 +383,41 @@ export default class Header extends Component {
                                 alert('O banco de dados demorou muito para responder, por favor tente mais tarde!');
                                 return;
                             }
+                            
+                            //ALERTA PERSONALIZADA
 
-                            alert("Nenhum produto encontrado com esse termo");
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                text: 'Nenhum produto encontrado com este termo',
+                                customClass: 'swal-alert',
+                                buttons: 'OK',
+                                confirmButtonColor: "#b86360",
+                                                            
+                            }).then(function(isConfirm) {
+                                if (isConfirm) {
+                                    window.location.reload(false)
+                                }  
+                            })  
                         })
 
                         }else{
-                            alert("Utilize apenas letras e numeros na sua busca, sem caracteres como : ? ! . , ")
+
+                             //ALERTA PERSONALIZADA
+
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                html: 'Utilize apenas letras e números na sua busca,<br> sem caracteres como : ? ! . , ',
+                                customClass: 'swal-alert',
+                                buttons: 'OK',
+                                confirmButtonColor: "#b86360",
+                                                            
+                            }).then(function(isConfirm) {
+                                if (isConfirm) {
+                                    window.location.reload(false)
+                                }  
+                            }) 
                             return
                         }
 
