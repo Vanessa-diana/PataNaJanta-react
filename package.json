@@ -12,7 +12,8 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-js-pagination": "^3.0.3",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "sweetalert2": "^10.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
