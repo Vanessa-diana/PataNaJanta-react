@@ -5,6 +5,7 @@ import axios from 'axios'
 import '../Resultado-produto/Resultado.css';
 import Card from './../../components/Card/Card'
 import Botao from '../../components/Button/Button'
+import Pagination from 'react-js-pagination';
 
 const URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
 
@@ -20,6 +21,9 @@ const URLPORTERMO = 'http://patanajanta.test/api/produto/buscarProdutoTermo/'
 
 //Route::get('produto/buscarProdutoTermo/{termo}
 
+var current_page = 1
+var per_page = 1
+var total = 1
 
 const list =  [];
 
@@ -38,8 +42,14 @@ let verificatipo = localStorage.getItem('verificatipo');
 
 let tipoanimal = localStorage.getItem('tipoanimal');
 
+let paginacao =localStorage.getItem('paginacao');
+
+let pagina =parseInt(localStorage.getItem('pagina'));
+
+let cardpaginado =JSON.parse(localStorage.getItem('cardpaginado'));
 
 let titulo = localStorage.getItem('titulo');   
+
 
 //if (item.id_tipo = animal and item.valor < filtro valor ) //deixar pre selecionado +150 pra nao pesquisar nulo
 
@@ -52,14 +62,118 @@ export default class Resultado extends Component {
 
         super(props)
     
-        this.state = {  list: [], listaprodtermo:[] }
+        if(pagina==null){
+          localStorage.setItem('pagina',1);
+        }
+
+        this.state = {  list: [], listaprodtermo:[], users: null ,
+        activePage:1,
+        itemsCountPerPage:1,
+        totalItemsCount:1,
+        pageRangeDisplayed:3,
+        paginado: 1,
+        Estadopagina: 0,
+        
+        }
+
+        this.handlePageChange=this.handlePageChange.bind(this)
 
         this.getCategorias();
 
+        
        
+      
     
     
     }
+
+
+    handlePageChange(pageNumber) {
+      console.log(`active page is ${pageNumber}`);
+
+      //criar um if aqui pra quando for por categoria, fzer url de categoria e tipo, e fazer igual o que aqui abaixo pra ele tambem
+      //no laravel, criar uma paginacao por categoria tambem
+      axios.get('http://patanajanta.test/api/produto/buscarProdutoTermo/'+titulo+`?page=${pageNumber}`)
+      .then(response=>{
+
+        this.setState({
+          itemsCountPerPage: response.data.per_page,
+          totalItemsCount: response.data.total,
+          activePage: response.data.current_page,
+
+          paginado : response.data.data
+        
+        
+        
+        });
+
+        localStorage.setItem('paginacao',2);
+        localStorage.setItem('pagina',pageNumber);
+        localStorage.setItem('resultadoPesquisa',JSON.stringify(this.state.paginado));
+
+        localStorage.setItem('cardpaginado',JSON.stringify(response.data.data));
+        
+        
+        window.location.reload(false);
+        
+
+
+      }    
+      
+      
+
+        )
+
+        
+      
+    }
+
+
+
+
+    // getUserData = ()=>{
+
+    //   let pageNumber =1
+
+    //   const url = 'http://patanajanta.test/api/produto/buscarProdutoTermo/'+titulo+`?page=${pageNumber}`;
+
+    //   const response = axios.get(url);
+
+    //   this.setState({users: response.data});
+
+    //    current_page = this.state.users
+    //    per_page = this.state.users
+    //    total = this.state.users;
+    
+    //   this.paginacaoDiv();
+
+
+    // }
+
+    // paginacaoDiv = ()=>{
+
+
+
+    //   return(
+
+        
+    //   )
+
+
+
+    // }
+
+
+    // async componentDidMount(){
+
+    //   await this.getUserData();
+
+    // }
+
+
+
+
+
 
     btnCarrinho = (btnValue) => {
 
@@ -395,22 +509,69 @@ export default class Resultado extends Component {
         localStorage.removeItem('verificatipo')
         
 
-        return resultado.map((item,index)=> {
+        if(paginacao==2){
 
-        
-              return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
-           
-              
- 
+                 localStorage.removeItem('paginacao')
+                 
+                  //o problema e aqui, pq 
+                  return cardpaginado.map((item,index)=> {
 
-       })
-  
+                            
+                    return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
+                
+                    
+
+
+                    })
+
+
+        }else{
+
+          //problema e aqui:
+                    
+                    return resultado.map((item,index)=> {
+
+                           
+                          return <Card onClick={this.btnCarrinho} value={index} image={item.img_produto} nome={item.nome} preco={(item.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /> 
+                      
+                          
+            
+
+                  })
+
+        }
 
 
    }
 
    componentDidMount() {
 
+
+
+    axios.get('http://patanajanta.test/api/produto/buscarProdutoTermo/'+titulo)
+    .then(response=>{
+
+      this.setState({
+        itemsCountPerPage: response.data.per_page,
+        totalItemsCount: response.data.total,
+        activePage: response.data.current_page,
+
+        paginado : response.data.data
+      
+      
+      
+      });
+
+      
+
+    }    
+    
+    
+
+      )
+    
+  
+    
           var self = this
          
           this.carregamentoRadios();
@@ -530,6 +691,43 @@ export default class Resultado extends Component {
 
       }
    
+
+      verificapagFiltro = () => {
+
+
+        if(filtroresultado=="true"){
+          return 
+ 
+         }
+         else{
+ 
+          return (
+
+            <div className='d-flex justify-content-center mt-5'>
+                    <Pagination 
+                    activePage={pagina}
+                    itemsCountPerPage={this.state.itemsCountPerPage}
+                    totalItemsCount={this.state.totalItemsCount}
+                    pageRangeDisplayed={3}
+                    onChange={this.handlePageChange}
+                    itemClass='page-item'
+                    linkClass='page-link'
+                    onClick={this.handlePageChange}
+                    />
+
+              </div>
+
+
+
+          )
+           
+         }
+
+
+
+
+
+      }
 
       
 
@@ -677,13 +875,20 @@ export default class Resultado extends Component {
                             
                             {   this.condicionalFiltroBusca()}
                             
+                            
                         </div>
                 
                 </div>
 
+
+               
+                  
+
              </div>
                  
-               
+            {this.verificapagFiltro()}
+
+             
   
 
 
