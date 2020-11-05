@@ -96,7 +96,7 @@ class Login extends React.Component {
                         self.setState({ lblBotao: 'Entrar' })
                         return
                     }
-                    self.swall('Houve um erro ao fazer o login, tente novamente mais tarde')
+                    self.swall('Houve um erro ao fazer o login, verifique se os dados foram digitados corretamente ou tente novamente mais tarde')
                     btnEntrar.disabled = false;
                     txtUsuario.disabled = false;
                     txtSenha.disabled = false;
