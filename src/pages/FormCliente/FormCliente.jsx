@@ -3,7 +3,6 @@ import '../FormCliente/formCliente.css'
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 export default class FormCliente extends Component {
 
 
@@ -14,6 +13,8 @@ componentDidMount(){
 
 
 recuperaDados = () => {
+
+    let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
     let nome = document.getElementById('nome');
     let sobrenome = document.getElementById('sobrenome');
@@ -56,6 +57,8 @@ montaJSON = (sobrenome, genero, telefone, email, senha) => {
 }
 
 atualizaDados = () =>{
+
+    let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
     let sobrenome = document.getElementById('sobrenome');
     let cbbGenero = document.getElementById('cbbGenero');
@@ -123,6 +126,9 @@ atualizaDados = () =>{
                 
                 
             }).catch((error)=>{
+
+                console.clear();
+                console.log(error);
 
                 if (error.toString().includes('Network Error') || error.toString().includes('timeout of')) {
                     Swal.fire({
@@ -199,7 +205,7 @@ validaCampos = () => {
 
 
     // validação celular
-    const regexCelular = /^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$/;
+    const regexCelular = /^(\d{2}\s)?(\d{4,5}\d{4})$/;
 
     if (txtCelular.value.length == 0) {
 
@@ -209,7 +215,7 @@ validaCampos = () => {
 
     } else if (regexCelular.test(txtCelular.value) == false) {
 
-        self.swall('Celular inválido');
+        self.swall('Celular inválido! O celular deve estar no seguinte padrão DDD 00000000');
         txtCelular.style.borderColor = "red";
         return false
 
@@ -307,7 +313,7 @@ validaCampos = () => {
                             <div class="form-group row text-center">
                                 <label className="col-2" for="tel">Telefone</label>
                                 <input name="telefone" type="tel" className="form-control tel-form col-8"
-                                    placeholder="(00) 00000-0000" required id='txtCelular' />
+                                    placeholder="00 000000000" required id='txtCelular' maxLength='12'/>
                             </div>
                             <div class="form-group row text-center">
                                 <label className="col-2" for="email">E-mail</label>
