@@ -140,12 +140,15 @@ atualizaDados = () =>{
                         icon: 'success',
                         confirmButtonColor: "#B86360",
                         confirmButtonText: 'OK'
-                    });
+                    })
+                    .then((isConfirmed)=>{
+                        if(isConfirmed){
+                            let currentURL = window.location.href;
+                            let domain = currentURL.split("/");
 
-                    let currentURL = window.location.href;
-                    let domain = currentURL.split("/");
-
-                    window.location.replace(domain[0] + '#/seuespaco');
+                            window.location.replace(domain[0] + '#/seuespaco');
+                        }
+                    })
                 })
                 
                 

@@ -9,6 +9,7 @@ import AMEXMARROM from '../../images/imgcheckout/AMEX_MARROM.png';
 import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
 import Button from '../../components/Button/Button'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 let qtdRequisicaoCalculaPrazo = 0;
 let valor_total = 0;
@@ -25,6 +26,16 @@ export default class Checkout extends Component {
         enderecos: [],
         UFs: [],
         lblBtnSalvar: 'Salvar',
+    }
+
+    swall = (mensagem) =>{
+        Swal.fire({
+            title: 'Atenção!',
+            html: mensagem,
+            icon: 'warning',
+            confirmButtonColor: "#B86360",
+            confirmButtonText: 'OK'
+        });
     }
 
     componentDidMount()
@@ -139,7 +150,15 @@ export default class Checkout extends Component {
         }).catch(function(erro){
 
             if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                alert('API Endereço - O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                
+                Swal.fire({
+                    title: 'Erro API Endereço',
+                    html: 'O banco de dados demorou muito para responder, por favor tente novamente mais tarde!',
+                    icon: 'error',
+                    confirmButtonColor: "#B86360",
+                    confirmButtonText: 'OK'
+                });
+                
                 cbbEndereco.disabled = false;
                 return;
             }
@@ -150,7 +169,14 @@ export default class Checkout extends Component {
                 return;
             }
 
-            alert(erro);
+            Swal.fire({
+                title: 'Erro API Endereço',
+                html: erro,
+                icon: 'error',
+                confirmButtonColor: "#B86360",
+                confirmButtonText: 'OK'
+            });
+
             cbbEndereco.disabled = false;
         })
     }
@@ -163,7 +189,7 @@ export default class Checkout extends Component {
         let self = this;
         cbbUF.disabled = true;
 
-        const msgTimeOut = "UF - O sistema demorou muito para retornar os dados.\n\nPor favor, tente novamente mais tarde.";
+        const msgTimeOut = "O sistema demorou muito para retornar os dados.<br>Por favor, tente novamente mais tarde.";
         const strLinkRequest = `https://servicodados.ibge.gov.br/api/v1/localidades/estados`;
 
         axios({
@@ -199,7 +225,15 @@ export default class Checkout extends Component {
     
             //Caso tenha dado timeout
             if(erro.toString().includes('Network Error') || erro.toString().includes('timeout of')){
-                alert(msgTimeOut);
+                
+                Swal.fire({
+                    title: 'Erro API UF',
+                    html: msgTimeOut,
+                    icon: 'error',
+                    confirmButtonColor: "#B86360",
+                    confirmButtonText: 'OK'
+                });
+                
                 return;
             }
 
@@ -265,7 +299,7 @@ export default class Checkout extends Component {
                 return;
             }
 
-            const msgTimeOut = "O sistema demorou muito para retornar os dados.\n\nPor favor, tente novamente mais tarde ou preencha os dados manualmente.";
+            const msgTimeOut = "O sistema demorou muito para retornar os dados.<br>Por favor, tente novamente mais tarde ou preencha os dados manualmente.";
             const msgCEPfalso = "O CEP informado não existe";
             let cep = txtCep.value;
 
@@ -307,11 +341,25 @@ export default class Checkout extends Component {
                 }).catch(function(erro){
 
                     if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                        alert(msgTimeOut)
-                        return
+                        
+                        Swal.fire({
+                            title: 'Erro API CEP',
+                            html: msgTimeOut,
+                            icon: 'error',
+                            confirmButtonColor: "#B86360",
+                            confirmButtonText: 'OK'
+                        });
+                        
+                        return;
                     }
 
-                    alert(erro)
+                    Swal.fire({
+                        title: 'Erro API CEP',
+                        html: erro,
+                        icon: 'error',
+                        confirmButtonColor: "#B86360",
+                        confirmButtonText: 'OK'
+                    });
                 });
                 
                 return;
@@ -341,6 +389,13 @@ export default class Checkout extends Component {
 
             event.preventDefault();
 
+            let elementos = [txtRua, txtCEP, txtNumRua, txtComplemento, txtBairro, txtCidade, cbbUF];
+
+            //SETA BORDA CINZA PARA TODOS OS INPUTS
+            for(let i=0; i<elementos.length; i++){
+                elementos[i].style.borderColor = '#ced4da';
+            }
+
             let URL = 'http://patanajanta.test/api';
             let cep = txtCEP.value;
 
@@ -351,7 +406,7 @@ export default class Checkout extends Component {
 
             //VERIFICA CEP VAZIO
             if(txtCEP.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtCEP.style.borderColor = 'red';
                 return;
             }
@@ -362,7 +417,7 @@ export default class Checkout extends Component {
 
             //VERIFICA RUA VAZIA
             if(txtRua.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtRua.style.borderColor = 'red';
                 return;
             }
@@ -373,7 +428,7 @@ export default class Checkout extends Component {
 
             //VERIFICA NUMERO VAZIO
             if(txtNumRua.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtNumRua.style.borderColor = 'red';
                 return;
             }
@@ -384,7 +439,7 @@ export default class Checkout extends Component {
 
             //VERIFICA BAIRRO VAZIO
             if(txtBairro.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtBairro.style.borderColor = 'red';
                 return;
             }
@@ -395,7 +450,7 @@ export default class Checkout extends Component {
 
             //VERIFICA CIDADE VAZIO
             if(txtCidade.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtCidade.style.borderColor = 'red';
                 return;
             }
@@ -406,7 +461,7 @@ export default class Checkout extends Component {
 
             //VERIFICA COMBOBOX VAZIA
             if(cbbUF.options[cbbUF.selectedIndex].value == 'NULL'){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 cbbUF.style.borderColor = 'red';
                 return;
             }
@@ -462,14 +517,28 @@ export default class Checkout extends Component {
             }).catch(function(error){
 
                 if(error.toString().includes('Network Error') || error.toString().includes('timeout of')){
-                    alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+
+                    Swal.fire({
+                        title: 'Erro API Gravar Endereço',
+                        html: 'O banco de dados demorou muito para responder, por favor tente novamente mais tarde!',
+                        icon: 'error',
+                        confirmButtonColor: "#B86360",
+                        confirmButtonText: 'OK'
+                    });
+
                     self.disabled = true;
                     self.setState({lblBtnSalvar: 'Salvar'});
                     return;
                 }
 
-                alert(error);
-                alert('Houve um erro ao realizar o cadastro. Por favor, tente novamente mais tarde');
+                Swal.fire({
+                    title: 'Erro API Gravar Endereço',
+                    html: `Houve um erro ao realizar o cadastro. Por favor, tente novamente mais tarde<br>${error}`,
+                    icon: 'error',
+                    confirmButtonColor: "#B86360",
+                    confirmButtonText: 'OK'
+                });
+
                 self.disabled = true;
                 self.setState({lblBtnSalvar: 'Salvar'});
 
@@ -882,7 +951,7 @@ export default class Checkout extends Component {
         let self = this;
 
         if(cbbEndereco.options[cbbEndereco.selectedIndex].value == 'NULL'){
-            alert('Por favor, selecione um endereço para entrega de sua compra');
+            self.swall('Por favor, selecione um endereço para entrega de sua compra');
             cbbEndereco.style.borderColor = 'red';
             return false;
         }
@@ -891,12 +960,12 @@ export default class Checkout extends Component {
         }
 
         if(rdbPAC.checked==false && rdbSedex.checked == false){
-            alert('Por favor, escolha um serviço de entrega para sua compra');
+            self.swall('Por favor, escolha um serviço de entrega para sua compra');
             return false;
         }
 
         if(rdbPagBoleto.checked == false && rdbPagCartao.checked == false){
-            alert('Por favor, selecione uma opção de pagamento.')
+            self.swall('Por favor, selecione uma opção de pagamento.')
             return false;
         }
 
@@ -904,12 +973,12 @@ export default class Checkout extends Component {
 
             //VERIFICA N CARTAO VAZIO OU INVÁLIDO
             if(txtNumCartao.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtNumCartao.style.borderColor = 'red';
                 return false;
             }
             else if(self.validaRegex(/^[0-9]*$/,txtNumCartao)==false){
-                alert('O campo informado deve ser preenchido apenas com números');
+                self.swall('O campo informado deve ser preenchido apenas com números');
                 txtNumCartao.style.borderColor = 'red';
                 return false;
             }
@@ -920,7 +989,7 @@ export default class Checkout extends Component {
 
             //VERIFICA CBB PARCELAS
             if(cbbQtdParcela.options[cbbQtdParcela.selectedIndex].value == 'NULL'){
-                alert('Selecione uma opção válida no campo informado');
+                self.swall('Selecione uma opção válida no campo informado');
                 cbbQtdParcela.style.borderColor = 'red';
                 return false;
             }
@@ -931,12 +1000,12 @@ export default class Checkout extends Component {
 
             //VERIFICA CPF
             if(txtNumCPF.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtNumCPF.style.borderColor = 'red';
                 return false;
             }
             else if(self.validaRegex(/^\d{3}?\.?\d{3}?\.?\d{3}?\-?\d{2}$/, txtNumCPF) == false){
-                alert('Por favor, digite um CPF válido');
+                self.swall('Por favor, digite um CPF válido');
                 txtNumCPF.style.borderColor = 'red';
                 return false;
             }
@@ -947,23 +1016,23 @@ export default class Checkout extends Component {
 
             //VERIFICA NOME IMPRESSO CARTAO
             if(txtNomeTitularCartao.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtNomeTitularCartao.style.borderColor = 'red';
                 return false;
             }
             else if(self.validaRegex(/^[a-zA-Z\s]*$/, txtNomeTitularCartao) == false){
-                alert('Por favor, digite um nome válido no campo informado');
+                self.swall('Por favor, digite um nome válido no campo informado');
                 txtNomeTitularCartao.style.borderColor = 'red';
                 return false;
             }
             else{
-                txtNumCPF.style.borderColor = '#ced4da';
+                txtNomeTitularCartao.style.borderColor = '#ced4da';
             }
 
 
             //VERIFICA CBB MES VALIDADE
             if(cbbMesValidade.options[cbbMesValidade.selectedIndex].value == 'NULL'){
-                alert('Selecione uma opção válida no campo informado');
+                self.swall('Selecione uma opção válida no campo informado');
                 cbbMesValidade.style.borderColor = 'red';
                 return false;
             }
@@ -974,7 +1043,7 @@ export default class Checkout extends Component {
 
             //VERIFICA CBB ANO VALIDADE
             if(cbbAnoValidade.options[cbbAnoValidade.selectedIndex].value == 'NULL'){
-                alert('Selecione uma opção válida no campo informado');
+                self.swall('Selecione uma opção válida no campo informado');
                 cbbAnoValidade.style.borderColor = 'red';
                 return false;
             }
@@ -985,12 +1054,12 @@ export default class Checkout extends Component {
 
             //VERIFICA CVV
             if(txtNomeCVVCartao.value.length == 0){
-                alert('O campo informado não pode estar vazio');
+                self.swall('O campo informado não pode estar vazio');
                 txtNomeCVVCartao.style.borderColor = 'red';
                 return false;
             }
             else if(self.validaRegex(/^[0-9]*$/,txtNomeCVVCartao) == false){
-                alert('O campo informado deve ser preenchido apenas com números');
+                self.swall('O campo informado deve ser preenchido apenas com números');
                 txtNomeCVVCartao.style.borderColor = 'red';
                 return false;
             }
@@ -1040,7 +1109,13 @@ export default class Checkout extends Component {
             
                 })
                 .catch(function(erro){
-                    alert(erro);
+                    Swal.fire({
+                        title: 'Erro API Gerar Pedido',
+                        html: `Houve um erro ao gerar o pedido. Por favor, tente novamente mais tarde<br>${erro}`,
+                        icon: 'error',
+                        confirmButtonColor: "#B86360",
+                        confirmButtonText: 'OK'
+                    });
                 })
             }
         });
