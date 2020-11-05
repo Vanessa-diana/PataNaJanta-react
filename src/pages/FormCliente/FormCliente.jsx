@@ -3,7 +3,6 @@ import '../FormCliente/formCliente.css'
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 export default class FormCliente extends Component {
 
 
@@ -12,8 +11,9 @@ componentDidMount(){
     this.atualizaDados();
 }
 
-
 recuperaDados = () => {
+
+    let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
     let nome = document.getElementById('nome');
     let sobrenome = document.getElementById('sobrenome');
@@ -24,13 +24,37 @@ recuperaDados = () => {
     let txtEmail = document.getElementById('txtEmail');
     let txtSenha = document.getElementById('txtSenha');
     let txtConfSenha = document.getElementById('txtConfSenha');
+    let chkSenha = document.getElementById('chkSenha');
+
+    chkSenha.addEventListener('click', function(){
+        if(chkSenha.checked){
+            txtSenha.disabled = false;
+            txtConfSenha.disabled = false;
+
+            txtSenha.value = '';
+            txtConfSenha.value = '';
+        }
+        else{
+            txtSenha.disabled = true;
+            txtConfSenha.disabled = true;
+
+            txtSenha.value = '';
+            txtConfSenha.value = '';
+
+            txtSenha.style.borderColor = "#ced4da"
+            txtConfSenha.style.borderColor = "#ced4da"
+        }
+    });
 
     cbbGenero.value = dadosUsuario.genero;
     txtCelular.value = dadosUsuario.telefone;
     txtEmail.value = dadosUsuario.email;
     sobrenome.value = dadosUsuario.sobrenome;
-    /* txtSenha.value = dadosUsuario.senha;
-    txtConfSenha.value = dadosUsuario.senha; */
+
+    /* txtSenha.value = dadosUsuario.senha; */
+    /* txtConfSenha.value = dadosUsuario.senha; */
+    txtSenha.disabled = true;
+    txtConfSenha.disabled = true;
     
     CPF.value = dadosUsuario.CPF;
     CPF.disabled = true;
@@ -56,6 +80,8 @@ montaJSON = (sobrenome, genero, telefone, email, senha) => {
 }
 
 atualizaDados = () =>{
+
+    let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
     let sobrenome = document.getElementById('sobrenome');
     let cbbGenero = document.getElementById('cbbGenero');
@@ -112,6 +138,7 @@ atualizaDados = () =>{
                         title: 'Sucesso!',
                         text: 'Dados atualizados com sucesso!',
                         icon: 'success',
+                        confirmButtonColor: "#B86360",
                         confirmButtonText: 'OK'
                     });
 
@@ -124,11 +151,15 @@ atualizaDados = () =>{
                 
             }).catch((error)=>{
 
+                console.clear();
+                console.log(error);
+
                 if (error.toString().includes('Network Error') || error.toString().includes('timeout of')) {
                     Swal.fire({
                         title: 'Erro!',
                         text: 'O banco de dados demorou muito para responder. Por favor, tente novamente mais tarde!',
                         icon: 'error',
+                        confirmButtonColor: "#B86360",
                         confirmButtonText: 'OK'
                     });
                     return;
@@ -138,6 +169,7 @@ atualizaDados = () =>{
                     title: 'Erro!',
                     text: error.data.erro,
                     icon: 'error',
+                    confirmButtonColor: "#B86360",
                     confirmButtonText: 'OK'
                 });
             })
@@ -149,8 +181,9 @@ atualizaDados = () =>{
 swall = (mensagem) =>{
     Swal.fire({
         title: 'Atenção!',
-        text: mensagem,
+        html: mensagem,
         icon: 'warning',
+        confirmButtonColor: "#B86360",
         confirmButtonText: 'OK'
     });
 }
@@ -163,6 +196,7 @@ validaCampos = () => {
     let txtEmail = document.getElementById('txtEmail');
     let txtSenha = document.getElementById('txtSenha');
     let txtConfSenha = document.getElementById('txtConfSenha');
+    let chkSenha = document.getElementById('chkSenha');
     let self = this
 
 
@@ -199,7 +233,7 @@ validaCampos = () => {
 
 
     // validação celular
-    const regexCelular = /^(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})$/;
+    const regexCelular = /^(\d{2}\s)?(\d{4,5}\d{4})$/;
 
     if (txtCelular.value.length == 0) {
 
@@ -209,7 +243,7 @@ validaCampos = () => {
 
     } else if (regexCelular.test(txtCelular.value) == false) {
 
-        self.swall('Celular inválido');
+        self.swall('Telefone inválido. O número deve estar em um dos seguintes padrões:<br> <div style=\'text-align: left\'><strong><br> 1) 00000000<br>2) 000000000<br>3) 11 00000000<br>4) 11 000000000</strong></div>');
         txtCelular.style.borderColor = "red";
         return false
 
@@ -241,7 +275,7 @@ validaCampos = () => {
     //validação senha
     let regexSenha = /^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
 
-    if (txtSenha.value.length != 0) {
+    if (txtSenha.value.length != 0 || chkSenha.checked) {
         
         if (regexSenha.test(txtSenha.value) == false) {
 
@@ -307,12 +341,16 @@ validaCampos = () => {
                             <div class="form-group row text-center">
                                 <label className="col-2" for="tel">Telefone</label>
                                 <input name="telefone" type="tel" className="form-control tel-form col-8"
-                                    placeholder="(00) 00000-0000" required id='txtCelular' />
+                                    placeholder="00 000000000" required id='txtCelular' maxLength='12'/>
                             </div>
                             <div class="form-group row text-center">
                                 <label className="col-2" for="email">E-mail</label>
                                 <input name="email" type="email" className="form-control email-form col-8" placeholder="Digite um email válido"
                                     required id='txtEmail' />
+                            </div>
+                            <div class="form-group form-check text-right">
+                                <input type="checkbox" class="form-check-input" id="chkSenha"/>
+                                <label class="form-check-label" for="chkSenha">Desejo alterar minha senha</label>
                             </div>
                             <div class="form-group row text-center">
                                 <label className="col-2" for="senha">Senha Nova</label>
