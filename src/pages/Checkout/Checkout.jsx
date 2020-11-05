@@ -1090,6 +1090,15 @@ export default class Checkout extends Component {
 
                 console.log(self.montaJSONPedido())
                 //localStorage.setItem('AAA', JSON.stringify(self.montaJSONPedido()));
+
+                Swal.fire({
+                    title: 'Aguarde um momento...',
+                    text: 'Seus pedido está sendo gerado.',
+                    icon: 'info',
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    showConfirmButton: false
+                });
                 
                 axios.post(URL, self.montaJSONPedido())
                 .then(function(resp){

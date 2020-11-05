@@ -3,6 +3,7 @@ import  '../SucessoPedido/sucesso.css'
 import SucessoCompra from '../../images/sucesso-compra.png'
 import Button from '../../components/Button/Button'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 /* <!-- INICIO SUCESSO DE COMPRAS --> */
@@ -19,6 +20,15 @@ export default class SucessoPedido extends Component{
       componentDidMount() {
          
            this.buscarPedido();
+
+           Swal.fire({
+            title: 'Aguarde um momento...',
+            text: 'Finalizando processamento do pedido.',
+            icon: 'info',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
         
     }
 
@@ -52,6 +62,7 @@ export default class SucessoPedido extends Component{
             console.log('Erro ao enviar email = ' + erro);
         })
 
+        Swal.close();
     }
 
 render() {
