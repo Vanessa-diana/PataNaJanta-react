@@ -1,0 +1,22 @@
+.formulario-senha{
+
+    margin-top: 16.25rem;
+    border-radius: 10px;
+    border:1px solid black;
+    padding-top: 3.12rem;
+    padding-bottom: 10px;
+    width: 37.5rem;
+    align-items: center;
+}
+
+.titulo-senha{
+    text-align: center;
+    margin-bottom: 1.88rem;
+    margin-left: 1.88rem;
+    color: #351912;
+
+} 
+
+.bt-senha{
+    align-items: center;
+}
