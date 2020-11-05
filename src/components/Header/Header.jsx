@@ -251,10 +251,9 @@ export default class Header extends Component {
                  //ALERTA PERSONALIZADA
 
                  Swal.fire({
-                    position: 'center',
+                    title: 'Erro!',
                     icon: 'error',
                     html: 'O banco de dados demorou muito para responder, <br> por favor tente mais tarde!',
-                    customClass: 'swal-alert',
                     buttons: 'OK',
                     confirmButtonColor: "#b86360",
                                                 
@@ -284,10 +283,9 @@ export default class Header extends Component {
                 //ALERTA PERSONALIZADA
 
                 Swal.fire({
-                    position: 'center',
-                    icon: 'error',
+                    title: 'Atenção!',
+                    icon: 'warning',
                     text: 'Insira algum termo para pesquisar',
-                    customClass: 'swal-alert',
                     buttons: 'OK',
                     confirmButtonColor: "#b86360",
                                                 
@@ -383,10 +381,9 @@ export default class Header extends Component {
                             //ALERTA PERSONALIZADA
 
                             Swal.fire({
-                                position: 'center',
+                                title: 'Erro',
                                 icon: 'error',
                                 text: 'Nenhum produto encontrado com este termo',
-                                customClass: 'swal-alert',
                                 buttons: 'OK',
                                 confirmButtonColor: "#b86360",
                                                             
@@ -402,10 +399,9 @@ export default class Header extends Component {
                              //ALERTA PERSONALIZADA
 
                             Swal.fire({
-                                position: 'center',
-                                icon: 'error',
+                                title: 'Atenção!',
+                                icon: 'warning',
                                 html: 'Utilize apenas letras e números na sua busca,<br> sem caracteres como : ? ! . , ',
-                                customClass: 'swal-alert',
                                 buttons: 'OK',
                                 confirmButtonColor: "#b86360",
                                                             
