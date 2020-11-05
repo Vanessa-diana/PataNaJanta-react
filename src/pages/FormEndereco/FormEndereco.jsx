@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import '../FormEndereco/formEndereco.css'
+import Swal from 'sweetalert2';
+
 
 export default class FormEndereco extends Component {
    
@@ -18,19 +20,17 @@ export default class FormEndereco extends Component {
             UF: enderecoAtual.UF, 
                        
         };
-       
-          
+             
     }
-
   
+
     alteraEndereco = (event) => {
         let nome = event.target.name;
         let valor = event.target.value;
         this.setState({[nome]: valor});
-        
     }
 
-  
+
     atualizar = (e) => {
         e.preventDefault()
         let URL = 'http://patanajanta.test/api/endereco/atualizar/'
@@ -39,6 +39,22 @@ export default class FormEndereco extends Component {
         URL += enderecoAlterado.id;
         axios.put(`${URL}`,json)
            .then(resp => resp.data);
+
+        //Alerta de endereço salvo
+
+        Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'Endereço salvo com sucesso',
+            customClass: 'swal-wide',
+            showConfirmButton: true,
+            confirmButtonColor: "#b86360",
+            timer: 40000
+          })
+        
+        
+      
+        //redireciona página      
                     
         window.location.href = '#/enderecocliente'
         localStorage.removeItem('enderecoAtual')
@@ -81,8 +97,7 @@ render() {
                         <div className="col text-center">
                             <input type="submit" className= 'btn btn-padrao' value="Salvar"/>
                         </div>
-                      </form>
-                      
+                    </form>
                 </div>
             </div>
         </div>

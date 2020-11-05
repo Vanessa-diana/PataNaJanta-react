@@ -21,3 +21,8 @@
     font-size: 1rem;
     
 }
+
+.swal-wide{
+    width: 350px !important;
+
+}
