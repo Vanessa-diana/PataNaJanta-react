@@ -3,6 +3,7 @@ import './faleconosco.css';
 import axios from 'axios';
 import Title from '../../components/Titulo/Title'
 import Button from '../../components/Button/Button'
+import Swal from 'sweetalert2';
 
 let url = 'http://patanajanta.test/';
 
@@ -12,6 +13,15 @@ export default class FaleConosco extends Component {
         lbl_botao: "Enviar"
     }
 
+    swall = (mensagem) =>{
+        Swal.fire({
+            title: 'Atenção!',
+            html: mensagem,
+            icon: 'warning',
+            confirmButtonColor: "#B86360",
+            confirmButtonText: 'OK'
+        });
+    }
 
     componentDidMount = () => {
 
@@ -26,19 +36,19 @@ export default class FaleConosco extends Component {
             event.preventDefault();
 
             if (nome.value.length == 0) {
-                alert("O campo nome não pode estar vazio!")
+                self.swall("O campo nome não pode estar vazio!")
                 return
             }
             if (sobrenome.value.length == 0) {
-                alert("O campo Sobrenome não pode estar vazio!")
+                self.swall("O campo Sobrenome não pode estar vazio!")
                 return
             }
             if (email.value.length == 0) {
-                alert("O campo E-mail não pode estar vazio!")
+                self.swall("O campo E-mail não pode estar vazio!")
                 return
             }
             if (mensagem.value.length == 0) {
-                alert("O campo Mensagem não pode estar vazio!")
+                self.swall("O campo Mensagem não pode estar vazio!")
                 return
             }
 
@@ -55,7 +65,13 @@ export default class FaleConosco extends Component {
                     for (let i = 0; i < array.length; i++) {
                         array[i].value = '';
                     }
-                    alert("Mensagem enviada com Sucesso.")
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        html: "Mensagem enviada com Sucesso.",
+                        icon: 'success',
+                        confirmButtonColor: "#B86360",
+                        confirmButtonText: 'OK'
+                    });
 
                     self.setState({ lbl_botao: "Enviar" });
                     return
