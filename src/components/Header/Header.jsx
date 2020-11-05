@@ -101,12 +101,12 @@ export default class Header extends Component {
             
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
-                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
             }
 
             //Caso exista alguma consulta anterior guardada em LocalStorage
             localStorage.removeItem('resultadoPesquisa');
-            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
 
             
 
@@ -158,12 +158,12 @@ export default class Header extends Component {
 
             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
             if(localStorage.getItem('resultadoPesquisa') == null){
-                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
             }
 
             //Caso exista alguma consulta anterior guardada em LocalStorage
             localStorage.removeItem('resultadoPesquisa');
-            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
 
             localStorage.setItem('verificatipo',2);
 
@@ -296,16 +296,17 @@ export default class Header extends Component {
                             
                             localStorage.removeItem('tipoanimal')
                             localStorage.setItem('titulo',txtPesquisa.value );
+                            localStorage.setItem('pagina',1)
                             //CASO API RETORNE 404
 
                             //Caso NÃO exista alguma consulta anterior guardada em LocalStorage
                             if(localStorage.getItem('resultadoPesquisa') == null){
-                                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                                localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
                             }
 
                             //Caso exista alguma consulta anterior guardada em LocalStorage
                             localStorage.removeItem('resultadoPesquisa');
-                            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data));
+                            localStorage.setItem('resultadoPesquisa', JSON.stringify(resposta.data.data));
 
 
                             //CASO API RETORNE 201
