@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
-
+import Swal from 'sweetalert2';
 import axios from 'axios';
 
 let URL = 'http://patanajanta.test/api'
@@ -11,6 +11,14 @@ class Login extends React.Component {
         lblBotao: "Entrar"
     }
 
+    swall = (mensagem) =>{
+        Swal.fire({
+            title: 'Atenção!',
+            text: mensagem,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+    }
 
     componentDidMount() {
 
@@ -38,7 +46,7 @@ class Login extends React.Component {
             })
                 .then(function (resp) {
                     if (resp.data.status === 'Usuário ou senha inválidos') {
-                        alert('Usuário ou senha inválidos')
+                        self.swall('Usuário ou senha inválidos')
                         btnEntrar.disabled = false;
                         txtUsuario.disabled = false;
                         txtSenha.disabled = false;
@@ -54,6 +62,7 @@ class Login extends React.Component {
                         localStorage.setItem('carrinho',JSON.stringify([]))
                         localStorage.setItem('qtdItem', JSON.stringify([]));
 
+                        //pegar url atual
                         let currentURL = window.location.href;
                         let domain = currentURL.split("/");
 
@@ -80,14 +89,14 @@ class Login extends React.Component {
                 }).catch(function (erro) {
 
                     if (erro.toString().includes('Network Error') || erro.toString().includes('timeout of')) {
-                        alert('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
+                        self.swall('O banco de dados demorou muito para responder, por favor tente novamente mais tarde!')
                         btnEntrar.disabled = false;
                         txtUsuario.disabled = false;
                         txtSenha.disabled = false;
                         self.setState({ lblBotao: 'Entrar' })
                         return
                     }
-                    alert('Houve um erro ao fazer o login, tente novamente mais tarde')
+                    self.swall('Houve um erro ao fazer o login, tente novamente mais tarde')
                     btnEntrar.disabled = false;
                     txtUsuario.disabled = false;
                     txtSenha.disabled = false;
