@@ -7,7 +7,7 @@ import User from '../../images/user.png'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+let usuario = JSON.parse(localStorage.getItem('usuario'));
 
 export default class Header extends Component {
 
@@ -19,6 +19,22 @@ export default class Header extends Component {
     }
 
 
+    calculaQtdItensCarrinho = () =>{
+        let qtdItens = JSON.parse(localStorage.getItem('qtdItem'));
+        let totalItens=0;
+
+        //SE QTDITENS FOR UM ARRAY VAZIO
+        if(qtdItens==null){
+            return 0;
+        }
+
+        //CASO O ARRAY NAO SEJA VAZIO
+        for(let i=0; i<qtdItens.length; i++){
+            totalItens+=qtdItens[i].item;
+        }
+
+        return totalItens;
+    }
 
     componentDidMount()
     {
@@ -440,7 +456,7 @@ export default class Header extends Component {
                             <div className="col-6 text-center carrinho mt-3">
                                 <a href={localStorage.getItem('usuario') ? "#/carrinho" : '#/login'} style={{ color: '#b7773f' }}><img src={Cart} className="img-fluid" width="33px" />
                                     <h6 className='carrinho-header'>Meu carrinho</h6></a>
-                                    <strong className='itens'>{carrinho ==null ?'': 'Itens: ' +carrinho.length}</strong>
+                                    <strong className='itens'>{usuario==null ? '' : this.calculaQtdItensCarrinho() + ' Itens'}</strong>
                             </div>
                             <div class="col-6 text-center mt-3">
                                 <a href={this.state.link_url}>

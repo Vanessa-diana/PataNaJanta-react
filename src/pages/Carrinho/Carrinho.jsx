@@ -16,6 +16,23 @@ export default class Carrinho extends Component {
            
     }
 
+    calculaQtdItensCarrinho = () =>{
+        let qtdItens = JSON.parse(localStorage.getItem('qtdItem'));
+        let totalItens=0;
+
+        //SE QTDITENS FOR UM ARRAY VAZIO
+        if(qtdItens==null){
+            return 0;
+        }
+
+        //CASO O ARRAY NAO SEJA VAZIO
+        for(let i=0; i<qtdItens.length; i++){
+            totalItens+=qtdItens[i].item;
+        }
+
+        return totalItens;
+    }
+
     aumentar = (index) =>{
 
         try{
@@ -154,7 +171,7 @@ export default class Carrinho extends Component {
             <div className="row">
                 <div className="col-12 col-xl-8 col-md-6">
                     <Title title = "Meu carrinho" style = "titulo-carrinho mt-4 ml-2"/>
-                        <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">{carrinho.length}</b> itens</p>
+                        <p className="ml-2">Fornecido e entregue por Pata na Janta <b className="numero-itens">{this.calculaQtdItensCarrinho()}</b> itens</p>
                     
                     {/* <!-- LISTA DE ITENS ADICIONADOS--> */}
                     <div className="row">
