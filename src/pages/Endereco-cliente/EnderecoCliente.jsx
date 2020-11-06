@@ -108,7 +108,7 @@ export default class EnderecoCliente extends Component{
                     </div>
                     <div className="row mb-2 text-center">
                         {this.state.enderecos.map(item =>(
-                        <div  key = {item.id} className="col-5 col-md-5 col-xl-5 card-group ml-2">
+                        <div  key = {item.id} className="col-12 col-md-5 col-xl-5 card-group ml-2">
                             <div className="card quadro mt-3">
                                 <div className="card-body col-12 text-left">
                                     <div className="row">
@@ -123,11 +123,11 @@ export default class EnderecoCliente extends Component{
                                             <span className='dado'>{item.rua +', ' + item.numero + ' - '+ item.bairro + ' - ' + item.cidade + ' - ' + item.UF}</span>
                                         </div> 
                                     </div>
-                                    <div className="row no-gutters mt-2">
-                                        <div className="col-8 d-flex justify-content-end">
+                                    <div className="row mt-2">
+                                        <div className="col-12 col-sm-8 col-xl-8 col-md-6 d-flex justify-content-end">
                                           <a href='#/formendereco'><button className= 'btn bt-botao mb-2'onClick={( ) => this.editarEndereco(item)}>Editar</button></a>
                                         </div>
-                                        <div className="col-4 d-flex justify-content-end">
+                                        <div className="col-12 col-sm-4 col-xl-4 col-md-6 d-flex justify-content-end">
                                            <button className= 'btn bt-botao mb-2' onClick={( ) => this.removerEndereco(item)}>Remover</button>
                                         </div>
                                     </div>

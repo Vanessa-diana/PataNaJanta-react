@@ -73,42 +73,44 @@ render() {
     return (
            
         <div className="container formulario-endereco mt-3">
-            <div className="row">
                 <div className="col-12">
                     <h2 className="titulo-endereco">Editar Endereço</h2>
                     <form onSubmit={this.atualizar} className= 'label-form'> 
                         <div class="form-group row text-center">
-                            <label className= "col-1"for="cep">CEP </label>
-                            <input name="cep" type="text" onChange={this.alteraEndereco} className="form-control col-10"  id="cep" defaultValue={this.state.cep}/>
+                            <label className= "col-12 col-xl-1"for="cep">CEP </label>
+                            <input name="cep" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12"  id="cep" defaultValue={this.state.cep}/>
                         </div>
                         <div class="form-group row text-center">
-                            <label className= "col-1" for="rua">Rua</label>
-                            <input name= "rua" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="rua" defaultValue={this.state.rua}/>
+                            <label className= "col-12 col-xl-1" for="rua">Rua</label>
+                            <input name= "rua" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12" id="rua" defaultValue={this.state.rua}/>
                         </div>
                         <div class="form-group row text-center">
-                            <label className= "col-1" for="numero">Número</label>
-                            <input name= "numero" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="numero" defaultValue={this.state.numero}/>
+                            <label className= "col-12 col-xl-1" for="numero">Número</label>
+                            <input name= "numero" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12" id="numero" defaultValue={this.state.numero}/>
                         </div>
                         <div class="form-group row text-center">
-                            <label className= "col-1" for="bairro">Bairro</label>
-                            <input name="bairro" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="bairro" defaultValue={this.state.bairro}/>
+                            <label className= "col-12 col-xl-1" for="bairro">Bairro</label>
+                            <input name="bairro" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12" id="bairro" defaultValue={this.state.bairro}/>
                         </div>
                         <div class="form-group row text-center">
-                            <label className= "col-1" for="cidade">Cidade</label>
-                            <input name="cidade" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="cidade" defaultValue={this.state.cidade}/>
+                            <label className= "col-12 col-xl-1" for="cidade">Cidade</label>
+                            <input name="cidade" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12" id="cidade" defaultValue={this.state.cidade}/>
                         </div>
                         <div class="form-group row text-center">
-                            <label className= "col-1" for="UF">UF</label>
-                            <input name="UF" type="text" onChange={this.alteraEndereco} className="form-control col-10" id="UF" defaultValue={this.state.UF}/>
+                            <label className= "col-12 col-xl-1" for="UF">UF</label>
+                            <input name="UF" type="text" onChange={this.alteraEndereco} className="input form-control col-xl-10 col-12" id="UF" defaultValue={this.state.UF}/>
                         </div>
-                        <div className="col text-center">
-                            <input type="submit" className= 'btn btn-padrao mr-5' value="Salvar"/>
-                           <a href="#enderecocliente"><input type="text" className= 'btn btn-secundario' value="Cancelar"/></a> 
+                        <div className="row text-center">
+                            <div className="col-12 col-md-6 mt-2">
+                                <input type="submit" className= 'btn btn-padrao btn-form' value="Salvar"/>
+                            </div>
+                            <div className="col-12 col-md-6 mt-2">
+                                <a href="#enderecocliente"><input type="text" className= 'btn btn-secundario btn-form' value="Cancelar"/></a> 
+                            </div>
                        </div>
                     </form>
                 </div>
             </div>
-        </div>
         )
     }   
 }  
