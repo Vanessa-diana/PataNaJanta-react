@@ -31,6 +31,7 @@ novaSenha = () => {
                 title: 'Atenção!',
                 text: 'O campo não pode estar vazio!',
                 icon: 'warning',
+                confirmButtonColor: "#B86360",
                 confirmButtonText: 'OK'
             });
 
@@ -54,6 +55,7 @@ novaSenha = () => {
                     title: 'Sucesso!',
                     text: 'Email enviado com sucesso! Por favor, verifique a caixa de entrada do e-mail vinculado a seu usuário.',
                     icon: 'success',
+                    confirmButtonColor: "#B86360",
                     confirmButtonText: 'OK'
                 });
                 txtInput.value = '';
@@ -63,6 +65,7 @@ novaSenha = () => {
                     title: 'Erro!',
                     text: resp.data.status,
                     icon: 'error',
+                    confirmButtonColor: "#B86360",
                     confirmButtonText: 'OK'
                 });
                 txtInput.value = '';
@@ -77,6 +80,7 @@ novaSenha = () => {
                 title: 'Erro!',
                 text: 'ERRO AO ENVIAR EMAIL = ' + erro,
                 icon: 'error',
+                confirmButtonColor: "#B86360",
                 confirmButtonText: 'OK'
             });
 

@@ -107,7 +107,7 @@ atualizaDados = () =>{
 
                 Swal.fire({
                     title: 'Aguarde um momento...',
-                    text: 'Seus dados estão sendo atualizados.',
+                    text: 'Seus dados estão sendo atualizados...',
                     icon: 'info',
                     allowEscapeKey: false,
                     allowOutsideClick: false,

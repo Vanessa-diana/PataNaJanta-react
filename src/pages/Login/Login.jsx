@@ -40,6 +40,14 @@ class Login extends React.Component {
 
             self.setState({ lblBotao: 'Entrando...' })
 
+            Swal.fire({
+                text: 'Aguarde um momento...',
+                icon: 'info',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+            });
+
 
             axios({
                 method: 'get',
