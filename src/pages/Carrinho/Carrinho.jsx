@@ -186,25 +186,27 @@ export default class Carrinho extends Component {
                                     <div className="col-12 col-sm-6 col-xl-4  mt-3">
                                         <h6>{valor.nome}</h6>
                                     </div>
-                                    <div className="col-4 col-sm-4 col-xl-2 mt-3">
+                                    <div className="col-12 col-sm-4 col-xl-2 mt-3">
                                         <span >{valor.vlr_aquisicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                     </div>
-                                    <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <div className='row'>
-                                            <div className="col-3">
-                                                <button onClick={()=>this.diminuir(pos)} className='btn btn-quantidade'>-</button>
-                                            </div>
-                                            <div className="col-4">
-                                                <input disabled className ='quantidade'type="text" name="quantidade" id={`quantidade-${pos}`} value = {qtdItens[pos].item}/>
-                                            </div>
-                                            <div className="col-5">
-                                                <button onClick={()=>this.aumentar(pos)} className='btn btn-quantidade'>+</button>
-                                            </div>
-                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto">excluir</small>
+                                    <div className="col-12 col-sm-4 col-md-4 col-xl-2 mt-3">
+                                        <div className='row text-center'>
+                                         
+                                                <div className="col-4 col-sm-3 text-right">
+                                                    <button onClick={()=>this.diminuir(pos)} className='btn btn-quantidade'>-</button>
+                                                </div>
+                                                <div className="col-4 col-sm-4">
+                                                    <input disabled className ='quantidade'type="text" name="quantidade" id={`quantidade-${pos}`} value = {qtdItens[pos].item}/>
+                                                </div>
+                                                <div className="col-4 col-sm-5 text-left">
+                                                    <button onClick={()=>this.aumentar(pos)} className='btn btn-quantidade'>+</button>
+                                                </div>
+                                                
+                                            <small onClick={()=>this.excluirItemCarrinho(pos)} className="col-12 text-center excluir-produto mt-3">excluir</small>
                                         </div>
                                     </div>
-                                    <div className="col-4 col-sm-4 col-xl-2 mt-3">
-                                        <span id={`spam-valor-${pos}`}>{(qtdItens[pos].item * valor.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                    <div className="col-12 col-sm-4 col-xl-2 mt-3">
+                                        <strong><span id={`spam-valor-${pos}`}>{(qtdItens[pos].item * valor.vlr_aquisicao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></strong>
                                     </div>
                                 </div>
                             </div>
