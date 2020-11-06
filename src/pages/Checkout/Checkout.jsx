@@ -605,7 +605,7 @@ export default class Checkout extends Component {
         let cep_origem = "01001000";         /* cep de origem apenas numeros */
         let cep_destino = txtCEP.value;      /* cep de destino apenas numeros */
 
-        const strCalculaPrazo = `http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrazo?&nCdServico=${codigo_servico}&sCepOrigem=${cep_origem}&sCepDestino=${cep_destino}`
+        const strCalculaPrazo = `ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrazo?&nCdServico=${codigo_servico}&sCepOrigem=${cep_origem}&sCepDestino=${cep_destino}`
         console.log(strCalculaPrazo);
         
         axios({
