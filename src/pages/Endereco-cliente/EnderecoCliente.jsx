@@ -3,12 +3,16 @@ import Title from '../../components/Titulo/Title'
 import '../Endereco-cliente/enderecoCliente.css'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {protegeLogin} from '../../main/protegeRotas'
 
 export default class EnderecoCliente extends Component{
 
 
     constructor(props) {
         super(props);
+
+        protegeLogin('usuario');
+
         this.state = {
             enderecos: [],
             user:'',

@@ -6,6 +6,7 @@ import '../Resultado-produto/Resultado.css';
 import Card from './../../components/Card/Card'
 import Botao from '../../components/Button/Button'
 import Pagination from 'react-js-pagination';
+import {protegeLogin} from '../../main/protegeRotas'
 
 const URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
 
@@ -61,6 +62,8 @@ export default class Resultado extends Component {
    constructor(props){
 
         super(props)
+
+        protegeLogin('resultadoPesquisa');
     
         if(pagina==null){
           localStorage.setItem('pagina',1);
@@ -79,7 +82,6 @@ export default class Resultado extends Component {
         this.handlePageChange=this.handlePageChange.bind(this)
 
         this.getCategorias();
-
         
        
       

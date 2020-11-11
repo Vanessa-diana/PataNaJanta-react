@@ -3,10 +3,17 @@ import './historicodepedido.css';
 import Title from '../../components/Titulo/Title'
 import Button from '../../components/Button/Button';
 import axios from 'axios';
+import {protegeLogin} from '../../main/protegeRotas'
 
 
 
 export default class HistoricoDePedido extends Component{
+
+    constructor(props){
+        super(props);
+
+        protegeLogin('usuario');
+    }
 
     state = {
         historico: [],

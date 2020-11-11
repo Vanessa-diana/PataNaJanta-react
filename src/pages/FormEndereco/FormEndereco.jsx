@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import '../FormEndereco/formEndereco.css'
 import Swal from 'sweetalert2';
+import {protegeLogin} from '../../main/protegeRotas'
 
 
 export default class FormEndereco extends Component {
@@ -9,6 +10,9 @@ export default class FormEndereco extends Component {
 
     constructor(props) {
         super(props);
+
+        protegeLogin('usuario');
+        
         let enderecoAtual = JSON.parse(localStorage.getItem('enderecoAtual'));  
         this.state = {
             

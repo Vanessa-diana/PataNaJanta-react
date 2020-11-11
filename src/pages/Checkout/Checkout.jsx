@@ -10,6 +10,7 @@ import BOLETO from '../../images/imgcheckout/codigoDeBarras.png';
 import Button from '../../components/Button/Button'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {protegeLogin} from '../../main/protegeRotas'
 
 let qtdRequisicaoCalculaPrazo = 0;
 let valor_total = 0;
@@ -20,6 +21,7 @@ export default class Checkout extends Component {
     constructor(props){
         super(props);
         valor_total = 0;
+        protegeLogin('usuario');
     }
 
     state = {

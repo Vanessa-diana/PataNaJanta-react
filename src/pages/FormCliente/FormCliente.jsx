@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import '../FormCliente/formCliente.css'
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {protegeLogin} from '../../main/protegeRotas'
 
 export default class FormCliente extends Component {
 
+    constructor(props){
+        super(props);
+
+        protegeLogin('usuario');
+    }
 
 componentDidMount(){
     this.recuperaDados();
