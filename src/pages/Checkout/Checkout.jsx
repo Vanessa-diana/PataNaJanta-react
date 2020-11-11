@@ -1095,7 +1095,7 @@ export default class Checkout extends Component {
 
                 Swal.fire({
                     title: 'Aguarde um momento...',
-                    text: 'Seus pedido está sendo gerado.',
+                    text: 'Seu pedido está sendo gerado.',
                     icon: 'info',
                     allowEscapeKey: false,
                     allowOutsideClick: false,
