@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import './detalhe-produto.css';
 import ButtonCard from '../../components/ButtonCard/ButtonCard'
+import {protegeLogin} from '../../main/protegeRotas'
 
 
 export default class Detalhes extends Component { 
+
+    constructor(props){
+        super(props);
+
+        protegeLogin('produto');
+    }
+
     state = {
         numero: 1,
         nome: '',

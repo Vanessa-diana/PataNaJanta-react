@@ -4,6 +4,7 @@ import SucessoCompra from '../../images/sucesso-compra.png'
 import Button from '../../components/Button/Button'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {protegeLogin} from '../../main/protegeRotas'
 
 
 /* <!-- INICIO SUCESSO DE COMPRAS --> */
@@ -11,6 +12,12 @@ import Swal from 'sweetalert2';
 let pedido = JSON.parse(localStorage.getItem('AAA'))
 
 export default class SucessoPedido extends Component{
+
+    constructor(props){
+        super(props);
+
+        protegeLogin('usuario');
+    }
 
     state = {
         user:'',

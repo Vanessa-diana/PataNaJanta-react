@@ -3,6 +3,7 @@ import '../Carrinho/carrinho.css'
 import Button from '../../components/Button/Button'
 import Title from '../../components/Titulo/Title'
 import { event } from 'jquery';
+import {protegeLogin} from '../../main/protegeRotas'
 
 
 let carrinho = JSON.parse(localStorage.getItem('carrinho'));
@@ -10,6 +11,12 @@ let valor_total = 0;
 let qtdItens = JSON.parse(localStorage.getItem("qtdItem"));
 
 export default class Carrinho extends Component { 
+
+    constructor(props){
+        super(props);
+
+        protegeLogin('carrinho');
+    }
         
     state = {
         numero: 1
