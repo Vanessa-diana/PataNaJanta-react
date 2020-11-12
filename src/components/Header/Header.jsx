@@ -305,11 +305,7 @@ export default class Header extends Component {
                     buttons: 'OK',
                     confirmButtonColor: "#b86360",
                                                 
-                }).then(function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.reload(false)
-                    }  
-                })  
+                })
 
                 return
             
@@ -403,11 +399,7 @@ export default class Header extends Component {
                                 buttons: 'OK',
                                 confirmButtonColor: "#b86360",
                                                             
-                            }).then(function(isConfirm) {
-                                if (isConfirm) {
-                                    window.location.reload(false)
-                                }  
-                            })  
+                            }) 
                         })
 
                         }else{
@@ -421,11 +413,7 @@ export default class Header extends Component {
                                 buttons: 'OK',
                                 confirmButtonColor: "#b86360",
                                                             
-                            }).then(function(isConfirm) {
-                                if (isConfirm) {
-                                    window.location.reload(false)
-                                }  
-                            }) 
+                            })
                             return
                         }
 
