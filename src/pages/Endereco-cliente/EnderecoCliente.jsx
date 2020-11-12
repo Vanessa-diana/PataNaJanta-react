@@ -4,6 +4,8 @@ import '../Endereco-cliente/enderecoCliente.css'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {protegeLogin} from '../../main/protegeRotas'
+import Button from '../../components/Button/Button';
+
 
 export default class EnderecoCliente extends Component{
 
@@ -140,7 +142,9 @@ export default class EnderecoCliente extends Component{
                         </div>
                         ))}
                     </div>
-                </div>
-
+                    <div className="col-12 col-md-7 col-xl-6 mt-4 mb-5 text-left">
+                        <a href="/#seuespaco"><Button style="btn-secundario" title="Voltar" type="submit"/></a>
+                    </div>        
+               </div>
         }
 }
