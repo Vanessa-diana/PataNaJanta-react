@@ -7,6 +7,7 @@ import Card from './../../components/Card/Card'
 import Botao from '../../components/Button/Button'
 import Pagination from 'react-js-pagination';
 import {protegeLogin} from '../../main/protegeRotas'
+import Swal from 'sweetalert2';
 
 const URL = 'http://patanajanta.test/api/produto/maisvendido/gato'
 
@@ -83,6 +84,13 @@ export default class Resultado extends Component {
 
         this.getCategorias();
         
+        { Swal.fire({
+          text: 'Aguarde um momento...',
+          icon: 'info',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          showConfirmButton: false
+      })}
        
       
     
@@ -93,11 +101,15 @@ export default class Resultado extends Component {
     handlePageChange(pageNumber) {
       console.log(`active page is ${pageNumber}`);
 
+
+     
+
       //criar um if aqui pra quando for por categoria, fzer url de categoria e tipo, e fazer igual o que aqui abaixo pra ele tambem
       //no laravel, criar uma paginacao por categoria tambem
       axios.get('http://patanajanta.test/api/produto/buscarProdutoTermo/'+titulo+`?page=${pageNumber}`)
       .then(response=>{
 
+        
         this.setState({
           itemsCountPerPage: response.data.per_page,
           totalItemsCount: response.data.total,
@@ -105,9 +117,11 @@ export default class Resultado extends Component {
 
           paginado : response.data.data
         
+         
         
-        
-        });
+        } );
+        Swal.close()
+         
 
         localStorage.setItem('paginacao',2);
         localStorage.setItem('pagina',pageNumber);
@@ -116,9 +130,10 @@ export default class Resultado extends Component {
         localStorage.setItem('cardpaginado',JSON.stringify(response.data.data));
         
         
+         
         window.location.reload(false);
         
-
+               
 
       }    
       
@@ -564,7 +579,7 @@ export default class Resultado extends Component {
       
       });
 
-      
+      this.fecharAlert()
 
     }    
     
@@ -693,9 +708,16 @@ export default class Resultado extends Component {
 
       }
    
+      fecharAlert = () => {
+
+        Swal.close();
+      }
+
+
 
       verificapagFiltro = () => {
 
+       
 
         if(filtroresultado=="true"){
           return 
@@ -703,7 +725,14 @@ export default class Resultado extends Component {
          }
          else{
  
+         
+         
+
+
           return (
+
+          
+            
 
             <div className='d-flex justify-content-center mt-5'>
                     <Pagination 
@@ -716,8 +745,10 @@ export default class Resultado extends Component {
                     linkClass='page-link'
                     onClick={this.handlePageChange}
                     />
+                    
 
               </div>
+
 
 
 
@@ -888,8 +919,10 @@ export default class Resultado extends Component {
 
              </div>
                  
+            
             {this.verificapagFiltro()}
 
+            
              
   
 
