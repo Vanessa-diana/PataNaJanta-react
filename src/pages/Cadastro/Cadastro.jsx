@@ -148,7 +148,7 @@ export default class Cadastro extends Component {
             txtCelular.style.borderColor = "red";
             return false
         } else if (regexCelular.test(txtCelular.value) == false) {
-            self.swall('Celular inválido')
+            self.swall('Telefone inválido. O número deve estar em um dos seguintes padrões:<br> <div style=\'text-align: left\'><strong><br> 1) 00000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone Fixo sem DDD<br>2) 900000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Celular sem DDD<br>3) DDD 00000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone Fixo com DDD<br>4) DDD 900000000 &nbsp;&nbsp;&nbsp;Celular com DDD</strong></div>');
             txtCelular.style.borderColor = "red";
             return false
         } else {
@@ -206,7 +206,7 @@ export default class Cadastro extends Component {
 swall = (mensagem) =>{
     Swal.fire({
         title: 'Atenção!',
-        text: mensagem,
+        html: mensagem,
         icon: 'warning',
         customClass: 'swal-wide',
         showConfirmButton: true,
@@ -246,9 +246,9 @@ swall = (mensagem) =>{
         let cpfFormatado;
         let self = this;
         let cbbGeneroValue = cbbGenero.options[cbbGenero.selectedIndex].value
-        btnCadastrar.disabled = true;
-    
-        this.setState({ lblBotao: "Cadastrando..." })
+        
+        /* btnCadastrar.disabled = true;
+        this.setState({ lblBotao: "Cadastrando..." }) */
 
         if (this.validaCampos()) {
 
@@ -265,6 +265,15 @@ swall = (mensagem) =>{
                 } while (cpfFormatado.includes('.'))
 
             }
+
+            Swal.fire({
+                title: 'Aguarde um momento...',
+                text: 'Cadastrando dados...',
+                icon: 'info',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+            });
 
             axios({
                 method: 'post',
@@ -283,23 +292,44 @@ swall = (mensagem) =>{
                 }
             }).then(function (resposta) {
                 console.log(resposta.data)
-                self.swall('USUÁRIO CADASTRADO COM SUCESSO')
-
-                let currentURL = window.location.href;
-                let domain = currentURL.split("/");
-
-                window.location.replace(domain[0] + "#/login");
+                
+                if(resposta.data.status == 'sucesso'){
+                    Swal.fire({
+                        title: 'Sucesso',
+                        text: 'Usuário cadastrado com sucesso!',
+                        icon: 'success',
+                        customClass: 'swal-wide',
+                        showConfirmButton: true,
+                        confirmButtonColor: "#B86360",
+                    }).then(()=>{
+                        let currentURL = window.location.href;
+                        let domain = currentURL.split("/");
+    
+                        window.location.replace(domain[0] + "#/login");
+                    });
+                }
+                else{
+                    self.swall(resposta.data.status);
+                }
 
             }).catch(function (erro) {
-                self.swall(erro)
-                btnCadastrar.disabled = false;
-                self.setState({ lblBotao: "Cadastrar" })
+                Swal.fire({
+                    title: 'Erro',
+                    text: erro,
+                    icon: 'error',
+                    customClass: 'swal-wide',
+                    showConfirmButton: true,
+                    confirmButtonColor: "#B86360",
+                });
+
+                /* btnCadastrar.disabled = false;
+                self.setState({ lblBotao: "Cadastrar" }) */
             })
 
         }
 
-        btnCadastrar.disabled = false;
-        self.setState({ lblBotao: "Cadastrar" })
+        /* btnCadastrar.disabled = false;
+        self.setState({ lblBotao: "Cadastrar" }) */
     }
 
     render() {

@@ -265,7 +265,7 @@ validaCampos = () => {
 
     } else if (regexCelular.test(txtCelular.value) == false) {
 
-        self.swall('Telefone inválido. O número deve estar em um dos seguintes padrões:<br> <div style=\'text-align: left\'><strong><br> 1) 00000000<br>2) 000000000<br>3) 11 00000000<br>4) 11 000000000</strong></div>');
+        self.swall('Telefone inválido. O número deve estar em um dos seguintes padrões:<br> <div style=\'text-align: left\'><strong><br> 1) 00000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone Fixo sem DDD<br>2) 900000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Celular sem DDD<br>3) DDD 00000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Telefone Fixo com DDD<br>4) DDD 900000000 &nbsp;&nbsp;&nbsp;Celular com DDD</strong></div>');
         txtCelular.style.borderColor = "red";
         return false
 
