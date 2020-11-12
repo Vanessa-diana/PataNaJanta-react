@@ -129,33 +129,46 @@ atualizaDados = () =>{
             })
             .then((resp)=>{
 
-                //REALIZA GET NO BANCO DE DADOS PARA ATUALIZAR LOCAL STORAGE COM NOVOS DADOS DO USUARIO
-                let URLDados = `http://patanajanta.test/api/login/${dadosUsuario.CPF}/${senha}`
+                console.clear();
+                console.log(resp);
 
-                axios({
-                    method: 'get',
-                    url: URLDados,
-                    timeout: 20000
-                })
-                .then((resp)=>{
-                    localStorage.setItem('usuario', JSON.stringify(resp.data[0]));
+                if(resp.data.status == 'sucesso'){
 
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: 'Dados atualizados com sucesso!',
-                        icon: 'success',
-                        confirmButtonColor: "#B86360",
-                        confirmButtonText: 'OK'
+                    //REALIZA GET NO BANCO DE DADOS PARA ATUALIZAR LOCAL STORAGE COM NOVOS DADOS DO USUARIO
+                    let URLDados = `http://patanajanta.test/api/login/${dadosUsuario.CPF}/${senha}`
+
+                    axios({
+                        method: 'get',
+                        url: URLDados,
+                        timeout: 20000
                     })
-                    .then((isConfirmed)=>{
-                        if(isConfirmed){
-                            let currentURL = window.location.href;
-                            let domain = currentURL.split("/");
+                    .then((resp)=>{
+                        localStorage.setItem('usuario', JSON.stringify(resp.data[0]));
 
-                            window.location.replace(domain[0] + '#/seuespaco');
-                        }
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Dados atualizados com sucesso!',
+                            icon: 'success',
+                            confirmButtonColor: "#B86360",
+                            confirmButtonText: 'OK'
+                        })
+                        .then((isConfirmed)=>{
+                            if(isConfirmed){
+                                let currentURL = window.location.href;
+                                let domain = currentURL.split("/");
+
+                                window.location.replace(domain[0] + '#/seuespaco');
+                            }
+                        })
                     })
-                })
+                }else if(resp.data.erro == 'Email já existente!'){
+                    //Mostra mensagem de erro
+                    self.swall('Email já existente!');
+                }
+                else{
+                    self.swall(resp.data.erro);
+                }
+
                 
                 
             }).catch((error)=>{
