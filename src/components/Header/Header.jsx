@@ -294,6 +294,8 @@ export default class Header extends Component {
 
         btnPesquisar.addEventListener('click', function(event){
 
+            event.preventDefault();
+
             if(txtPesquisa.value=="" ||txtPesquisa.value==null || txtPesquisa.value==" "){
                 
                 //ALERTA PERSONALIZADA
