@@ -288,7 +288,7 @@ export default class Resultado extends Component {
 
 
 
-
+      
 
 //aqui no final tirar do local estorage o verifica tipo, pra quando carregar de novo setar
 
@@ -520,6 +520,8 @@ export default class Resultado extends Component {
       //aqui eu recarrego a pagina e mostro, pq o botao vai ser apertado e vai teer que recarregar
        //if o like(barra de pesquisa) tiver null entao faca abaixo
        
+       
+
         localStorage.removeItem('filtroresultado')
         localStorage.removeItem('animal')
         localStorage.removeItem('filtrovalor')
@@ -545,6 +547,8 @@ export default class Resultado extends Component {
         }else{
 
           //problema e aqui:
+
+          
                     
                     return resultado.map((item,index)=> {
 
@@ -587,7 +591,11 @@ export default class Resultado extends Component {
 
       )
     
-  
+      if(tipoanimal=='cachorro' || tipoanimal=='gato'){
+
+        this.fecharAlert()
+      }
+      
     
           var self = this
          
@@ -606,7 +614,7 @@ export default class Resultado extends Component {
             var checkmaisde150 = document.getElementById('checkmaisde150');
 
             
-            
+           
 
 
             //EVENTOS DE HABILITAR E DESABILITAR RADIO BUTTONS:
