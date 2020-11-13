@@ -130,7 +130,7 @@ export default class Resultado extends Component {
         localStorage.setItem('cardpaginado',JSON.stringify(response.data.data));
         
         
-         
+        window.scrollTo(0, 0)
         window.location.reload(false);
         
                

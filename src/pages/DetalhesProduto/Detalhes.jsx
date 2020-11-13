@@ -10,6 +10,7 @@ export default class Detalhes extends Component {
         super(props);
 
         protegeLogin('produto');
+        window.scrollTo(0, 0)
     }
 
     state = {
