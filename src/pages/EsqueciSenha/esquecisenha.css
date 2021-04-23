@@ -1,0 +1,98 @@
+.formulario-senha{
+
+    margin-top: 16.25rem;
+    border-radius: 10px;
+    border:1px solid black;
+    padding-top: 3.12rem;
+    padding-bottom: 10px;
+    width: 37.5rem;
+    align-items: center;
+}
+
+.titulo-senha{
+    text-align: center;
+    margin-bottom: 1.88rem;
+    margin-left: 1.88rem;
+    color: #351912;
+
+} 
+
+.bt-senha{
+    align-items: center;
+}
+
+/*======================================================== */
+/* ============ MEDIA QUERY CONTAINER =============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .formulario-senha{
+        width: 15.3rem;
+    }
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .formulario-senha{
+        width: 22.80rem;
+        text-align: center;
+    }  
+ 
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+
+    .formulario-senha{
+        width: 50.88rem;
+               
+    }
+
+}
+
+/* DE LG ATE TELAS EXTRA LARGAS - XLG*/
+@media screen and (min-width:992px) and (max-width:1200px){
+
+    .formulario-senha{
+        width: 50.69rem;
+    }
+}
+
+/*======================================================== */
+/* ============ MEDIA QUERY TITULO=============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .titulo-senha {
+        font-size: 1rem;
+        font-weight: bold;
+    } 
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .titulo-senha {
+        font-size: 1.4rem;
+        font-weight: bold;
+        
+    } 
+ 
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+    
+    .titulo-senha {
+        font-size: 2rem;
+
+    } 
+
+}

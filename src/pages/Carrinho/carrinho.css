@@ -1,0 +1,70 @@
+/* FORMATAÇÃO LISTA DE PRODUTOS */
+
+.numero-itens{
+    color: #b7773f;
+}
+
+.card-itens{
+    background-color:#fff;
+    color: #351912;
+}
+
+.quantidade{
+    width: 2.4rem;
+    max-width: 3.20rem;
+    border: solid 1px #351912;
+    text-align: center;
+    font-size: 0.90rem;
+    margin:2px;
+  
+}
+
+.excluir-produto{
+    text-decoration: underline;
+    color: #351912;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* FORMATAÇÃO RESUMO PEDIDO */
+
+.resumo-pedido{
+    background-color: #fff;
+    color:  #351912;
+    min-height: 23rem; 
+    max-height: 100rem;
+    padding: 0.30rem;
+
+}
+
+hr{
+    border-top: 1px solid #351912;
+    width: 100%;
+}
+
+#valor{
+    float: right;;
+}
+
+.space{
+    display: block;
+    height: 5rem;
+}
+
+.titulo-carrinho{
+    color: #351912;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.btn-quantidade{
+    background-color: #b86360;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+
+}

@@ -1,0 +1,63 @@
+body{
+    background-color: #ebebeb;
+    }
+    
+    .btn:hover {
+    color: #fff;
+    opacity: 0.8;
+    border: 0.0625rem solid #9D5452;
+    }
+    
+    .conhecer{
+    
+    margin-top: 2.5rem ;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    background-color: #b86360;
+    color: #fff;
+    
+    }
+    
+    .titulo{
+    
+    width: 100%;
+    
+    }
+    
+    .cardspet{
+    
+    width: 70%;
+    min-height: 21.875rem;
+    margin:1.875rem;
+    margin-left: auto;
+    margin-right: auto;
+    border:0.125rem solid gray;
+    border-radius: 0.3125rem;
+    background-color: white;
+    text-align: start;
+    
+    }
+    
+    .desc{
+    
+    height: 8.125rem;
+    overflow: auto;
+    
+    }
+    
+    .btn:hover {
+    color: #fff;
+    opacity: 0.8;
+    }
+    
+    .a{
+    text-decoration: none;
+    
+    }
+    
+    .a:link{
+    text-decoration: none;
+    
+    }
+    

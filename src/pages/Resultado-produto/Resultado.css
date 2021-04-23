@@ -1,0 +1,102 @@
+
+.btn:hover {
+    color: #fff;
+    opacity: 0.8;
+    border: 0.125rem solid #9D5452;
+}
+
+.btnfiltrar{
+    background-color: #b86360;
+    width: 100%;
+    
+}
+
+
+.btncomprar{
+    width: 70%; 
+    align-self: center; 
+    background-color: #b86360;
+}
+
+.btn-primary{
+
+border: 0.125rem solid #9D5452;
+margin-bottom: 0.625rem;
+
+}
+
+.titulocategoria{
+    color: #b7773f;
+}
+
+.tipo{
+
+    margin: 0.3125rem;
+    font-size: medium;
+}
+
+.filtrocard{
+    margin-left:0.625rem;
+    margin: 0.625rem;
+    
+}
+
+.titulo{
+    width: 100%;
+    margin: 0rem;
+}
+
+.filtro{
+    margin: 0rem;
+    
+
+}
+
+.cardes{
+    max-width: 110%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 18rem;
+}
+
+.cardsprod{
+
+    max-width: 110%;
+    margin:1.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 18rem;
+}
+
+
+.limiteLinhas{
+    height: 3.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.625rem;
+}
+
+
+@media screen and (min-width:49.75rem) and (max-width:75rem){
+
+    .tipo{
+        font-size: smaller;
+        text-align: center;
+        
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+

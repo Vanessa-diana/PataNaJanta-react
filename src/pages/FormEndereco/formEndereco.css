@@ -1,0 +1,170 @@
+.formulario-endereco{
+    margin-top: 16.25rem;
+    border-radius: 10px;
+    border:1px solid #351912;
+    padding-top: 3.12rem;
+    padding-bottom: 2rem;
+    width:56.25rem;
+    align-items: center;
+} 
+
+.titulo-endereco{
+    text-align: center;
+    margin-bottom: 1.88rem;
+    margin-left: 1.88rem;
+    color: #351912;
+    
+} 
+
+.label-form{
+    color:#351912;
+    font-size: 1rem;
+}    
+/*======================================================== */
+/* ============ MEDIA QUERY CONTAINER =============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .formulario-endereco{
+        width: 15.3rem;
+    }
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .formulario-endereco{
+        width: 22.80rem;
+        text-align: center;
+    }  
+ 
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+
+    .formulario-endereco{
+        width: 50.88rem;
+               
+    }
+
+}
+
+/* DE LG ATE TELAS EXTRA LARGAS - XLG*/
+@media screen and (min-width:992px) and (max-width:1200px){
+
+    .formulario-endereco{
+        width: 50.69rem;
+    }
+}
+/*======================================================== */
+/* ============ MEDIA QUERY INPUT =============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .input {
+        text-align: center;
+    }
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .input {
+        text-align: center;
+        
+    }  
+ 
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+    
+    .input {
+        text-align: center;
+    } 
+
+}
+
+/* DE MEDIUM ATE TELAS LARGAS - LG*/
+@media screen and (min-width:769px) and (max-width:991px){
+
+    .input {
+        text-align: center;
+    }
+    
+}
+
+/* DE LG ATE TELAS EXTRA LARGAS - XLG*/
+@media screen and (min-width:992px) and (max-width:1200px){
+
+    .input {
+        text-align: center;
+         
+    }
+}
+
+/*======================================================== */
+/* ============ MEDIA QUERY BOTAO =============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .btn-form {
+        width: 150px;
+    }
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .btn-form {
+        width: 200px;
+    }
+ 
+}
+
+/*======================================================== */
+/* ============ MEDIA QUERY TITULO=============== */
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .titulo-endereco {
+        font-size: 1rem;
+        font-weight: bold;
+    } 
+
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .titulo-endereco {
+        font-size: 1.4rem;
+        font-weight: bold;
+        
+    } 
+ 
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
+    
+    .titulo-endereco {
+        font-size: 2rem;
+
+    } 
+
+}
+
+

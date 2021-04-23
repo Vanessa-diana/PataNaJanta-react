@@ -1,0 +1,29 @@
+
+.sucessoDeCompras{
+width: 13.75rem; 
+text-align: center; 
+border: solid 2px #9D5452;
+
+}
+
+.col-da-imagem {
+text-align: center; 
+border-radius: 1.25rem;
+
+}
+
+.paragrafo{
+    color: #351912;
+}
+
+.div-principal{
+    width: 40%; 
+    height: 30%; 
+    border-radius: 1.25rem; 
+    background-color: white;
+}
+
+.sucessoDeCompras:hover{
+    color: white;
+    background-color: #C27976;
+}

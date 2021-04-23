@@ -1,0 +1,33 @@
+.titulo-card{
+    color:#351912;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.campo{
+    color: #b7773f;
+    font-weight: bold;
+}
+
+.dado{
+    color:#351912;
+}
+
+.quadro{
+    border-radius: 10px;
+    border-color: gray;
+  
+}
+
+.bt-botao{
+    width: 6.25rem;
+    height: 2.5rem;
+    background-color: #b86360;
+    color: #fff;
+    align-items: center;
+}
+
+.col-btn{
+    align-items: flex-end;
+}
+
+

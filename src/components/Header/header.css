@@ -1,8 +1,36 @@
-.header{
-    background-color: #b7773f;
-    min-height: 115px;
+#header-pataNaJanta{
+    /* position: fixed;
+    top: 0; */
+    position: -webkit-sticky;
+    position: sticky;
+    transition: top 1.0s;
+    z-index: 999;
+}
+.itens{
+    color: #351912;
 }
 
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-height:699px) and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
+/* EFEITO DE DESAPARECER AO DESCER A PAGINA */
+@media screen and (max-width:769px){
+
+    #header-pataNaJanta{
+        position: static;
+    }
+}
+
+.header{
+    background-color: #b7773f;
+    min-height: 7.19rem;
+    
+}
 
 .linkNav:hover{
     color: white;
@@ -10,9 +38,7 @@
 }
 
 .searchBox{
-    /* min-width:300px;
-    max-width: 619px; */
-    max-width: 619px;
+    max-width: 38.69rem;
     display: inline;
 }
 
@@ -52,20 +78,23 @@
 /* ==================== CARRINHO ======================== */
 /* ========================================================== */
 
-.titulo-carrinho{
+.carrinho-header{
+    font-size: 13px;
     color: white; 
     margin-top: 5px
+    
 }
 
 
 .carrinho{
-    padding-top: 2px; 
-    margin-top: 16px;
+    /* padding-top: 2.5px;  */
+    margin-top: 1rem;
     text-align: center; 
     display:inline-block; 
     display: block;
     margin-top: '16px';
     text-align: 'center'
+   
 }
 
 
@@ -77,36 +106,26 @@
 @media screen and (max-width:392px) {
 
     .searchBox{
-        width: 200px;
+        width: 12.5rem;
     }
 
-    .barrinha{
-        width: 100%;
-    }
 }
 
 /* TELA MUITO PEQUENA - XSM */
 @media screen and (min-width: 393px) and (max-width:575px) {
 
     .searchBox{
-        width: 300px;
-        
-    }
-
-    .barrinha{
-        width: 100%;
-    }
+        width: 18.75rem;
+    }  
+ 
 }
 
 /* DE SMALL ATE TELAS MEDIAS - MD*/
 @media screen and (min-width:576px) and (max-width:768px){
 
     .searchBox{
-        width: 190px;
-        margin-left: 20px;
-    }
-    .barrinha{
-        width: 100%;
+        width: 11.88rem;
+        margin-left: 1.25rem;
     }
 
 }
@@ -115,7 +134,7 @@
 @media screen and (min-width:769px) and (max-width:991px){
 
     .searchBox{
-        width: 347px;
+        width: 21.69rem;
     }
     
 }
@@ -124,7 +143,7 @@
 @media screen and (min-width:992px) and (max-width:1200px){
 
     .searchBox{
-        width: 477px;
+        width: 29.81rem;
     }
 }
 
@@ -132,10 +151,66 @@
 @media screen and (min-width:1201px){
 
     .searchBox{
-        width: 593px;
+        width: 37.06rem;
     }
 }
 
+/* ========================================================== */
+/* ==================== MENU =============================== */
+/* ========================================================== */
+
+.link-menu{
+    text-align: center;
+    color:white
+}
+.link-menu:hover{
+    color: white;
+}
+
+.navBar{
+    min-height: 3.75rem;
+    background-color: #351912;
+}
+.btn-nav{
+    padding-left: 2.5rem; 
+    padding-right: 2.5rem;
+
+}
+/*======================================================== */
+/* ==================== MEDIA QUERY MENU ==================*/
+/* ========================================================== */
+
+/* TELA MUITO PEQUENA */
+@media screen and (max-width:392px) {
+
+    .menu{
+        width: 100%;
+    }
+}
+
+/* TELA MUITO PEQUENA - XSM */
+@media screen and (min-width: 393px) and (max-width:575px) {
+
+    .menu{
+        width: 100%;
+    }
+}
+
+/* DE SMALL ATE TELAS MEDIAS - MD*/
+@media screen and (min-width:576px) and (max-width:768px){
 
 
+    .menu{
+        width: 100%;
+    }
+
+}
+
+.menu-dropdown{
+    display: none;
+}
+
+.lihover:hover .menu-dropdown{
+    display: block !important;
+}
 

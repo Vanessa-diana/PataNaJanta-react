@@ -1,0 +1,91 @@
+.formulario h5{
+    color:#b7773f;
+    margin-top: 1.25rem;
+    
+    
+}
+ 
+.logos{
+ 
+   margin-top: 4.38rem;
+   padding-top: 3.12rem;
+   padding-bottom: 0.62rem; 
+}
+ 
+ .formulario{
+    margin-top: 0.25rem;
+    border-radius: 0.62rem;
+    border:1px solid black;
+    padding-top: 1.12rem;
+    padding-bottom: 1.62rem;
+  
+}
+ 
+ 
+.btn-jacadastrado{
+    color:white;
+    background-color: #b86360;
+    border: solid 2px #b86360;
+    min-width: 15rem;
+    max-width: 30rem;
+ }
+.btn-jacadastrado:hover{
+    
+    background-color: #966462;
+    color: white;
+ }
+ 
+
+.criarConta{
+    font-size: xx-large;
+}
+ 
+.inferior{
+ 
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+    padding-top: 3.12rem;
+    margin-bottom: 3.75rem;
+}
+
+.btn-limpar:hover{
+    background-color: #b86360;
+    color: white;
+}
+ 
+ 
+.btn-limpar{
+    color: #b86360;
+    
+    background-color: #fff;
+    border: solid 2px#b86360;
+    border-radius: 0.312rem;
+    margin-bottom: 0.62rem;
+    min-width: 15rem;
+    max-width: 30rem;
+  
+}
+ 
+.btn-cadastrar:hover{
+    background-color: #966462;
+    color: white;
+}
+ 
+ 
+.btn-cadastrar{
+    color:white;
+    background-color: #b86360;
+    border: solid 2px #b86360;
+    min-width: 15rem;
+    max-width: 30rem;
+}
+ 
+ .display-cadastro{
+    display:none;
+}
+
+ 
+
+
+

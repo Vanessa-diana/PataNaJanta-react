@@ -1,0 +1,29 @@
+
+hr{
+    border: solid 1px #351912;
+    opacity: 0.9;
+}
+
+.titulo-principal{
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: inline;
+}
+.titulo{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.subtitulo{
+    font-size: 1.0rem;
+    font-weight: bold;   
+ 
+}
+
+.conteudo{
+    color: #351912;
+}
+
+.pedidos{
+    max-height: 400px;
+}

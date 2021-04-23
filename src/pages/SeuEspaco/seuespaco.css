@@ -1,0 +1,31 @@
+.tituloespaco{
+   font-size: 2rem;
+    color: #351912;
+    margin-left: 0.9375rem;
+}
+
+
+.border-espaco{
+    border: 0.0625rem solid;
+    border-color:  #351912;
+    border-radius: 0.5rem;
+    background-color: white;
+    height: 15rem;
+   
+}
+
+.tituloseucadastro{
+    color:  #b7773f;
+
+    margin-top: 0.8rem;
+    margin-left: 0.625rem;
+}
+
+.pseuespaco{
+    color:  #351912;
+}
+
+.pseuespaco:hover{
+    color: #b7773f;
+    text-decoration: underline #351912;
+}

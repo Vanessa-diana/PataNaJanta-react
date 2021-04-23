@@ -1,0 +1,12 @@
+.container-fluid{
+    background-color:#ebebeb;
+}
+/* FORMATAÇÃO HEADER DO CARRINHO */
+.header{
+    background-color: #b7773f;
+}
+
+.titulo-carrinho{
+    color: #351912;
+    font-weight: bold;
+}
